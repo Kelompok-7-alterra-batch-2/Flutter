@@ -1,15 +1,14 @@
 import 'package:capstone_project_hospital_management/presentation/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginPageAlt extends StatefulWidget {
+  const LoginPageAlt({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginPageAlt> createState() => _LoginPageAltState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  // Define a key to access the form
+class _LoginPageAltState extends State<LoginPageAlt> {
   final _formKey = GlobalKey<FormState>();
 
   String _userEmail = '';
@@ -39,34 +38,34 @@ class _LoginPageState extends State<LoginPage> {
       body: SingleChildScrollView(
         child: Container(
           color: const Color(0xff4e89a8),
+          height: MediaQuery.of(context).size.height,
+          padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.07),
           child: Column(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.3,
-                child: Center(
-                  child: Image(
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    image: const AssetImage("assets/logo/logo_text_white.png"),
-                  ),
-                ),
-              ),
               Container(
                 padding: EdgeInsets.symmetric(
-                    vertical: MediaQuery.of(context).size.height * 0.1,
+                    vertical: MediaQuery.of(context).size.height * 0.05,
                     horizontal: MediaQuery.of(context).size.width * 0.06),
-                height: MediaQuery.of(context).size.height * 0.7,
+                height: MediaQuery.of(context).size.height * 0.8,
                 decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
                 child: Form(
                   key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Center(
+                        child: Image(
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          image: const AssetImage(
+                              "assets/logo/logo_text_color.png"),
+                        ),
+                      ),
                       //email
                       const Padding(
                         padding: EdgeInsets.only(bottom: 8.0),
@@ -208,7 +207,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
