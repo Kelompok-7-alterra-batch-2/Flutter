@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DashboardCard extends StatelessWidget {
-  const DashboardCard({
-    Key? key,
-  }) : super(key: key);
+  const DashboardCard(
+      {Key? key,
+      this.icon = Icons.calendar_month_outlined,
+      this.total = 0,
+      this.information = "Appointments"})
+      : super(key: key);
 
+  final icon;
+  final int total;
+  final String information;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,6 +20,7 @@ class DashboardCard extends StatelessWidget {
         MediaQuery.of(context).size.height * 0.05,
       ),
       height: MediaQuery.of(context).size.height * 0.2,
+      width: MediaQuery.of(context).size.width * 0.8,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -31,39 +39,54 @@ class DashboardCard extends StatelessWidget {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Icon(
-              Icons.calendar_month_outlined,
-              size: MediaQuery.of(context).size.height * 0.07,
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+            Row(
               children: [
-                Text(
-                  "145",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      color: Colors.black,
-                      fontSize: 20),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.1,
+                  child: icon is Icon
+                      ? Icon(
+                          icon,
+                          size: MediaQuery.of(context).size.height * 0.06,
+                        )
+                      : FaIcon(
+                          icon,
+                          size: MediaQuery.of(context).size.height * 0.055,
+                        ),
                 ),
-                Text(
-                  "Appointments",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 15),
+                SizedBox(
+                  width: 20,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "$total",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          color: Colors.black,
+                          fontSize: 18),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      child: Text(
+                        information,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 13),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-            SizedBox(
-              width: 20,
-            ),
-            Column(
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
                   style: TextButton.styleFrom(
