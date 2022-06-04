@@ -37,6 +37,7 @@ dependencies:
   page_transition: ^2.0.5
   animated_splash_screen: ^1.2.0
   font_awesome_flutter: ^10.1.0
+  iconify_flutter: ^0.0.4
 
 
 dev_dependencies:

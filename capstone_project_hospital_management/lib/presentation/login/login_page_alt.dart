@@ -1,3 +1,4 @@
+import 'package:capstone_project_hospital_management/presentation/dashboard/dashboard_page.dart';
 import 'package:capstone_project_hospital_management/presentation/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +26,10 @@ class _LoginPageAltState extends State<LoginPageAlt> {
 
       debugPrint(_password);
 
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) {
+        return const DashboardPage();
+      }));
       /* 
       Continute proccessing the provided information with your own logic 
       such us sending HTTP requests, savaing to SQLite database, etc.
