@@ -1,7 +1,8 @@
+// ignore_for_file: avoid_unnecessary_containers
+
 import 'package:capstone_project_hospital_management/presentation/drawer/drawer_navigation.dart';
-import 'package:capstone_project_hospital_management/widget/dashboard/dashboard_card.dart';
+import 'package:capstone_project_hospital_management/widget/patient_single_list.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: const IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
           centerTitle: true,
           title: Row(
@@ -26,10 +27,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 height: MediaQuery.of(context).size.height * 0.05,
                 image: const AssetImage("assets/logo/logo.png"),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
-              Text(
+              const Text(
                 "Care Hospital",
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
@@ -37,7 +38,7 @@ class _DashboardPageState extends State<DashboardPage> {
             ],
           ),
         ),
-        drawer: DrawerWidget(),
+        drawer: const DrawerWidget(),
         body: SingleChildScrollView(
           child: Container(
             child: Column(
@@ -46,7 +47,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   height: MediaQuery.of(context).size.height * 0.02,
                 ),
                 Container(
-                  padding: EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(30),
                   height: MediaQuery.of(context).size.height * 0.35,
                   color: const Color(0xff4e89a8),
                   child: Center(
@@ -59,7 +60,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               // width: MediaQuery.of(context).size.width * 0.58,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
+                                children: const [
                                   Text(
                                     "Welcome,",
                                     style: TextStyle(
@@ -96,22 +97,22 @@ class _DashboardPageState extends State<DashboardPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               border: Border(
                             bottom: BorderSide(color: Colors.white, width: 1),
                           )),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               "May, 22 2022",
                               style: TextStyle(
                                   fontWeight: FontWeight.w600,
@@ -119,7 +120,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   fontSize: 18),
                             ),
                             Expanded(child: Container()),
-                            Text(
+                            const Text(
                               "15 Appointments",
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
@@ -150,29 +151,37 @@ class _DashboardPageState extends State<DashboardPage> {
                 //   height: MediaQuery.of(context).size.height * 0.03,
                 // ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
-                  margin: EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  child: Column(
                     children: [
-                      Text(
-                        "Patients Today",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            // color: Colors.white,
-                            fontSize: 18),
+                      Row(
+                        children: [
+                          const Text(
+                            "Patients Today",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                // color: Colors.white,
+                                fontSize: 18),
+                          ),
+                          Expanded(child: Container()),
+                          TextButton(
+                            onPressed: () {},
+                            child: Row(
+                              children: const [
+                                Text("See More"),
+                                Icon(
+                                  Icons.navigate_next,
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                      Expanded(child: Container()),
-                      TextButton(
-                        onPressed: () {},
-                        child: Row(
-                          children: [
-                            Text("See More"),
-                            Icon(
-                              Icons.navigate_next,
-                            )
-                          ],
-                        ),
-                      ),
+                      Column(children: const [
+                        PatientSingleList(),
+                        PatientSingleList()
+                      ]),
                     ],
                   ),
                 ),

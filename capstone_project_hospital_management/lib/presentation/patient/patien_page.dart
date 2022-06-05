@@ -1,3 +1,4 @@
+import 'package:capstone_project_hospital_management/widget/patient_single_list.dart';
 import 'package:flutter/material.dart';
 
 class PatientPage extends StatefulWidget {
@@ -12,17 +13,29 @@ class _PatientPageState extends State<PatientPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.navigate_before),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        leading: Semantics(
+          label: "Tombol kembali",
+          child: IconButton(
+            icon: const Icon(Icons.navigate_before),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
-        title: Text(
+        title: const Text(
           "Patient",
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          color: Colors.grey[300],
+          padding: const EdgeInsets.all(10),
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+              children: const [PatientSingleList(), PatientSingleList()]),
         ),
       ),
     );
