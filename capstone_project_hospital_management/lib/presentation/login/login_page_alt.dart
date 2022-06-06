@@ -81,38 +81,41 @@ class _LoginPageAltState extends State<LoginPageAlt> {
                           ),
                         ),
                       ),
-                      TextFormField(
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return 'Please enter';
-                          }
-                          // Check if the entered email has the right format
-                          if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                            return 'Please enter a valid email address';
-                          }
-                          // Return null if the entered email is valid
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'email@carehospital.com',
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(10),
+                      Semantics(
+                        label: "emailId",
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value == null || value.trim().isEmpty) {
+                              return 'Please enter';
+                            }
+                            // Check if the entered email has the right format
+                            if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                              return 'Please enter a valid email address';
+                            }
+                            // Return null if the entered email is valid
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'email@carehospital.com',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.black),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.black),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                          onChanged: (value) => _userEmail = value,
                         ),
-                        onChanged: (value) => _userEmail = value,
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.035,
@@ -127,51 +130,54 @@ class _LoginPageAltState extends State<LoginPageAlt> {
                           ),
                         ),
                       ),
-                      TextFormField(
-                        obscureText: _isObscure,
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return 'Please enter';
-                          }
-                          if (value.trim().length < 8) {
-                            return 'Password must be at least 8 characters in length';
-                          }
-                          // Return null if the entered password is valid
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'your password',
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              _isObscure
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: Colors.grey,
+                      Semantics(
+                        label: "passwordId",
+                        child: TextFormField(
+                          obscureText: _isObscure,
+                          validator: (value) {
+                            if (value == null || value.trim().isEmpty) {
+                              return 'Please enter';
+                            }
+                            if (value.trim().length < 8) {
+                              return 'Password must be at least 8 characters in length';
+                            }
+                            // Return null if the entered password is valid
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'your password',
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _isObscure
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Colors.grey,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _isObscure = !_isObscure;
+                                });
+                              },
                             ),
-                            onPressed: () {
-                              setState(() {
-                                _isObscure = !_isObscure;
-                              });
-                            },
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.black),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.black),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                          onChanged: (value) => _password = value,
                         ),
-                        onChanged: (value) => _password = value,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
