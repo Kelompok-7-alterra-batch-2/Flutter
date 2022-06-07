@@ -1,3 +1,4 @@
+import 'package:capstone_project_hospital_management/presentation/patient/detail/patient_detail.dart';
 import 'package:flutter/material.dart';
 
 class PatientSingleList extends StatelessWidget {
@@ -69,7 +70,13 @@ class PatientSingleList extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.08,
             width: MediaQuery.of(context).size.height * 0.06,
             child: IconButton(
-                onPressed: () {}, icon: const Icon(Icons.navigate_next)),
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushReplacement(MaterialPageRoute(builder: (context) {
+                    return const PatientDetailPage();
+                  }));
+                },
+                icon: const Icon(Icons.navigate_next)),
           ),
         ],
       ),

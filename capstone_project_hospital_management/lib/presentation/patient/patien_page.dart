@@ -1,3 +1,4 @@
+import 'package:capstone_project_hospital_management/presentation/dashboard/dashboard_page.dart';
 import 'package:capstone_project_hospital_management/widget/patient_single_list.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,10 @@ class _PatientPageState extends State<PatientPage> {
           child: IconButton(
             icon: const Icon(Icons.navigate_before),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.of(context)
+                  .pushReplacement(MaterialPageRoute(builder: (context) {
+                return const DashboardPage();
+              }));
             },
           ),
         ),

@@ -53,7 +53,7 @@ class DrawerWidget extends StatelessWidget {
               text: 'Patient',
               onTap: () {
                 Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
+                    .pushReplacement(MaterialPageRoute(builder: (context) {
                   return const PatientPage();
                 }));
               }),
