@@ -1,5 +1,6 @@
 import 'package:capstone_project_hospital_management/presentation/dashboard/dashboard_page.dart';
 import 'package:capstone_project_hospital_management/presentation/patient/patien_page.dart';
+import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/fluent.dart';
@@ -11,6 +12,7 @@ class DrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: sett.cPrimary,
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         children: <Widget>[
@@ -22,8 +24,10 @@ class DrawerWidget extends StatelessWidget {
             child: Row(
               children: [
                 Image(
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  image: const AssetImage("assets/logo/logo.png"),
+                  height: sett.isTablet
+                      ? MediaQuery.of(context).size.height * 0.05
+                      : MediaQuery.of(context).size.height * 0.08,
+                  image: const AssetImage("assets/logo/Vector.png"),
                 ),
                 const SizedBox(
                   width: 10,
@@ -32,7 +36,7 @@ class DrawerWidget extends StatelessWidget {
                   "Care Hospital",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: Colors.white,
                     fontSize: 25,
                   ),
                 ),
@@ -40,7 +44,10 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           drawerItem(
-              icon: const Iconify(Ic.baseline_dashboard),
+              icon: const Iconify(
+                Ic.baseline_dashboard,
+                color: Colors.white,
+              ),
               text: 'Dashboard',
               onTap: () {
                 Navigator.of(context)
@@ -49,7 +56,10 @@ class DrawerWidget extends StatelessWidget {
                 }));
               }),
           drawerItem(
-              icon: const Iconify(Fluent.patient_20_filled),
+              icon: const Iconify(
+                Fluent.patient_20_filled,
+                color: Colors.white,
+              ),
               text: 'Patient',
               onTap: () {
                 Navigator.of(context)
@@ -58,7 +68,10 @@ class DrawerWidget extends StatelessWidget {
                 }));
               }),
           drawerItem(
-              icon: const Iconify(Ic.settings),
+              icon: const Iconify(
+                Ic.settings,
+                color: Colors.white,
+              ),
               text: 'Setting',
               onTap: () {
                 // Navigator.of(context)
@@ -69,6 +82,7 @@ class DrawerWidget extends StatelessWidget {
           drawerItem(
               icon: const Iconify(
                 Ic.twotone_log_out,
+                color: Colors.white,
               ),
               text: 'Log Out',
               onTap: () {
@@ -97,6 +111,7 @@ Widget drawerItem(
             text,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
           ),
         ),
