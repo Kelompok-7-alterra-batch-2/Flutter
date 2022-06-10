@@ -256,7 +256,7 @@ class ColumnData extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 30,
+            height: sett.isTablet ? 30 : 10,
           ),
         ],
       ),
