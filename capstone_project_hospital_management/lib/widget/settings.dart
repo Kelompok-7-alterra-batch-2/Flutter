@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Settings {
   bool isTablet = false;
@@ -23,9 +23,19 @@ class Settings {
     fontSize: 16,
     fontWeight: FontWeight.bold,
   );
+  final body2wh = const TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
   final body3 = const TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
+  );
+  final body3p = const TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: Color(0xff204f6e),
   );
   final body4 = const TextStyle(
     fontSize: 16,
@@ -41,11 +51,15 @@ class Settings {
   );
 
   final cPrimary = const Color(0xff4e89a8);
+  final picture = const Color(0xff204f6e);
   final cNeutral = const Color(0xff060f1d);
   final cGrey1 = const Color(0xffb3bdc9);
   final cGrey2 = const Color(0xffccd5de);
   final cGrey3 = const Color(0xffe2eaf2);
   final cGrey4 = const Color(0xffeef3ed);
+  final cGrey15 = const Color(0xfff6f6f6);
+  final cGrey16 = const Color(0xffafafa);
+  final cGrey17 = const Color(0xffadb5be);
 }
 
 var sett = Settings();

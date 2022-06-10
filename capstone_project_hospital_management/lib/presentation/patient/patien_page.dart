@@ -1,5 +1,6 @@
 import 'package:capstone_project_hospital_management/presentation/dashboard/dashboard_page.dart';
 import 'package:capstone_project_hospital_management/widget/patient_single_list.dart';
+import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
 
 class PatientPage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _PatientPageState extends State<PatientPage> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: Colors.grey[300],
+          color: sett.cGrey15,
           padding: const EdgeInsets.all(10),
           width: MediaQuery.of(context).size.width,
           child: Column(

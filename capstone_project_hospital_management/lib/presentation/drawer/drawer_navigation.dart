@@ -109,10 +109,7 @@ Widget drawerItem(
           padding: const EdgeInsets.only(left: 25.0),
           child: Text(
             text,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+            style: sett.body2wh,
           ),
         ),
       ],

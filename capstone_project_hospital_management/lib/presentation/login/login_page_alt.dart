@@ -85,7 +85,7 @@ class _LoginPageAltState extends State<LoginPageAlt> {
                         : MediaQuery.of(context).size.width * 0.06),
                 height: sett.isTablet
                     ? MediaQuery.of(context).size.height * 0.65
-                    : MediaQuery.of(context).size.height * 0.8,
+                    : MediaQuery.of(context).size.height * 0.7,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(20)),

@@ -17,7 +17,17 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    sett.isTablet = true;
+    if (MediaQuery.of(context).size.width > 700) {
+      sett.isTablet = true;
+      // _isTablet = true;
+      // testing = true;
+      debugPrint("ini tablet");
+    } else {
+      sett.isTablet = false;
+      // _isTablet = false;
+      // testing = false;
+      debugPrint("ini bukan tablet");
+    }
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -65,17 +75,20 @@ class _DashboardPageState extends State<DashboardPage> {
                   height: MediaQuery.of(context).size.height * 0.35,
                   width: MediaQuery.of(context).size.width,
                   // color: sett.cPrimary,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                    tileMode: TileMode.clamp,
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                    colors: [
-                      sett.cPrimary,
-                      sett.cPrimary,
-                      Colors.white,
-                    ],
-                  )),
+                  decoration: sett.isTablet
+                      ? BoxDecoration(
+                          gradient: LinearGradient(
+                            tileMode: TileMode.clamp,
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: [
+                              sett.cPrimary,
+                              sett.cPrimary,
+                              Colors.white,
+                            ],
+                          ),
+                        )
+                      : BoxDecoration(color: sett.cPrimary),
                   child: Center(
                     // child: DashboardHeadTablet(),
                     child: sett.isTablet
@@ -107,12 +120,9 @@ class _DashboardPageState extends State<DashboardPage> {
                     children: [
                       Row(
                         children: [
-                          const Text(
+                          Text(
                             "Patients Today",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                // color: Colors.white,
-                                fontSize: 18),
+                            style: sett.body3,
                           ),
                           Expanded(child: Container()),
                           TextButton(

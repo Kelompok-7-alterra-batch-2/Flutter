@@ -1,4 +1,5 @@
 import 'package:capstone_project_hospital_management/presentation/patient/detail/patient_detail.dart';
+import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
 
 class PatientSingleList extends StatelessWidget {
@@ -9,7 +10,9 @@ class PatientSingleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.12,
+      height: sett.isTablet
+          ? MediaQuery.of(context).size.height * 0.08
+          : MediaQuery.of(context).size.height * 0.12,
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.only(
         top: 5,
@@ -30,14 +33,21 @@ class PatientSingleList extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.08,
-            width: MediaQuery.of(context).size.height * 0.08,
+            height: sett.isTablet
+                ? MediaQuery.of(context).size.height * 0.05
+                : MediaQuery.of(context).size.height * 0.08,
+            width: sett.isTablet
+                ? MediaQuery.of(context).size.height * 0.05
+                : MediaQuery.of(context).size.height * 0.08,
             decoration: BoxDecoration(
-              color: Colors.grey[300],
+              color: sett.cPrimary.withOpacity(0.25),
               borderRadius: const BorderRadius.all(Radius.circular(5)),
             ),
-            child: const Center(
-              child: Text("1"),
+            child: Center(
+              child: Text(
+                "1",
+                style: sett.body3p,
+              ),
             ),
           ),
           Container(
@@ -47,19 +57,14 @@ class PatientSingleList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(child: Container()),
-                const Text(
+                Text(
                   "Wanda Scarlett",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 15,
-                  ),
+                  style: sett.body5,
                 ),
                 Expanded(child: Container()),
-                const Text(
+                Text(
                   "123456789",
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
+                  style: sett.body6,
                 ),
                 Expanded(child: Container()),
               ],

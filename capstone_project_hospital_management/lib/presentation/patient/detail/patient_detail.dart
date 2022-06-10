@@ -1,5 +1,8 @@
 import 'package:capstone_project_hospital_management/presentation/patient/patien_page.dart';
+import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/emojione_monotone.dart';
 
 class PatientDetailPage extends StatefulWidget {
   const PatientDetailPage({Key? key}) : super(key: key);
@@ -32,22 +35,20 @@ class _PatientDetailPageState extends State<PatientDetailPage> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: Colors.grey[300],
-          padding: const EdgeInsets.all(20),
+          color: sett.cGrey15,
+          padding: EdgeInsets.symmetric(
+              vertical: 20,
+              horizontal: sett.isTablet
+                  ? MediaQuery.of(context).size.width * 0.15
+                  : MediaQuery.of(context).size.width * 0.05),
           width: MediaQuery.of(context).size.width,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(bottom: 8.0),
                 child: Center(
-                  child: Text(
-                    "Update Patient Data",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  child: Text("Update Patient Data", style: sett.body3),
                 ),
               ),
               ColumnData(
@@ -73,7 +74,7 @@ class _PatientDetailPageState extends State<PatientDetailPage> {
               ColumnData(
                 labelName: "Diagnosis",
                 idSemantics: "Diagnosis",
-                hintText: "write here...",
+                hintText: "",
                 isEnabled: true,
                 maxLine: 4,
                 isFocused: true,
@@ -81,7 +82,7 @@ class _PatientDetailPageState extends State<PatientDetailPage> {
               ColumnData(
                 labelName: "Prescription",
                 idSemantics: "Prescription",
-                hintText: "write here...",
+                hintText: "",
                 isEnabled: true,
                 maxLine: 4,
                 isFocused: true,
@@ -91,9 +92,11 @@ class _PatientDetailPageState extends State<PatientDetailPage> {
                 margin: EdgeInsets.only(bottom: 15),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: const Color(0xff4e89a8),
+                    primary: sett.cPrimary,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    showAlertDialog(context);
+                  },
                   child: Text(
                     "Submit",
                     style: TextStyle(
@@ -105,6 +108,88 @@ class _PatientDetailPageState extends State<PatientDetailPage> {
           ),
         ),
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = ElevatedButton(
+      child: Text(
+        "No",
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+          color: sett.cPrimary,
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.white,
+      ),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+    Widget continueButton = ElevatedButton(
+      child: Text(
+        "Yes",
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: sett.cPrimary,
+      ),
+      onPressed: () {},
+    ); // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Iconify(
+              EmojioneMonotone.information,
+              color: sett.cPrimary,
+              size: MediaQuery.of(context).size.height * 0.03,
+            ),
+          ),
+          Text(
+            "Confirmation",
+            style: sett.body2,
+          ),
+        ],
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(
+            "Are you sure this data is correct?",
+            textAlign: TextAlign.center,
+            style: sett.body6,
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              continueButton,
+              SizedBox(
+                width: 30,
+              ),
+              cancelButton,
+            ],
+          )
+        ],
+      ),
+      contentPadding: EdgeInsets.all(20),
+    ); // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
@@ -140,10 +225,7 @@ class ColumnData extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 8.0),
             child: Text(
               labelName,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
+              style: sett.body3,
             ),
           ),
           Semantics(
@@ -152,25 +234,29 @@ class ColumnData extends StatelessWidget {
               enabled: isEnabled,
               maxLines: maxLine,
               decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 filled: isFilled,
-                fillColor: isFocused ? Colors.grey[400] : Colors.grey[200],
+                fillColor: isFocused ? sett.cGrey15 : sett.cGrey16,
                 hintText: hintText,
                 hintStyle: TextStyle(fontSize: 14),
                 disabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey[300]!),
+                  borderSide: BorderSide(color: sett.cGrey15),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey[300]!),
+                  borderSide: BorderSide(color: sett.cGrey17),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey[300]!),
+                  borderSide: BorderSide(color: sett.cNeutral),
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),
+          ),
+          SizedBox(
+            height: 30,
           ),
         ],
       ),
