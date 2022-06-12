@@ -2,6 +2,8 @@ import 'package:capstone_project_hospital_management/model/mock_patient.dart';
 import 'package:capstone_project_hospital_management/widget/patient_single_list.dart';
 import 'package:flutter/material.dart';
 
+import 'patient_single_list_dummy.dart';
+
 class PatientBuilder extends StatelessWidget {
   const PatientBuilder({
     Key? key,
@@ -23,9 +25,9 @@ class PatientBuilder extends StatelessWidget {
           child: ListView.builder(
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
-              final creator = snapshot.data![index];
+              final patients = snapshot.data![index];
               // print(creator.realName);
-              return _buildPatientCard(creator, context);
+              return _buildPatientCard(patients, context);
             },
           ),
         );
@@ -36,7 +38,9 @@ class PatientBuilder extends StatelessWidget {
   Widget _buildPatientCard(MockPatient mockPatient, BuildContext context) {
     return GestureDetector(
       onTap: () {},
-      child: PatientSingleList(),
+      child: PatientSingleListDummy(
+        patient: mockPatient,
+      ),
     );
   }
 }

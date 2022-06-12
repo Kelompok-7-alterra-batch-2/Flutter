@@ -58,4 +58,15 @@ class DatabasePatient {
     return List.generate(
         maps.length, (index) => MockPatient.fromMap(maps[index]));
   }
+
+  Future<void> updatePatient(MockPatient patient) async {
+    final db = await _databasePatient.database;
+
+    await db.update(
+      'mockpatient',
+      patient.toMap(),
+      where: 'id = ?',
+      whereArgs: [patient.id],
+    );
+  }
 }

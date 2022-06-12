@@ -4,8 +4,8 @@ class MockPatient {
   DateTime doB = DateTime.now();
   final String address;
   final String gender;
-  final String diagnosis;
-  final String prescription;
+  String diagnosis;
+  String prescription;
 
   MockPatient({
     this.id,
@@ -43,6 +43,6 @@ class MockPatient {
 
   @override
   String toString() {
-    return "MockPatient(id: $id, name: $name)";
+    return "MockPatient(id: $id,\nname: $name,\ndiagnose : $diagnosis,\nprescription : $prescription)";
   }
 }
