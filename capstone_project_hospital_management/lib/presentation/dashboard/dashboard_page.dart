@@ -1,9 +1,12 @@
 // ignore_for_file: avoid_unnecessary_containers
 
 import 'package:capstone_project_hospital_management/presentation/drawer/drawer_navigation.dart';
+import 'package:capstone_project_hospital_management/presentation/vm/patient_view_model.dart';
+import 'package:capstone_project_hospital_management/widget/patient_builder.dart';
 import 'package:capstone_project_hospital_management/widget/patient_single_list.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -14,20 +17,20 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   // testing
-
+  final PatientVM patientvm = PatientVM();
   @override
   Widget build(BuildContext context) {
-    if (MediaQuery.of(context).size.width > 700) {
-      sett.isTablet = true;
-      // _isTablet = true;
-      // testing = true;
-      debugPrint("ini tablet");
-    } else {
-      sett.isTablet = false;
-      // _isTablet = false;
-      // testing = false;
-      debugPrint("ini bukan tablet");
-    }
+    // if (MediaQuery.of(context).size.width > 700) {
+    //   sett.isTablet = true;
+    //   // _isTablet = true;
+    //   // testing = true;
+    //   debugPrint("ini tablet");
+    // } else {
+    //   sett.isTablet = false;
+    //   // _isTablet = false;
+    //   // testing = false;
+    //   debugPrint("ini bukan tablet");
+    // }
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -41,7 +44,7 @@ class _DashboardPageState extends State<DashboardPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image(
-                  height: sett.isTablet
+                  height: MediaQuery.of(context).size.width > 770
                       ? MediaQuery.of(context).size.height * 0.035
                       : MediaQuery.of(context).size.height * 0.05,
                   image: const AssetImage("assets/logo/logo.png"),
@@ -70,12 +73,12 @@ class _DashboardPageState extends State<DashboardPage> {
                 Container(
                   padding: EdgeInsets.symmetric(
                     horizontal: 40,
-                    vertical: sett.isTablet ? 20 : 40,
+                    vertical: MediaQuery.of(context).size.width > 770 ? 20 : 40,
                   ),
                   height: MediaQuery.of(context).size.height * 0.35,
                   width: MediaQuery.of(context).size.width,
                   // color: sett.cPrimary,
-                  decoration: sett.isTablet
+                  decoration: MediaQuery.of(context).size.width > 770
                       ? BoxDecoration(
                           gradient: LinearGradient(
                             tileMode: TileMode.clamp,
@@ -91,7 +94,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       : BoxDecoration(color: sett.cPrimary),
                   child: Center(
                     // child: DashboardHeadTablet(),
-                    child: sett.isTablet
+                    child: MediaQuery.of(context).size.width > 770
                         ? DashboardHeadTablet()
                         : DashboardHeadAndroid(),
                   ),
@@ -138,10 +141,26 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                         ],
                       ),
-                      Column(children: const [
-                        PatientSingleList(),
-                        PatientSingleList()
-                      ]),
+                      // Column(children: const [
+                      //   PatientSingleList(),
+                      //   PatientSingleList()
+                      // ]),
+                      // ShrinkWrappingViewport(
+                      //   offset: ViewportOffset.zero(),
+                      //   slivers: [
+                      //     PatientBuilder(
+                      //       future: patientvm.getPatients(),
+                      //     ),
+                      //   ],
+                      // )
+
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        // height: double.infinity,
+                        child: PatientBuilder(
+                          future: patientvm.getPatients(),
+                        ),
+                      )
                     ],
                   ),
                 ),

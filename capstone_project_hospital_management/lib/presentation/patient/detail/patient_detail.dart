@@ -38,8 +38,8 @@ class _PatientDetailPageState extends State<PatientDetailPage> {
           color: sett.cGrey15,
           padding: EdgeInsets.symmetric(
               vertical: 20,
-              horizontal: sett.isTablet
-                  ? MediaQuery.of(context).size.width * 0.15
+              horizontal: MediaQuery.of(context).size.width > 770
+                  ? MediaQuery.of(context).size.width * 0.2
                   : MediaQuery.of(context).size.width * 0.05),
           width: MediaQuery.of(context).size.width,
           child: Column(
@@ -76,7 +76,7 @@ class _PatientDetailPageState extends State<PatientDetailPage> {
                 idSemantics: "Diagnosis",
                 hintText: "",
                 isEnabled: true,
-                maxLine: 4,
+                maxLine: 2,
                 isFocused: true,
               ),
               ColumnData(
@@ -84,7 +84,7 @@ class _PatientDetailPageState extends State<PatientDetailPage> {
                 idSemantics: "Prescription",
                 hintText: "",
                 isEnabled: true,
-                maxLine: 4,
+                maxLine: 2,
                 isFocused: true,
               ),
               Container(

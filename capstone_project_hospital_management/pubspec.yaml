@@ -38,6 +38,9 @@ dependencies:
   animated_splash_screen: ^1.2.0
   font_awesome_flutter: ^10.1.0
   iconify_flutter: ^0.0.4
+  sqflite: ^2.0.2+1
+  path: ^1.8.0
+  shared_preferences: ^2.0.15
 
 
 dev_dependencies:

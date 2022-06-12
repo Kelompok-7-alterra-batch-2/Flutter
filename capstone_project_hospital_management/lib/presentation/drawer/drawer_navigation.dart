@@ -14,34 +14,46 @@ class DrawerWidget extends StatelessWidget {
     return Drawer(
       backgroundColor: sett.cPrimary,
       child: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: const EdgeInsets.symmetric(/*horizontal: 20,*/ vertical: 20),
         children: <Widget>[
           Container(
             height: MediaQuery.of(context).size.height * 0.1,
             padding: const EdgeInsets.symmetric(
               vertical: 10,
             ),
-            child: Row(
-              children: [
-                Image(
-                  height: sett.isTablet
-                      ? MediaQuery.of(context).size.height * 0.05
-                      : MediaQuery.of(context).size.height * 0.08,
-                  image: const AssetImage("assets/logo/Vector.png"),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Text(
-                  "Care Hospital",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 25,
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                    height: MediaQuery.of(context).size.width > 770
+                        ? MediaQuery.of(context).size.height * 0.05
+                        : MediaQuery.of(context).size.height * 0.08,
+                    image: const AssetImage("assets/logo/Vector.png"),
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Text(
+                    "Care Hospital",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 25,
+                    ),
+                  ),
+                  // garis bawah
+                ],
+              ),
             ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 10),
+            decoration: const BoxDecoration(
+                border: Border(
+              bottom: BorderSide(color: Colors.white, width: 1),
+            )),
           ),
           drawerItem(
               icon: const Iconify(

@@ -1,7 +1,12 @@
 import 'package:capstone_project_hospital_management/presentation/dashboard/dashboard_page.dart';
+import 'package:capstone_project_hospital_management/presentation/vm/patient_view_model.dart';
+import 'package:capstone_project_hospital_management/widget/patient_builder.dart';
 import 'package:capstone_project_hospital_management/widget/patient_single_list.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/clarity.dart';
+import 'package:iconify_flutter/icons/ic.dart';
 
 class PatientPage extends StatefulWidget {
   const PatientPage({Key? key}) : super(key: key);
@@ -11,6 +16,8 @@ class PatientPage extends StatefulWidget {
 }
 
 class _PatientPageState extends State<PatientPage> {
+  final PatientVM patientvm = PatientVM();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,10 +44,50 @@ class _PatientPageState extends State<PatientPage> {
       body: SingleChildScrollView(
         child: Container(
           color: sett.cGrey15,
-          padding: const EdgeInsets.all(10),
+          padding: MediaQuery.of(context).size.width > 770
+              ? EdgeInsets.all(40)
+              : EdgeInsets.all(10),
           width: MediaQuery.of(context).size.width,
-          child: Column(
-              children: const [PatientSingleList(), PatientSingleList()]),
+          child: Column(children: [
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: Semantics(
+                label: "searchID",
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: Iconify(
+                        Ic.outline_search,
+                        size: 25,
+                        color: sett.cGrey2,
+                      ),
+                      onPressed: () {},
+                    ),
+                    fillColor: Colors.white,
+                    filled: true,
+                    hintText: 'Search Here',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: sett.cGrey15),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: sett.cGrey2),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            // PatientSingleList(),
+            // PatientSingleList(),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.5,
+              // height: double.infinity,
+              child: PatientBuilder(
+                future: patientvm.getPatients(),
+              ),
+            ),
+          ]),
         ),
       ),
     );

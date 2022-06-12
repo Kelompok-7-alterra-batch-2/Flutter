@@ -42,26 +42,26 @@ class _LoginPageAltState extends State<LoginPageAlt> {
     }
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
 
-    super.initState();
-  }
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    if (MediaQuery.of(context).size.width > 700) {
-      sett.isTablet = true;
-      // _isTablet = true;
-      // testing = true;
-      debugPrint("ini tablet");
-    } else {
-      sett.isTablet = false;
-      // _isTablet = false;
-      // testing = false;
-      debugPrint("ini bukan tablet");
-    }
+    // if (MediaQuery.of(context).size.width > 700) {
+    //   sett.isTablet = true;
+    //   // _isTablet = true;
+    //   // testing = true;
+    //   debugPrint("ini tablet");
+    // } else {
+    //   sett.isTablet = false;
+    //   // _isTablet = false;
+    //   // testing = false;
+    //   debugPrint("ini bukan tablet");
+    // }
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -77,13 +77,13 @@ class _LoginPageAltState extends State<LoginPageAlt> {
             children: [
               Container(
                 padding: EdgeInsets.symmetric(
-                    vertical: sett.isTablet
+                    vertical: MediaQuery.of(context).size.width > 770
                         ? MediaQuery.of(context).size.height * 0.08
                         : MediaQuery.of(context).size.height * 0.05,
-                    horizontal: sett.isTablet
+                    horizontal: MediaQuery.of(context).size.width > 770
                         ? MediaQuery.of(context).size.width * 0.14
                         : MediaQuery.of(context).size.width * 0.06),
-                height: sett.isTablet
+                height: MediaQuery.of(context).size.width > 770
                     ? MediaQuery.of(context).size.height * 0.65
                     : MediaQuery.of(context).size.height * 0.7,
                 decoration: const BoxDecoration(

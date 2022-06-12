@@ -10,7 +10,7 @@ class PatientSingleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: sett.isTablet
+      height: MediaQuery.of(context).size.width > 770
           ? MediaQuery.of(context).size.height * 0.08
           : MediaQuery.of(context).size.height * 0.12,
       padding: const EdgeInsets.all(10),
@@ -33,10 +33,10 @@ class PatientSingleList extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            height: sett.isTablet
+            height: MediaQuery.of(context).size.width > 770
                 ? MediaQuery.of(context).size.height * 0.05
                 : MediaQuery.of(context).size.height * 0.08,
-            width: sett.isTablet
+            width: MediaQuery.of(context).size.width > 770
                 ? MediaQuery.of(context).size.height * 0.05
                 : MediaQuery.of(context).size.height * 0.08,
             decoration: BoxDecoration(
