@@ -79,16 +79,19 @@ class PatientSingleListDummy extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.08,
             width: MediaQuery.of(context).size.height * 0.06,
-            child: IconButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .pushReplacement(MaterialPageRoute(builder: (context) {
-                    return PatientDetailPageDummy(
-                      patient: patient,
-                    );
-                  }));
-                },
-                icon: const Icon(Icons.navigate_next)),
+            child: Semantics(
+              label: "goDetailId",
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushReplacement(MaterialPageRoute(builder: (context) {
+                      return PatientDetailPageDummy(
+                        patient: patient,
+                      );
+                    }));
+                  },
+                  icon: const Icon(Icons.navigate_next)),
+            ),
           ),
         ],
       ),
