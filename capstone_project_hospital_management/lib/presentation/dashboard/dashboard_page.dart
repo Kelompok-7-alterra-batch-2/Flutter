@@ -5,6 +5,7 @@ import 'package:capstone_project_hospital_management/presentation/vm/patient_vie
 import 'package:capstone_project_hospital_management/widget/temp%20feature/patient_builder.dart';
 import 'package:capstone_project_hospital_management/widget/patient_single_list.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
+import 'package:capstone_project_hospital_management/widget/temp%20feature/patient_done_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -154,16 +155,65 @@ class _DashboardPageState extends State<DashboardPage> {
                       //   ],
                       // )
 
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.5,
-                        // height: double.infinity,
-                        child: PatientBuilder(
-                          future: patientvm.getPatients(),
-                        ),
-                      )
+                      // SizedBox(
+                      //   height: MediaQuery.of(context).size.height * 0.3,
+                      //   // height: double.infinity,
+                      //   child: PatientBuilder(
+                      //     future: patientvm.getPatients(),
+                      //   ),
+                      // ),
+                      Column(
+                        children: [
+                          PatientBuilder(
+                            future: patientvm.getPatients(),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            "Finished Consultation",
+                            style: sett.body3,
+                          ),
+                          Expanded(child: Container()),
+                          TextButton(
+                            onPressed: () {},
+                            child: Row(
+                              children: const [
+                                Text("See More"),
+                                Icon(
+                                  Icons.navigate_next,
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      // SizedBox(
+                      //   height: MediaQuery.of(context).size.height * 0.3,
+                      //   // height: double.infinity,
+                      //   child: PatientBuilderDone(
+                      //     future: patientvm.getPatients(),
+                      //   ),
+                      // ),
+                      Column(
+                        children: [
+                          PatientBuilderDone(
+                            future: patientvm.getPatients(),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),

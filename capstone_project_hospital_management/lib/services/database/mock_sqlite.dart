@@ -26,7 +26,7 @@ class DatabasePatient {
       path,
       onCreate: (db, version) async {
         await db.execute(
-          'CREATE TABLE mockpatient(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, doB INTEGER NOT NULL, address TEXT NOT NULL, gender TEXT NOT NULL, diagnosis TEXT NOT NULL, prescription TEXT NOT NULL)',
+          'CREATE TABLE mockpatient(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, doB INTEGER NOT NULL, address TEXT NOT NULL, gender TEXT NOT NULL, diagnosis TEXT NOT NULL, prescription TEXT NOT NULL, isDone BOOLEAN NOT NULL)',
         );
       },
       version: 1,

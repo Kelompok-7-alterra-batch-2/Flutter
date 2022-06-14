@@ -201,6 +201,7 @@ class _PatientDetailPageDummyState extends State<PatientDetailPageDummy> {
                     primary: sett.cPrimary,
                   ),
                   onPressed: () {
+                    widget.patient.isDone = true;
                     widget.patient.diagnosis = _diagnoseController.text;
                     widget.patient.prescription = _prescriptionController.text;
                     showAlertDialog(context, widget.patient);

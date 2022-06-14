@@ -80,13 +80,20 @@ class _PatientPageState extends State<PatientPage> {
             ),
             // PatientSingleList(),
             // PatientSingleList(),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.5,
-              // height: double.infinity,
-              child: PatientBuilder(
-                future: patientvm.getPatients(),
-              ),
-            ),
+            // SizedBox(
+            //   height: MediaQuery.of(context).size.height * 0.5,
+            //   // height: double.infinity,
+            //   child: PatientBuilder(
+            //     future: patientvm.getPatients(),
+            //   ),
+            // ),
+            Column(
+              children: [
+                PatientBuilder(
+                  future: patientvm.getPatients(),
+                ),
+              ],
+            )
           ]),
         ),
       ),

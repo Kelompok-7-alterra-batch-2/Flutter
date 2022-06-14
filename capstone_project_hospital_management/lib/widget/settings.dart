@@ -37,6 +37,11 @@ class Settings {
     fontWeight: FontWeight.w600,
     color: Color(0xff204f6e),
   );
+  final body3d = const TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: Color(0xffb4bdc9),
+  );
   final body4 = const TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.normal,
@@ -45,11 +50,21 @@ class Settings {
     fontSize: 14,
     fontWeight: FontWeight.w600,
   );
+  final body5d = const TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: Color(0xff979ca3),
+  );
   final body6 = const TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.normal,
   );
-
+  final body6d = const TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.normal,
+    color: Color(0xff979ca3),
+  );
+  final cDone = const Color(0xff979ca3);
   final cPrimary = const Color(0xff4e89a8);
   final picture = const Color(0xff204f6e);
   final cNeutral = const Color(0xff060f1d);

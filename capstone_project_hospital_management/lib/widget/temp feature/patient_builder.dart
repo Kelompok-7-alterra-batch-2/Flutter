@@ -23,10 +23,15 @@ class PatientBuilder extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               final patients = snapshot.data![index];
-              // print(creator.realName);
+
+              if (patients.isDone == true) {
+                return SizedBox.shrink();
+              }
               return _buildPatientCard(patients, context);
             },
           ),

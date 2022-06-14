@@ -6,6 +6,7 @@ class MockPatient {
   final String gender;
   String diagnosis;
   String prescription;
+  bool isDone;
 
   MockPatient({
     this.id,
@@ -15,6 +16,7 @@ class MockPatient {
     required this.gender,
     required this.diagnosis,
     required this.prescription,
+    this.isDone = false,
   });
 
   Map<String, dynamic> toMap() {
@@ -26,6 +28,7 @@ class MockPatient {
       "gender": gender,
       "diagnosis": diagnosis,
       "prescription": prescription,
+      "isDone": isDone ? 1 : 0,
     };
   }
 
@@ -38,6 +41,7 @@ class MockPatient {
       gender: map['gender'] ?? "",
       diagnosis: map['diagnosis'] ?? "",
       prescription: map['prescription'] ?? "",
+      isDone: (map['isDone'] ?? 0) == 1 ? true : false,
     );
   }
 

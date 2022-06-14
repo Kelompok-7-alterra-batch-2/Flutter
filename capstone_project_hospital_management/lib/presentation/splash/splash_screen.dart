@@ -24,6 +24,7 @@ class _MyAppState extends State<MyApp> {
       gender: "Pria",
       diagnosis: "no",
       prescription: "",
+      isDone: false,
     ),
     MockPatient(
       name: "Oktorian",
@@ -32,6 +33,7 @@ class _MyAppState extends State<MyApp> {
       gender: "Pria",
       diagnosis: "no",
       prescription: "",
+      isDone: false,
     ),
     MockPatient(
       name: "Oktorian",
@@ -40,6 +42,7 @@ class _MyAppState extends State<MyApp> {
       gender: "Pria",
       diagnosis: "no",
       prescription: "",
+      isDone: false,
     ),
   ];
 
