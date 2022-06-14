@@ -42,12 +42,30 @@ class _LoginPageAltState extends State<LoginPageAlt> {
     }
   }
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-
-  //   super.initState();
+  // String? validatePassword(String value) {
+  //   RegExp regex =
+  //       RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  //   if (value.isEmpty) {
+  //     return 'Please enter password';
+  //   } else {
+  //     if (!regex.hasMatch(value)) {
+  //       return 'Enter valid password';
+  //     } else {
+  //       return null;
+  //     }
+  //   }
   // }
+
+  /*
+  
+  r'^
+  (?=.*[A-Z])       // should contain at least one upper case
+  (?=.*[a-z])       // should contain at least one lower case
+  (?=.*?[0-9])      // should contain at least one digit
+  (?=.*?[!@#\$&*~]) // should contain at least one Special character
+  .{8,}             // Must be at least 8 characters in length  
+$
+  */
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +103,7 @@ class _LoginPageAltState extends State<LoginPageAlt> {
                         : MediaQuery.of(context).size.width * 0.06),
                 height: MediaQuery.of(context).size.width > 770
                     ? MediaQuery.of(context).size.height * 0.65
-                    : MediaQuery.of(context).size.height * 0.7,
+                    : MediaQuery.of(context).size.height * 0.8,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -172,11 +190,17 @@ class _LoginPageAltState extends State<LoginPageAlt> {
                           child: TextFormField(
                             obscureText: _isObscure,
                             validator: (value) {
+                              RegExp regex = RegExp(
+                                  r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
                               if (value == null || value.trim().isEmpty) {
                                 return 'Please enter';
                               }
                               if (value.trim().length < 8) {
                                 return 'Password must be at least 8 characters in length';
+                              } else {
+                                if (!regex.hasMatch(value)) {
+                                  return 'Please enter valid password!';
+                                }
                               }
                               // Return null if the entered password is valid
                               return null;
