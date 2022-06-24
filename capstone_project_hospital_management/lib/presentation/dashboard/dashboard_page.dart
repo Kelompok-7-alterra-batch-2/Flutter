@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_unnecessary_containers
 
 import 'package:capstone_project_hospital_management/presentation/drawer/drawer_navigation.dart';
+import 'package:capstone_project_hospital_management/presentation/patient/done/patient_done_page.dart';
 import 'package:capstone_project_hospital_management/presentation/vm/patient_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/temp%20feature/patient_builder.dart';
 import 'package:capstone_project_hospital_management/widget/patient_single_list.dart';
@@ -35,34 +36,56 @@ class _DashboardPageState extends State<DashboardPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.black),
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          flexibleSpace: Container(
-            height: MediaQuery.of(context).size.height * 0.1,
-            padding: EdgeInsets.all(5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image(
-                  height: MediaQuery.of(context).size.width > 770
-                      ? MediaQuery.of(context).size.height * 0.035
-                      : MediaQuery.of(context).size.height * 0.05,
-                  image: const AssetImage("assets/logo/logo.png"),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Text(
-                  "Care Hospital",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
-                ),
-              ],
+            iconTheme: const IconThemeData(color: Colors.black),
+            backgroundColor: Colors.white,
+            centerTitle: true,
+            flexibleSpace: Container(
+              height: MediaQuery.of(context).size.height * 0.1,
+              padding: EdgeInsets.all(5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                    height: MediaQuery.of(context).size.width > 770
+                        ? MediaQuery.of(context).size.height * 0.035
+                        : MediaQuery.of(context).size.height * 0.05,
+                    image: const AssetImage("assets/logo/logo.png"),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Text(
+                    "Care Hospital",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black),
+                  ),
+                ],
+              ),
             ),
-          ),
-          // title:
-        ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.purple[300],
+                    shape: const CircleBorder(),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushReplacement(MaterialPageRoute(builder: (context) {
+                      return const DashboardPage();
+                    }));
+                  },
+                  // child: const Text("A"),
+                  child: Image(
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    image: const AssetImage("assets/pic/image1.png"),
+                  ),
+                ),
+              ),
+            ]
+            // title:
+            ),
         drawer: const DrawerWidget(),
         body: SingleChildScrollView(
           child: Container(
@@ -166,6 +189,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         children: [
                           PatientBuilder(
                             future: patientvm.getPatients(),
+                            limit: 3,
                           ),
                         ],
                       ),
@@ -185,7 +209,12 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                           Expanded(child: Container()),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(builder: (context) {
+                                return const PatientDonePage();
+                              }));
+                            },
                             child: Row(
                               children: const [
                                 Text("See More"),
@@ -208,6 +237,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         children: [
                           PatientBuilderDone(
                             future: patientvm.getPatients(),
+                            limit: 3,
                           ),
                         ],
                       ),
