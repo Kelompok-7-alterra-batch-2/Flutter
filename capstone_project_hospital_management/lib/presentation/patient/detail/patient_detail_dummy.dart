@@ -62,6 +62,11 @@ class _PatientDetailPageDummyState extends State<PatientDetailPageDummy> {
                 ),
               ),
               ColumnData(
+                labelName: "ID Patient",
+                idSemantics: "patientIDField",
+                hintText: "${widget.patient.idPatient}",
+              ),
+              ColumnData(
                 labelName: "Name",
                 idSemantics: "NameField",
                 hintText: widget.patient.name,
@@ -97,6 +102,7 @@ class _PatientDetailPageDummyState extends State<PatientDetailPageDummy> {
               //   maxLine: 2,
               //   isFocused: true,
               // ),
+
               Container(
                 margin: EdgeInsets.only(bottom: 15),
                 child: Column(

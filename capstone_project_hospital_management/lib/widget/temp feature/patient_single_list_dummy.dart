@@ -68,7 +68,8 @@ class PatientSingleListDummy extends StatelessWidget {
                 ),
                 Expanded(child: Container()),
                 Text(
-                  "${patient.doB.day}-${patient.doB.month}-${patient.doB.year}",
+                  // "${patient.doB.day}-${patient.doB.month}-${patient.doB.year}",
+                  "${patient.idPatient}",
                   style: sett.body6,
                 ),
                 Expanded(child: Container()),

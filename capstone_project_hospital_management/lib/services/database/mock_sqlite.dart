@@ -26,7 +26,7 @@ class DatabasePatient {
       path,
       onCreate: (db, version) async {
         await db.execute(
-          'CREATE TABLE mockpatient(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, doB INTEGER NOT NULL, address TEXT NOT NULL, gender TEXT NOT NULL, diagnosis TEXT NOT NULL, prescription TEXT NOT NULL, isDone BOOLEAN NOT NULL)',
+          'CREATE TABLE mockpatient(id INTEGER PRIMARY KEY AUTOINCREMENT, idPatient INTEGER NOT NULL, name TEXT NOT NULL, doB INTEGER NOT NULL, address TEXT NOT NULL, gender TEXT NOT NULL, diagnosis TEXT NOT NULL, prescription TEXT NOT NULL, isDone BOOLEAN NOT NULL)',
         );
       },
       version: 1,
@@ -49,6 +49,13 @@ class DatabasePatient {
     final db = await _databasePatient.database;
     final List<Map<String, dynamic>> maps =
         await db.query('mockpatient', where: 'id = ?', whereArgs: [id]);
+    return MockPatient.fromMap(maps[0]);
+  }
+
+  Future<MockPatient> namePatient(String name) async {
+    final db = await _databasePatient.database;
+    final List<Map<String, dynamic>> maps =
+        await db.query('mockpatient', where: 'name = ?', whereArgs: [name]);
     return MockPatient.fromMap(maps[0]);
   }
 

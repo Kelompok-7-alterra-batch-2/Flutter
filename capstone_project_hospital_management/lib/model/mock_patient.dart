@@ -1,5 +1,6 @@
 class MockPatient {
   final int? id;
+  final int idPatient;
   final String name;
   DateTime doB = DateTime.now();
   final String address;
@@ -10,6 +11,7 @@ class MockPatient {
 
   MockPatient({
     this.id,
+    required this.idPatient,
     required this.name,
     required this.doB,
     required this.address,
@@ -22,6 +24,7 @@ class MockPatient {
   Map<String, dynamic> toMap() {
     return {
       "id": id,
+      "idPatient": idPatient,
       "name": name,
       "doB": doB.millisecondsSinceEpoch,
       "address": address,
@@ -35,6 +38,7 @@ class MockPatient {
   factory MockPatient.fromMap(Map<String, dynamic> map) {
     return MockPatient(
       id: map['id']?.toInt() ?? 0,
+      idPatient: map['idPatient']?.toInt() ?? 0,
       name: map['name'] ?? "",
       doB: DateTime.fromMillisecondsSinceEpoch(map['doB'] ?? DateTime.now()),
       address: map['address'] ?? "",
@@ -47,6 +51,6 @@ class MockPatient {
 
   @override
   String toString() {
-    return "MockPatient(id: $id,\nname: $name,\ndiagnose : $diagnosis,\nprescription : $prescription)";
+    return "MockPatient(id: $id, id patient : $idPatient, name: $name,diagnose : $diagnosis,prescription : $prescription)";
   }
 }
