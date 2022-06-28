@@ -50,7 +50,7 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
+            margin: const EdgeInsets.symmetric(vertical: 10),
             decoration: const BoxDecoration(
                 border: Border(
               bottom: BorderSide(color: Colors.white, width: 1),
@@ -101,7 +101,7 @@ class DrawerWidget extends StatelessWidget {
               onTap: () {
                 Navigator.of(context)
                     .pushReplacement(MaterialPageRoute(builder: (context) {
-                  return LoginPageAlt();
+                  return const LoginPageAlt();
                 }));
               }),
         ],

@@ -1,4 +1,4 @@
-import 'package:capstone_project_hospital_management/model/patient.dart';
+import 'package:capstone_project_hospital_management/model/outpatient_model.dart';
 import 'package:capstone_project_hospital_management/presentation/patient/detail/patient_detail_api.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,7 @@ class PatientSingleListAPIDone extends StatelessWidget {
     required this.patient,
   }) : super(key: key);
 
-  final Patient patient;
+  final OutpatientModel patient;
   @override
   Widget build(BuildContext context) {
     debugPrint(patient.toString());
@@ -49,7 +49,7 @@ class PatientSingleListAPIDone extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                "${patient.outpatient?.last.queue}",
+                "${patient.queue}",
                 style: sett.body3d,
               ),
             ),
@@ -62,12 +62,12 @@ class PatientSingleListAPIDone extends StatelessWidget {
               children: [
                 Expanded(child: Container()),
                 Text(
-                  patient.name!,
+                  "${patient.patient!.name}",
                   style: sett.body5d,
                 ),
                 Expanded(child: Container()),
                 Text(
-                  "${patient.outpatient?.last.medicalRecord}",
+                  "${patient.appointmentReason}",
                   style: sett.body6d,
                 ),
                 Expanded(child: Container()),

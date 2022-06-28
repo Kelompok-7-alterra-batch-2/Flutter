@@ -1,35 +1,25 @@
-import 'package:capstone_project_hospital_management/model/patient.dart';
+// ignore_for_file: avoid_print, unused_local_variable
+
+import 'package:capstone_project_hospital_management/model/outpatient_model.dart';
 import 'package:dio/dio.dart';
 
 class PatientVM {
   var dio = Dio();
 
-  Future<List<Patient>> fetchDataPatient() async {
+  Future<List<OutpatientModel>> fetchDataOutpatient() async {
     try {
-      Response response = await Dio()
-          .get('https://capstone-project-hospital.herokuapp.com/patients');
+      Response response = await Dio().get(
+          'https://capstone-project-hospital.herokuapp.com/outpatients/today');
       print(response.statusCode);
-      final List<Patient> _listPatient =
-          (response.data as List).map((e) => Patient.fromJson(e)).toList();
-      return _listPatient;
+      final List<OutpatientModel> _listOutpatient = (response.data as List)
+          .map((e) => OutpatientModel.fromJson(e))
+          .toList();
+      return _listOutpatient;
     } on DioError catch (e) {
       if (e.response!.statusCode == 400) {
         print("error : ${e.response!.statusCode}");
         return [];
       }
-      print("something wrong");
-      print(e);
-      return [];
-    }
-  }
-
-  Future<List<Patient>> fetchDataPatientName(String name) async {
-    try {
-      Response response = await Dio().get(
-          'https://capstone-project-hospital.herokuapp.com/patients/names/$name');
-      print(response.statusCode);
-      return (response.data as List).map((e) => Patient.fromJson(e)).toList();
-    } on DioError catch (e) {
       print("something wrong");
       print(e);
       return [];

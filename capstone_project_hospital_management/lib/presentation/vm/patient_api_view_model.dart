@@ -1,9 +1,11 @@
+import 'package:capstone_project_hospital_management/model/outpatient_model.dart';
+// ignore: unused_import
 import 'package:capstone_project_hospital_management/model/patient.dart';
-import 'package:capstone_project_hospital_management/services/API/patient_api_view_model.dart';
+import 'package:capstone_project_hospital_management/services/API/patient_api_service.dart';
 
 class PatientAPIVM {
-  Future<List<Patient>> getPatients() async {
-    return await PatientVM().fetchDataPatient();
+  Future<List<OutpatientModel>> getPatients() async {
+    return await PatientVM().fetchDataOutpatient();
   }
 
   Future<void> updateOutpatientToProcess(int? id) async {

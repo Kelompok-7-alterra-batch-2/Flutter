@@ -12,8 +12,6 @@ class PatientDetailPage extends StatefulWidget {
 }
 
 class _PatientDetailPageState extends State<PatientDetailPage> {
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,32 +44,32 @@ class _PatientDetailPageState extends State<PatientDetailPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 8.0),
                 child: Center(
                   child: Text("Update Patient Data", style: sett.body3),
                 ),
               ),
-              ColumnData(
+              const ColumnData(
                 labelName: "Name",
                 idSemantics: "NameField",
                 hintText: "Wanda Maximoff",
               ),
-              ColumnData(
+              const ColumnData(
                 labelName: "Date of Birth",
                 idSemantics: "DOBField",
                 hintText: "10/08/1996",
               ),
-              ColumnData(
+              const ColumnData(
                 labelName: "Address",
                 idSemantics: "AddressField",
                 hintText: "Jl. Mawar 4 No. 10, Jakarta Barat",
               ),
-              ColumnData(
+              const ColumnData(
                 labelName: "Gender",
                 idSemantics: "GenderField",
                 hintText: "Female",
               ),
-              ColumnData(
+              const ColumnData(
                 labelName: "Diagnosis",
                 idSemantics: "Diagnosis",
                 hintText: "",
@@ -79,7 +77,7 @@ class _PatientDetailPageState extends State<PatientDetailPage> {
                 maxLine: 2,
                 isFocused: true,
               ),
-              ColumnData(
+              const ColumnData(
                 labelName: "Prescription",
                 idSemantics: "Prescription",
                 hintText: "",
@@ -89,7 +87,7 @@ class _PatientDetailPageState extends State<PatientDetailPage> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(bottom: 15),
+                margin: const EdgeInsets.only(bottom: 15),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: sett.cPrimary,
@@ -97,7 +95,7 @@ class _PatientDetailPageState extends State<PatientDetailPage> {
                   onPressed: () {
                     showAlertDialog(context);
                   },
-                  child: Text(
+                  child: const Text(
                     "Submit",
                     style: TextStyle(
                         fontFamily: "Lato", fontWeight: FontWeight.w700),
@@ -130,7 +128,7 @@ class _PatientDetailPageState extends State<PatientDetailPage> {
       },
     );
     Widget continueButton = ElevatedButton(
-      child: Text(
+      child: const Text(
         "Yes",
         style: TextStyle(
           fontSize: 16,
@@ -168,14 +166,14 @@ class _PatientDetailPageState extends State<PatientDetailPage> {
             textAlign: TextAlign.center,
             style: sett.body6,
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               continueButton,
-              SizedBox(
+              const SizedBox(
                 width: 30,
               ),
               cancelButton,
@@ -183,7 +181,7 @@ class _PatientDetailPageState extends State<PatientDetailPage> {
           )
         ],
       ),
-      contentPadding: EdgeInsets.all(20),
+      contentPadding: const EdgeInsets.all(20),
     ); // show the dialog
     showDialog(
       context: context,
@@ -217,12 +215,12 @@ class ColumnData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 15),
+      margin: const EdgeInsets.only(bottom: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 8.0),
+            padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
               labelName,
               style: sett.body3,
@@ -235,11 +233,11 @@ class ColumnData extends StatelessWidget {
               maxLines: maxLine,
               decoration: InputDecoration(
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 filled: isFilled,
                 fillColor: isFocused ? sett.cGrey15 : sett.cGrey16,
                 hintText: hintText,
-                hintStyle: TextStyle(fontSize: 14),
+                hintStyle: const TextStyle(fontSize: 14),
                 disabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: sett.cGrey15),
                   borderRadius: BorderRadius.circular(10),

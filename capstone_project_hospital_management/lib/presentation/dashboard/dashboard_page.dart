@@ -6,12 +6,11 @@ import 'package:capstone_project_hospital_management/presentation/vm/patient_api
 import 'package:capstone_project_hospital_management/presentation/vm/patient_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_api.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_done_api.dart';
-import 'package:capstone_project_hospital_management/widget/temp%20feature/patient_builder.dart';
-import 'package:capstone_project_hospital_management/widget/patient_single_list.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
-import 'package:capstone_project_hospital_management/widget/temp%20feature/patient_done_builder.dart';
 import 'package:flutter/material.dart';
+// ignore: unnecessary_import
 import 'package:flutter/rendering.dart';
+import 'package:intl/intl.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -45,7 +44,7 @@ class _DashboardPageState extends State<DashboardPage> {
             centerTitle: true,
             flexibleSpace: Container(
               height: MediaQuery.of(context).size.height * 0.1,
-              padding: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -123,8 +122,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   child: Center(
                     // child: DashboardHeadTablet(),
                     child: MediaQuery.of(context).size.width > 770
-                        ? DashboardHeadTablet()
-                        : DashboardHeadAndroid(),
+                        ? const DashboardHeadTablet()
+                        : const DashboardHeadAndroid(),
                   ),
                 ),
 
@@ -274,6 +273,8 @@ class DashboardHeadAndroid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var tanggal = DateTime.now();
+
     return Column(
       children: [
         Row(
@@ -328,12 +329,13 @@ class DashboardHeadAndroid extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Text(
-              "May, 22 2022",
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                  fontSize: 18),
+            Text(
+              "${DateFormat("MMMM").format(tanggal)}, ${tanggal.day} ${tanggal.year}",
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+                fontSize: 16,
+              ),
             ),
             Expanded(child: Container()),
             const Text(
@@ -357,6 +359,7 @@ class DashboardHeadTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var tanggal = DateTime.now();
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -366,7 +369,7 @@ class DashboardHeadTablet extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width * 0.6,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -375,7 +378,7 @@ class DashboardHeadTablet extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Text(
                           "Welcome,",
                           style: TextStyle(
@@ -397,9 +400,9 @@ class DashboardHeadTablet extends StatelessWidget {
                       ],
                     ),
                     Expanded(child: Container()),
-                    const Text(
-                      "May, 22 2022",
-                      style: TextStyle(
+                    Text(
+                      "${DateFormat("MMMM").format(tanggal)}, ${tanggal.day} ${tanggal.year}",
+                      style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                         fontSize: 16,
@@ -408,7 +411,7 @@ class DashboardHeadTablet extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -418,7 +421,7 @@ class DashboardHeadTablet extends StatelessWidget {
                   bottom: BorderSide(color: Colors.white, width: 2),
                 )),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               const Text(

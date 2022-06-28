@@ -1,7 +1,6 @@
 import 'package:capstone_project_hospital_management/model/mock_patient.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:capstone_project_hospital_management/widget/temp%20feature/patient_done_single_list_dummy.dart';
-import 'package:capstone_project_hospital_management/widget/temp%20feature/patient_single_list_dummy.dart';
 import 'package:flutter/material.dart';
 
 class PatientBuilderDone extends StatelessWidget {
@@ -21,7 +20,7 @@ class PatientBuilderDone extends StatelessWidget {
       future: future,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
@@ -55,7 +54,7 @@ class PatientBuilderDone extends StatelessWidget {
               final patients = snapshot.data![index];
 
               if (!patients.isDone == true) {
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }
               return _buildPatientCard(patients, context);
             },

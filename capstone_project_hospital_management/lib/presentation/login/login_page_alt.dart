@@ -127,7 +127,7 @@ $
                         ),
                         //email
                         Padding(
-                          padding: EdgeInsets.only(bottom: 8.0),
+                          padding: const EdgeInsets.only(bottom: 8.0),
                           child: Text(
                             "Email",
                             // style: TextStyle(
@@ -179,7 +179,7 @@ $
                         ),
                         //password
                         Padding(
-                          padding: EdgeInsets.only(bottom: 8.0),
+                          padding: const EdgeInsets.only(bottom: 8.0),
                           child: Text(
                             "Password",
                             style: sett.body3,
@@ -209,11 +209,11 @@ $
                               hintText: 'your password',
                               suffixIcon: IconButton(
                                 icon: !_isObscure
-                                    ? Iconify(
+                                    ? const Iconify(
                                         Iconoir.eye_alt,
                                         color: Colors.grey,
                                       )
-                                    : Iconify(
+                                    : const Iconify(
                                         Iconoir.eye_close,
                                         color: Colors.grey,
                                       ),
@@ -271,7 +271,7 @@ $
                           child: ElevatedButton(
                             onPressed: _trySubmitForm,
                             style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(vertical: 12),
+                              padding: const EdgeInsets.symmetric(vertical: 12),
                               primary: sett.cPrimary,
                               fixedSize: Size.fromWidth(
                                   MediaQuery.of(context).size.width),

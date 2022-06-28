@@ -1,4 +1,4 @@
-import 'package:capstone_project_hospital_management/model/patient.dart';
+import 'package:capstone_project_hospital_management/model/outpatient_model.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_single_list_api.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
@@ -10,27 +10,27 @@ class PatientBuilderAPI extends StatelessWidget {
     this.limit = 0,
   }) : super(key: key);
 
-  final Future<List<Patient>> future;
+  final Future<List<OutpatientModel>> future;
   final int limit;
   @override
   Widget build(BuildContext context) {
     int adaOutpatient = 0;
-    return FutureBuilder<List<Patient>>(
+    return FutureBuilder<List<OutpatientModel>>(
       future: future,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
             child: Container(
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   top: 20,
                 ),
-                child: CircularProgressIndicator()),
+                child: const CircularProgressIndicator()),
           );
         }
 
-        for (var a in snapshot.data!) {
-          if (a.outpatient!.isNotEmpty) {
-            if (a.outpatient!.last.outpatientCondition!.conditions != "done") {
+        if (snapshot.data!.isNotEmpty) {
+          for (var a in snapshot.data!) {
+            if (a.outpatientCondition!.conditions != "done") {
               adaOutpatient++;
             }
           }
@@ -56,18 +56,18 @@ class PatientBuilderAPI extends StatelessWidget {
           child: ListView.builder(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
-            itemCount: limit == 0 ? snapshot.data!.length : limit,
+            itemCount: limit == 0
+                ? snapshot.data!.length
+                : snapshot.data!.length < limit
+                    ? snapshot.data!.length
+                    : limit,
             itemBuilder: (context, index) {
               final patients = snapshot.data![index];
 
-              if (patients.outpatient!.isEmpty) {
-                return SizedBox.shrink();
-              } else if (patients.outpatient!.isNotEmpty) {
-                if (patients.outpatient!.last.outpatientCondition!.conditions ==
-                    "done") {
-                  return SizedBox.shrink();
-                }
+              if (patients.outpatientCondition!.conditions == "done") {
+                return const SizedBox.shrink();
               }
+
               return _buildPatientCard(patients, context);
             },
           ),
@@ -77,7 +77,7 @@ class PatientBuilderAPI extends StatelessWidget {
   }
 }
 
-Widget _buildPatientCard(Patient patient, BuildContext context) {
+Widget _buildPatientCard(OutpatientModel patient, BuildContext context) {
   return GestureDetector(
     onTap: () {},
     child: PatientSingleListAPI(

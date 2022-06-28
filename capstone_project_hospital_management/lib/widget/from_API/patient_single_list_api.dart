@@ -1,4 +1,4 @@
-import 'package:capstone_project_hospital_management/model/patient.dart';
+import 'package:capstone_project_hospital_management/model/outpatient_model.dart';
 import 'package:capstone_project_hospital_management/presentation/patient/detail/patient_detail_api.dart';
 import 'package:capstone_project_hospital_management/presentation/vm/patient_api_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
@@ -10,7 +10,7 @@ class PatientSingleListAPI extends StatelessWidget {
     required this.patient,
   }) : super(key: key);
 
-  final Patient patient;
+  final OutpatientModel patient;
   final PatientAPIVM patientApi = PatientAPIVM();
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class PatientSingleListAPI extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                "${patient.outpatient?.last.queue}",
+                "${patient.queue}",
                 style: sett.body3p,
               ),
             ),
@@ -64,13 +64,13 @@ class PatientSingleListAPI extends StatelessWidget {
               children: [
                 Expanded(child: Container()),
                 Text(
-                  patient.name!,
+                  "${patient.patient!.name}",
                   style: sett.body5,
                 ),
                 Expanded(child: Container()),
                 Text(
                   // "${patient.doB.day}-${patient.doB.month}-${patient.doB.year}",
-                  "${patient.outpatient?.last.medicalRecord}",
+                  "${patient.appointmentReason}",
                   style: sett.body6,
                 ),
                 Expanded(child: Container()),
@@ -85,8 +85,7 @@ class PatientSingleListAPI extends StatelessWidget {
               label: "goDetailId",
               child: IconButton(
                   onPressed: () {
-                    patientApi
-                        .updateOutpatientToProcess(patient.outpatient!.last.id);
+                    patientApi.updateOutpatientToProcess(patient.id);
                     Navigator.of(context)
                         .pushReplacement(MaterialPageRoute(builder: (context) {
                       return PatientDetailPageAPI(

@@ -73,7 +73,7 @@ class Settings {
   final cGrey3 = const Color(0xffe2eaf2);
   final cGrey4 = const Color(0xffeef3ed);
   final cGrey15 = const Color(0xfff6f6f6);
-  final cGrey16 = const Color(0xffafafa);
+  final cGrey16 = const Color(0x0ffafafa);
   final cGrey17 = const Color(0xffadb5be);
 }
 

@@ -29,10 +29,10 @@ class Outpatient {
   Outpatient.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     department = json['department'] != null
-        ? new Department.fromJson(json['department'])
+        ? Department.fromJson(json['department'])
         : null;
     outpatientCondition = json['outpatientCondition'] != null
-        ? new OutpatientCondition.fromJson(json['outpatientCondition'])
+        ? OutpatientCondition.fromJson(json['outpatientCondition'])
         : null;
     diagnosis = json['diagnosis'] ?? "";
     prescription = json['prescription'] ?? "";
@@ -46,23 +46,23 @@ class Outpatient {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.department != null) {
-      data['department'] = this.department!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    if (department != null) {
+      data['department'] = department!.toJson();
     }
-    if (this.outpatientCondition != null) {
-      data['outpatientCondition'] = this.outpatientCondition!.toJson();
+    if (outpatientCondition != null) {
+      data['outpatientCondition'] = outpatientCondition!.toJson();
     }
-    data['diagnosis'] = this.diagnosis ?? "";
-    data['prescription'] = this.prescription ?? "";
-    data['medicalRecord'] = this.medicalRecord;
-    data['appointmentReason'] = this.appointmentReason;
-    data['dokter'] = this.dokter;
-    data['queue'] = this.queue;
-    data['date'] = this.date;
-    data['arrivalTime'] = this.arrivalTime;
-    data['createdAt'] = this.createdAt;
+    data['diagnosis'] = diagnosis ?? "";
+    data['prescription'] = prescription ?? "";
+    data['medicalRecord'] = medicalRecord;
+    data['appointmentReason'] = appointmentReason;
+    data['dokter'] = dokter;
+    data['queue'] = queue;
+    data['date'] = date;
+    data['arrivalTime'] = arrivalTime;
+    data['createdAt'] = createdAt;
     return data;
   }
 }
@@ -81,10 +81,10 @@ class Department {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['createdAt'] = this.createdAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['createdAt'] = createdAt;
     return data;
   }
 }
@@ -103,10 +103,10 @@ class OutpatientCondition {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['conditions'] = this.conditions;
-    data['createdAt'] = this.createdAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['conditions'] = conditions;
+    data['createdAt'] = createdAt;
     return data;
   }
 }

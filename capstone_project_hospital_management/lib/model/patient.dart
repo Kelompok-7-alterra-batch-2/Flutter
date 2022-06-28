@@ -35,33 +35,32 @@ class Patient {
     if (json['outpatient'] != null) {
       outpatient = <Outpatient>[];
       json['outpatient'].forEach((v) {
-        outpatient!.add(new Outpatient.fromJson(v));
+        outpatient!.add(Outpatient.fromJson(v));
       });
     }
     bloodType = json['bloodType'] != null
-        ? new BloodType.fromJson(json['bloodType'])
+        ? BloodType.fromJson(json['bloodType'])
         : null;
-    gender =
-        json['gender'] != null ? new BloodType.fromJson(json['gender']) : null;
+    gender = json['gender'] != null ? BloodType.fromJson(json['gender']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['dob'] = this.dob;
-    data['createdAt'] = this.createdAt;
-    data['phoneNumber'] = this.phoneNumber;
-    data['city'] = this.city;
-    data['address'] = this.address;
-    if (this.outpatient != null) {
-      data['outpatient'] = this.outpatient!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['dob'] = dob;
+    data['createdAt'] = createdAt;
+    data['phoneNumber'] = phoneNumber;
+    data['city'] = city;
+    data['address'] = address;
+    if (outpatient != null) {
+      data['outpatient'] = outpatient!.map((v) => v.toJson()).toList();
     }
-    if (this.bloodType != null) {
-      data['bloodType'] = this.bloodType!.toJson();
+    if (bloodType != null) {
+      data['bloodType'] = bloodType!.toJson();
     }
-    if (this.gender != null) {
-      data['gender'] = this.gender!.toJson();
+    if (gender != null) {
+      data['gender'] = gender!.toJson();
     }
     return data;
   }
@@ -79,9 +78,9 @@ class BloodType {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['type'] = this.type;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['type'] = type;
     return data;
   }
 }

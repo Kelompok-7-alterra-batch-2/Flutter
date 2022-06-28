@@ -1,3 +1,5 @@
+import 'package:capstone_project_hospital_management/model/outpatient_model.dart';
+// ignore: unused_import
 import 'package:capstone_project_hospital_management/model/patient.dart';
 import 'package:capstone_project_hospital_management/presentation/patient/patien_page.dart';
 import 'package:capstone_project_hospital_management/presentation/vm/patient_api_view_model.dart';
@@ -12,12 +14,13 @@ class PatientDetailPageAPI extends StatefulWidget {
     required this.patient,
   }) : super(key: key);
 
-  final Patient patient;
+  final OutpatientModel patient;
   @override
   State<PatientDetailPageAPI> createState() => _PatientDetailPageAPIState();
 }
 
 class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
+  // ignore: unused_field
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _diagnoseController = TextEditingController();
   final TextEditingController _prescriptionController = TextEditingController();
@@ -54,7 +57,7 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 8.0),
                 child: Center(
                   child: Text("Update Patient Data", style: sett.body3),
                 ),
@@ -62,27 +65,32 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
               ColumnData(
                 labelName: "ID Patient",
                 idSemantics: "patientIDField",
-                hintText: "${widget.patient.id}",
+                hintText: "${widget.patient.patient!.id}",
               ),
               ColumnData(
                 labelName: "Name",
                 idSemantics: "NameField",
-                hintText: "${widget.patient.name}",
+                hintText: "${widget.patient.patient!.name}",
               ),
               ColumnData(
                 labelName: "Date of Birth",
                 idSemantics: "DOBField",
-                hintText: "${widget.patient.dob}",
+                hintText: "${widget.patient.patient!.dob}",
+              ),
+              ColumnData(
+                labelName: "Phone Number",
+                idSemantics: "Phone Number",
+                hintText: "${widget.patient.patient!.phoneNumber}",
               ),
               ColumnData(
                 labelName: "Address",
                 idSemantics: "AddressField",
-                hintText: "${widget.patient.address}",
+                hintText: "${widget.patient.patient!.address}",
               ),
               ColumnData(
                 labelName: "Gender",
                 idSemantics: "GenderField",
-                hintText: "${widget.patient.gender!.type}",
+                hintText: "${widget.patient.patient!.gender!.type}",
               ),
               // ColumnData(
               //   labelName: "Diagnosis",
@@ -102,12 +110,12 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
               // ),
 
               Container(
-                margin: EdgeInsets.only(bottom: 15),
+                margin: const EdgeInsets.only(bottom: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(bottom: 8.0),
+                      padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
                         "Diagnosis",
                         style: sett.body3,
@@ -123,11 +131,11 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
                         enabled: true,
                         maxLines: 3,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                               vertical: 20, horizontal: 20),
                           filled: true,
                           fillColor: sett.cGrey15,
-                          hintStyle: TextStyle(fontSize: 14),
+                          hintStyle: const TextStyle(fontSize: 14),
                           disabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: sett.cGrey15),
                             borderRadius: BorderRadius.circular(10),
@@ -150,12 +158,12 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 15),
+                margin: const EdgeInsets.only(bottom: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(bottom: 8.0),
+                      padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
                         "Prescription",
                         style: sett.body3,
@@ -171,11 +179,11 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
                         //     : widget.patient.prescription,
                         maxLines: 3,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                               vertical: 20, horizontal: 20),
                           filled: true,
                           fillColor: sett.cGrey15,
-                          hintStyle: TextStyle(fontSize: 14),
+                          hintStyle: const TextStyle(fontSize: 14),
                           disabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: sett.cGrey15),
                             borderRadius: BorderRadius.circular(10),
@@ -199,7 +207,7 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(bottom: 15),
+                margin: const EdgeInsets.only(bottom: 15),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: sett.cPrimary,
@@ -214,7 +222,7 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
                         _diagnoseController.text.toString(),
                         _prescriptionController.text.toString());
                   },
-                  child: Text(
+                  child: const Text(
                     "Submit",
                     style: TextStyle(
                         fontFamily: "Lato", fontWeight: FontWeight.w700),
@@ -228,8 +236,8 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
     );
   }
 
-  showAlertDialog(BuildContext context, Patient patient, String diagnose,
-      String prescription) {
+  showAlertDialog(BuildContext context, OutpatientModel patient,
+      String diagnose, String prescription) {
     // set up the buttons
     final PatientAPIVM _patientApi = PatientAPIVM();
 
@@ -250,7 +258,7 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
       },
     );
     Widget continueButton = ElevatedButton(
-      child: Text(
+      child: const Text(
         "Yes",
         style: TextStyle(
           fontSize: 16,
@@ -262,13 +270,11 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
       ),
       onPressed: () {
         _patientApi.updateOutpatientDiagnose(
-          patient.outpatient!.last.id,
+          patient.id,
           diagnose: diagnose,
           prescription: prescription,
         );
-        _patientApi
-            .updateOutpatientToDone(patient.outpatient!.last.id)
-            .then((value) {
+        _patientApi.updateOutpatientToDone(patient.id).then((value) {
           Navigator.of(context)
               .pushReplacement(MaterialPageRoute(builder: (context) {
             return const PatientPage();
@@ -304,14 +310,14 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
             textAlign: TextAlign.center,
             style: sett.body6,
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               continueButton,
-              SizedBox(
+              const SizedBox(
                 width: 30,
               ),
               cancelButton,
@@ -319,7 +325,7 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
           )
         ],
       ),
-      contentPadding: EdgeInsets.all(20),
+      contentPadding: const EdgeInsets.all(20),
     ); // show the dialog
     showDialog(
       context: context,
@@ -353,12 +359,12 @@ class ColumnData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 15),
+      margin: const EdgeInsets.only(bottom: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 8.0),
+            padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
               labelName,
               style: sett.body3,
@@ -372,11 +378,11 @@ class ColumnData extends StatelessWidget {
               maxLines: maxLine,
               decoration: InputDecoration(
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 filled: isFilled,
                 fillColor: isFocused ? sett.cGrey15 : sett.cGrey16,
                 hintText: hintText,
-                hintStyle: TextStyle(fontSize: 14),
+                hintStyle: const TextStyle(fontSize: 14),
                 disabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: sett.cGrey15),
                   borderRadius: BorderRadius.circular(10),

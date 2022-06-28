@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:capstone_project_hospital_management/model/mock_patient.dart';
 import 'package:capstone_project_hospital_management/presentation/patient/patien_page.dart';
 import 'package:capstone_project_hospital_management/services/database/mock_sqlite.dart';
@@ -8,7 +10,7 @@ import 'package:iconify_flutter/icons/emojione_monotone.dart';
 import 'package:sqflite/sqflite.dart';
 
 class PatientDetailPageDummy extends StatefulWidget {
-  PatientDetailPageDummy({
+  const PatientDetailPageDummy({
     Key? key,
     required this.patient,
   }) : super(key: key);
@@ -19,7 +21,6 @@ class PatientDetailPageDummy extends StatefulWidget {
 }
 
 class _PatientDetailPageDummyState extends State<PatientDetailPageDummy> {
-  final _formKey = GlobalKey<FormState>();
   final TextEditingController _diagnoseController = TextEditingController();
   final TextEditingController _prescriptionController = TextEditingController();
   final DatabasePatient dbPatient = DatabasePatient();
@@ -56,7 +57,7 @@ class _PatientDetailPageDummyState extends State<PatientDetailPageDummy> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 8.0),
                 child: Center(
                   child: Text("Update Patient Data", style: sett.body3),
                 ),
@@ -104,12 +105,12 @@ class _PatientDetailPageDummyState extends State<PatientDetailPageDummy> {
               // ),
 
               Container(
-                margin: EdgeInsets.only(bottom: 15),
+                margin: const EdgeInsets.only(bottom: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(bottom: 8.0),
+                      padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
                         "Diagnosis",
                         style: sett.body3,
@@ -125,11 +126,11 @@ class _PatientDetailPageDummyState extends State<PatientDetailPageDummy> {
                         enabled: true,
                         maxLines: 3,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                               vertical: 20, horizontal: 20),
                           filled: true,
                           fillColor: sett.cGrey15,
-                          hintStyle: TextStyle(fontSize: 14),
+                          hintStyle: const TextStyle(fontSize: 14),
                           disabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: sett.cGrey15),
                             borderRadius: BorderRadius.circular(10),
@@ -152,12 +153,12 @@ class _PatientDetailPageDummyState extends State<PatientDetailPageDummy> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 15),
+                margin: const EdgeInsets.only(bottom: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(bottom: 8.0),
+                      padding: const EdgeInsets.only(bottom: 8.0),
                       child: Text(
                         "Prescription",
                         style: sett.body3,
@@ -173,11 +174,11 @@ class _PatientDetailPageDummyState extends State<PatientDetailPageDummy> {
                         //     : widget.patient.prescription,
                         maxLines: 3,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                               vertical: 20, horizontal: 20),
                           filled: true,
                           fillColor: sett.cGrey15,
-                          hintStyle: TextStyle(fontSize: 14),
+                          hintStyle: const TextStyle(fontSize: 14),
                           disabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: sett.cGrey15),
                             borderRadius: BorderRadius.circular(10),
@@ -201,7 +202,7 @@ class _PatientDetailPageDummyState extends State<PatientDetailPageDummy> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(bottom: 15),
+                margin: const EdgeInsets.only(bottom: 15),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: sett.cPrimary,
@@ -212,7 +213,7 @@ class _PatientDetailPageDummyState extends State<PatientDetailPageDummy> {
                     widget.patient.prescription = _prescriptionController.text;
                     showAlertDialog(context, widget.patient);
                   },
-                  child: Text(
+                  child: const Text(
                     "Submit",
                     style: TextStyle(
                         fontFamily: "Lato", fontWeight: FontWeight.w700),
@@ -245,7 +246,7 @@ class _PatientDetailPageDummyState extends State<PatientDetailPageDummy> {
       },
     );
     Widget continueButton = ElevatedButton(
-      child: Text(
+      child: const Text(
         "Yes",
         style: TextStyle(
           fontSize: 16,
@@ -290,14 +291,14 @@ class _PatientDetailPageDummyState extends State<PatientDetailPageDummy> {
             textAlign: TextAlign.center,
             style: sett.body6,
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               continueButton,
-              SizedBox(
+              const SizedBox(
                 width: 30,
               ),
               cancelButton,
@@ -305,7 +306,7 @@ class _PatientDetailPageDummyState extends State<PatientDetailPageDummy> {
           )
         ],
       ),
-      contentPadding: EdgeInsets.all(20),
+      contentPadding: const EdgeInsets.all(20),
     ); // show the dialog
     showDialog(
       context: context,
@@ -339,12 +340,12 @@ class ColumnData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 15),
+      margin: const EdgeInsets.only(bottom: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 8.0),
+            padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
               labelName,
               style: sett.body3,
@@ -358,11 +359,11 @@ class ColumnData extends StatelessWidget {
               maxLines: maxLine,
               decoration: InputDecoration(
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 filled: isFilled,
                 fillColor: isFocused ? sett.cGrey15 : sett.cGrey16,
                 hintText: hintText,
-                hintStyle: TextStyle(fontSize: 14),
+                hintStyle: const TextStyle(fontSize: 14),
                 disabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: sett.cGrey15),
                   borderRadius: BorderRadius.circular(10),

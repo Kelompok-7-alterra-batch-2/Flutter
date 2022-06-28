@@ -1,5 +1,4 @@
 import 'package:capstone_project_hospital_management/model/mock_patient.dart';
-import 'package:capstone_project_hospital_management/widget/patient_single_list.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
 
@@ -56,7 +55,7 @@ class PatientBuilder extends StatelessWidget {
               final patients = snapshot.data![index];
 
               if (patients.isDone == true) {
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }
               return _buildPatientCard(patients, context);
             },

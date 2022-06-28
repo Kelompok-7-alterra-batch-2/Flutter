@@ -3,7 +3,6 @@ import 'package:capstone_project_hospital_management/presentation/vm/patient_api
 import 'package:capstone_project_hospital_management/presentation/vm/patient_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_done_api.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
-import 'package:capstone_project_hospital_management/widget/temp%20feature/patient_done_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
@@ -45,12 +44,12 @@ class _PatientDonePageState extends State<PatientDonePage> {
         child: Container(
           color: sett.cGrey15,
           padding: MediaQuery.of(context).size.width > 770
-              ? EdgeInsets.all(40)
-              : EdgeInsets.all(10),
+              ? const EdgeInsets.all(40)
+              : const EdgeInsets.all(10),
           width: MediaQuery.of(context).size.width,
           child: Column(children: [
             Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
+              margin: const EdgeInsets.symmetric(vertical: 10),
               child: Semantics(
                 label: "searchID",
                 child: TextFormField(

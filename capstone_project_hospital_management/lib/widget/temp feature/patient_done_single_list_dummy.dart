@@ -1,5 +1,4 @@
 import 'package:capstone_project_hospital_management/model/mock_patient.dart';
-import 'package:capstone_project_hospital_management/presentation/patient/detail/patient_detail.dart';
 import 'package:capstone_project_hospital_management/presentation/patient/detail/patient_detail_dummy.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
