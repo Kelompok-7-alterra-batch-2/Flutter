@@ -1,11 +1,10 @@
 import 'package:capstone_project_hospital_management/presentation/dashboard/dashboard_page.dart';
+import 'package:capstone_project_hospital_management/presentation/vm/patient_api_view_model.dart';
 import 'package:capstone_project_hospital_management/presentation/vm/patient_view_model.dart';
-import 'package:capstone_project_hospital_management/widget/patient_builder.dart';
-import 'package:capstone_project_hospital_management/widget/patient_single_list.dart';
+import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_api.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:iconify_flutter/icons/clarity.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 
 class PatientPage extends StatefulWidget {
@@ -17,6 +16,7 @@ class PatientPage extends StatefulWidget {
 
 class _PatientPageState extends State<PatientPage> {
   final PatientVM patientvm = PatientVM();
+  final PatientAPIVM patientApi = PatientAPIVM();
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +45,12 @@ class _PatientPageState extends State<PatientPage> {
         child: Container(
           color: sett.cGrey15,
           padding: MediaQuery.of(context).size.width > 770
-              ? EdgeInsets.all(40)
-              : EdgeInsets.all(10),
+              ? const EdgeInsets.all(40)
+              : const EdgeInsets.all(10),
           width: MediaQuery.of(context).size.width,
           child: Column(children: [
             Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
+              margin: const EdgeInsets.symmetric(vertical: 10),
               child: Semantics(
                 label: "searchID",
                 child: TextFormField(
@@ -80,13 +80,20 @@ class _PatientPageState extends State<PatientPage> {
             ),
             // PatientSingleList(),
             // PatientSingleList(),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.5,
-              // height: double.infinity,
-              child: PatientBuilder(
-                future: patientvm.getPatients(),
-              ),
-            ),
+            // SizedBox(
+            //   height: MediaQuery.of(context).size.height * 0.5,
+            //   // height: double.infinity,
+            //   child: PatientBuilder(
+            //     future: patientvm.getPatients(),
+            //   ),
+            // ),
+            Column(
+              children: [
+                PatientBuilderAPI(
+                  future: patientApi.getPatients(),
+                ),
+              ],
+            )
           ]),
         ),
       ),

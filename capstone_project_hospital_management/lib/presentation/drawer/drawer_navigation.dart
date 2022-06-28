@@ -1,4 +1,5 @@
 import 'package:capstone_project_hospital_management/presentation/dashboard/dashboard_page.dart';
+import 'package:capstone_project_hospital_management/presentation/login/login_page_alt.dart';
 import 'package:capstone_project_hospital_management/presentation/patient/patien_page.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class DrawerWidget extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
+            margin: const EdgeInsets.symmetric(vertical: 10),
             decoration: const BoxDecoration(
                 border: Border(
               bottom: BorderSide(color: Colors.white, width: 1),
@@ -98,10 +99,10 @@ class DrawerWidget extends StatelessWidget {
               ),
               text: 'Log Out',
               onTap: () {
-                // Navigator.of(context)
-                //     .pushReplacement(MaterialPageRoute(builder: (context) {
-                //   return LoginPage();
-                // }));
+                Navigator.of(context)
+                    .pushReplacement(MaterialPageRoute(builder: (context) {
+                  return const LoginPageAlt();
+                }));
               }),
         ],
       ),

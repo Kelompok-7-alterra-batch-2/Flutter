@@ -1,12 +1,16 @@
 // ignore_for_file: avoid_unnecessary_containers
 
 import 'package:capstone_project_hospital_management/presentation/drawer/drawer_navigation.dart';
+import 'package:capstone_project_hospital_management/presentation/patient/done/patient_done_page.dart';
+import 'package:capstone_project_hospital_management/presentation/vm/patient_api_view_model.dart';
 import 'package:capstone_project_hospital_management/presentation/vm/patient_view_model.dart';
-import 'package:capstone_project_hospital_management/widget/patient_builder.dart';
-import 'package:capstone_project_hospital_management/widget/patient_single_list.dart';
+import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_api.dart';
+import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_done_api.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
+// ignore: unnecessary_import
 import 'package:flutter/rendering.dart';
+import 'package:intl/intl.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -18,6 +22,7 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   // testing
   final PatientVM patientvm = PatientVM();
+  final PatientAPIVM patientApi = PatientAPIVM();
   @override
   Widget build(BuildContext context) {
     // if (MediaQuery.of(context).size.width > 700) {
@@ -34,34 +39,56 @@ class _DashboardPageState extends State<DashboardPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          iconTheme: const IconThemeData(color: Colors.black),
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          flexibleSpace: Container(
-            height: MediaQuery.of(context).size.height * 0.1,
-            padding: EdgeInsets.all(5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image(
-                  height: MediaQuery.of(context).size.width > 770
-                      ? MediaQuery.of(context).size.height * 0.035
-                      : MediaQuery.of(context).size.height * 0.05,
-                  image: const AssetImage("assets/logo/logo.png"),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Text(
-                  "Care Hospital",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
-                ),
-              ],
+            iconTheme: const IconThemeData(color: Colors.black),
+            backgroundColor: Colors.white,
+            centerTitle: true,
+            flexibleSpace: Container(
+              height: MediaQuery.of(context).size.height * 0.1,
+              padding: const EdgeInsets.all(5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                    height: MediaQuery.of(context).size.width > 770
+                        ? MediaQuery.of(context).size.height * 0.035
+                        : MediaQuery.of(context).size.height * 0.05,
+                    image: const AssetImage("assets/logo/logo.png"),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Text(
+                    "Care Hospital",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black),
+                  ),
+                ],
+              ),
             ),
-          ),
-          // title:
-        ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.purple[300],
+                    shape: const CircleBorder(),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushReplacement(MaterialPageRoute(builder: (context) {
+                      return const DashboardPage();
+                    }));
+                  },
+                  // child: const Text("A"),
+                  child: Image(
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    image: const AssetImage("assets/pic/image1.png"),
+                  ),
+                ),
+              ),
+            ]
+            // title:
+            ),
         drawer: const DrawerWidget(),
         body: SingleChildScrollView(
           child: Container(
@@ -95,8 +122,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   child: Center(
                     // child: DashboardHeadTablet(),
                     child: MediaQuery.of(context).size.width > 770
-                        ? DashboardHeadTablet()
-                        : DashboardHeadAndroid(),
+                        ? const DashboardHeadTablet()
+                        : const DashboardHeadAndroid(),
                   ),
                 ),
 
@@ -154,16 +181,82 @@ class _DashboardPageState extends State<DashboardPage> {
                       //   ],
                       // )
 
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.5,
-                        // height: double.infinity,
-                        child: PatientBuilder(
-                          future: patientvm.getPatients(),
-                        ),
-                      )
+                      // SizedBox(
+                      //   height: MediaQuery.of(context).size.height * 0.3,
+                      //   // height: double.infinity,
+                      //   child: PatientBuilder(
+                      //     future: patientvm.getPatients(),
+                      //   ),
+                      // ),
+                      Column(
+                        children: [
+                          // PatientBuilder(
+                          //   future: patientvm.getPatients(),
+                          //   limit: 3,
+                          // ),
+                          // PAKE API
+                          PatientBuilderAPI(
+                            future: patientApi.getPatients(),
+                            limit: 3,
+                          )
+                        ],
+                      ),
                     ],
                   ),
                 ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            "Finished Consultation",
+                            style: sett.body3,
+                          ),
+                          Expanded(child: Container()),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(builder: (context) {
+                                return const PatientDonePage();
+                              }));
+                            },
+                            child: Row(
+                              children: const [
+                                Text("See More"),
+                                Icon(
+                                  Icons.navigate_next,
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      // SizedBox(
+                      //   height: MediaQuery.of(context).size.height * 0.3,
+                      //   // height: double.infinity,
+                      //   child: PatientBuilderDone(
+                      //     future: patientvm.getPatients(),
+                      //   ),
+                      // ),
+                      Column(
+                        children: [
+                          // PatientBuilderDone(
+                          //   future: patientvm.getPatients(),
+                          //   limit: 3,
+                          // ),
+                          // PAKE API
+                          PatientBuilderDoneAPI(
+                            future: patientApi.getPatients(),
+                            limit: 3,
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
@@ -180,6 +273,8 @@ class DashboardHeadAndroid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var tanggal = DateTime.now();
+
     return Column(
       children: [
         Row(
@@ -234,12 +329,13 @@ class DashboardHeadAndroid extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Text(
-              "May, 22 2022",
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                  fontSize: 18),
+            Text(
+              "${DateFormat("MMMM").format(tanggal)}, ${tanggal.day} ${tanggal.year}",
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+                fontSize: 16,
+              ),
             ),
             Expanded(child: Container()),
             const Text(
@@ -263,6 +359,7 @@ class DashboardHeadTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var tanggal = DateTime.now();
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -272,7 +369,7 @@ class DashboardHeadTablet extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width * 0.6,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -281,7 +378,7 @@ class DashboardHeadTablet extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Text(
                           "Welcome,",
                           style: TextStyle(
@@ -303,9 +400,9 @@ class DashboardHeadTablet extends StatelessWidget {
                       ],
                     ),
                     Expanded(child: Container()),
-                    const Text(
-                      "May, 22 2022",
-                      style: TextStyle(
+                    Text(
+                      "${DateFormat("MMMM").format(tanggal)}, ${tanggal.day} ${tanggal.year}",
+                      style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                         fontSize: 16,
@@ -314,7 +411,7 @@ class DashboardHeadTablet extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -324,7 +421,7 @@ class DashboardHeadTablet extends StatelessWidget {
                   bottom: BorderSide(color: Colors.white, width: 2),
                 )),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               const Text(

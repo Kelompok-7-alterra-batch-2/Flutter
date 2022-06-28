@@ -1,8 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:capstone_project_hospital_management/model/mock_patient.dart';
-import 'package:capstone_project_hospital_management/presentation/dashboard/dashboard_page.dart';
 import 'package:capstone_project_hospital_management/presentation/login/login_page_alt.dart';
-import 'package:capstone_project_hospital_management/presentation/patient/detail/patient_detail.dart';
 import 'package:capstone_project_hospital_management/services/database/mock_sqlite.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -18,28 +16,34 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final List<MockPatient> isiPatient = [
     MockPatient(
+      idPatient: 123,
       name: "Oscar",
       doB: DateTime(1997, 11, 21),
       address: "Jalan Ketapang",
       gender: "Pria",
       diagnosis: "no",
       prescription: "",
+      isDone: false,
     ),
     MockPatient(
+      idPatient: 124,
       name: "Oktorian",
       doB: DateTime(2000, 11, 12),
       address: "Jalan Ketapang",
       gender: "Pria",
       diagnosis: "no",
       prescription: "",
+      isDone: false,
     ),
     MockPatient(
+      idPatient: 125,
       name: "Oktorian",
       doB: DateTime(2000, 11, 12),
       address: "Jalan Ketapang",
       gender: "Pria",
       diagnosis: "no",
       prescription: "",
+      isDone: false,
     ),
   ];
 
@@ -53,6 +57,7 @@ class _MyAppState extends State<MyApp> {
     if (newDB) {
       _databasePatient.insertPatient(isiPatient[0]);
       _databasePatient.insertPatient(isiPatient[1]);
+      _databasePatient.insertPatient(isiPatient[2]);
       _databasePatient.insertPatient(isiPatient[2]);
       pref.setBool('ndb', false);
     } else {
