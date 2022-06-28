@@ -2,7 +2,10 @@
 
 import 'package:capstone_project_hospital_management/presentation/drawer/drawer_navigation.dart';
 import 'package:capstone_project_hospital_management/presentation/patient/done/patient_done_page.dart';
+import 'package:capstone_project_hospital_management/presentation/vm/patient_api_view_model.dart';
 import 'package:capstone_project_hospital_management/presentation/vm/patient_view_model.dart';
+import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_api.dart';
+import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_done_api.dart';
 import 'package:capstone_project_hospital_management/widget/temp%20feature/patient_builder.dart';
 import 'package:capstone_project_hospital_management/widget/patient_single_list.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
@@ -20,6 +23,7 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   // testing
   final PatientVM patientvm = PatientVM();
+  final PatientAPIVM patientApi = PatientAPIVM();
   @override
   Widget build(BuildContext context) {
     // if (MediaQuery.of(context).size.width > 700) {
@@ -187,10 +191,15 @@ class _DashboardPageState extends State<DashboardPage> {
                       // ),
                       Column(
                         children: [
-                          PatientBuilder(
-                            future: patientvm.getPatients(),
+                          // PatientBuilder(
+                          //   future: patientvm.getPatients(),
+                          //   limit: 3,
+                          // ),
+                          // PAKE API
+                          PatientBuilderAPI(
+                            future: patientApi.getPatients(),
                             limit: 3,
-                          ),
+                          )
                         ],
                       ),
                     ],
@@ -235,10 +244,15 @@ class _DashboardPageState extends State<DashboardPage> {
                       // ),
                       Column(
                         children: [
-                          PatientBuilderDone(
-                            future: patientvm.getPatients(),
+                          // PatientBuilderDone(
+                          //   future: patientvm.getPatients(),
+                          //   limit: 3,
+                          // ),
+                          // PAKE API
+                          PatientBuilderDoneAPI(
+                            future: patientApi.getPatients(),
                             limit: 3,
-                          ),
+                          )
                         ],
                       ),
                     ],

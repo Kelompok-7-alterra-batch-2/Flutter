@@ -1,5 +1,7 @@
 import 'package:capstone_project_hospital_management/presentation/dashboard/dashboard_page.dart';
+import 'package:capstone_project_hospital_management/presentation/vm/patient_api_view_model.dart';
 import 'package:capstone_project_hospital_management/presentation/vm/patient_view_model.dart';
+import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_api.dart';
 import 'package:capstone_project_hospital_management/widget/temp%20feature/patient_builder.dart';
 import 'package:capstone_project_hospital_management/widget/patient_single_list.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
@@ -17,6 +19,7 @@ class PatientPage extends StatefulWidget {
 
 class _PatientPageState extends State<PatientPage> {
   final PatientVM patientvm = PatientVM();
+  final PatientAPIVM patientApi = PatientAPIVM();
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +92,8 @@ class _PatientPageState extends State<PatientPage> {
             // ),
             Column(
               children: [
-                PatientBuilder(
-                  future: patientvm.getPatients(),
+                PatientBuilderAPI(
+                  future: patientApi.getPatients(),
                 ),
               ],
             )
