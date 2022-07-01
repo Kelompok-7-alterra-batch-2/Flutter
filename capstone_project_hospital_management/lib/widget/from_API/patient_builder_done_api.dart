@@ -31,7 +31,7 @@ class PatientBuilderDoneAPI extends StatelessWidget {
 
         if (snapshot.data!.isNotEmpty) {
           for (var a in snapshot.data!) {
-            if (a.outpatientCondition!.conditions != "done") {
+            if (a.outpatientCondition!.conditions == "done") {
               outpatientDone++;
             }
           }
