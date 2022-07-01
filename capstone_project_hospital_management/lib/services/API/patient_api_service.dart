@@ -8,8 +8,8 @@ class PatientVM {
 
   Future<List<OutpatientModel>> fetchDataOutpatient() async {
     try {
-      Response response = await Dio().get(
-          'https://capstone-project-hospital.herokuapp.com/outpatients/today');
+      Response response = await Dio()
+          .get('https://capstone-project-hospital.herokuapp.com/outpatients');
       print(response.statusCode);
       final List<OutpatientModel> _listOutpatient = (response.data as List)
           .map((e) => OutpatientModel.fromJson(e))
