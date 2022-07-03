@@ -16,6 +16,7 @@ class PatientBuilderDoneAPI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int outpatientDone = 0;
+    int buildLimit = 0;
     return FutureBuilder<List<OutpatientModel>>(
       future: future,
       builder: (context, snapshot) {
@@ -51,22 +52,29 @@ class PatientBuilderDoneAPI extends StatelessWidget {
             ),
           );
         }
+        int limited = limit == 0 ? snapshot.data!.length : limit;
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: ListView.builder(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
-            itemCount: limit == 0
-                ? snapshot.data!.length
-                : snapshot.data!.length < limit
-                    ? snapshot.data!.length
-                    : limit,
+            // itemCount: limit == 0
+            //     ? snapshot.data!.length
+            //     : snapshot.data!.length < limit
+            //         ? snapshot.data!.length
+            //         : limit,
+            itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               final patients = snapshot.data![index];
 
-              if (patients.outpatientCondition!.conditions != "done") {
+              if (patients.outpatientCondition!.conditions != "done" ||
+                  buildLimit == limited) {
                 return const SizedBox.shrink();
+              }
+
+              if (patients.outpatientCondition!.conditions == "done") {
+                buildLimit++;
               }
 
               return _buildPatientCard(patients, context);

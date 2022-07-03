@@ -1,6 +1,6 @@
 import 'package:capstone_project_hospital_management/model/outpatient_model.dart';
-import 'package:capstone_project_hospital_management/presentation/patient/detail/patient_detail_api.dart';
-import 'package:capstone_project_hospital_management/presentation/vm/patient_api_view_model.dart';
+import 'package:capstone_project_hospital_management/screen/patient/detail/patient_detail_api.dart';
+import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
 
@@ -87,7 +87,7 @@ class PatientSingleListAPI extends StatelessWidget {
                   onPressed: () {
                     patientApi.updateOutpatientToProcess(patient.id);
                     Navigator.of(context)
-                        .pushReplacement(MaterialPageRoute(builder: (context) {
+                        .push(MaterialPageRoute(builder: (context) {
                       return PatientDetailPageAPI(
                         patient: patient,
                       );
