@@ -196,7 +196,7 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
                       primary: sett.cPrimary,
                     ),
                     onPressed: () {
-                      if (_diagnoseController.text.trim() == "" &&
+                      if (_diagnoseController.text.trim() == "" ||
                           _prescriptionController.text.trim() == "") {
                         showDialog(
                             context: context,
