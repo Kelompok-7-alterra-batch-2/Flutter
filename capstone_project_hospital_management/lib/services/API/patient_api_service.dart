@@ -10,6 +10,7 @@ class PatientVM {
     try {
       Response response = await Dio()
           .get('https://capstone-project-hospital.herokuapp.com/outpatients');
+
       print(response.statusCode);
       final List<OutpatientModel> _listOutpatient = (response.data as List)
           .map((e) => OutpatientModel.fromJson(e))

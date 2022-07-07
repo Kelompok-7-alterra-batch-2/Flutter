@@ -1,5 +1,6 @@
 import 'package:capstone_project_hospital_management/screen/dashboard/dashboard_page.dart';
 import 'package:capstone_project_hospital_management/screen/login/login_page_alt.dart';
+import 'package:capstone_project_hospital_management/screen/login/login_page_api.dart';
 import 'package:capstone_project_hospital_management/screen/patient/patien_page.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +105,7 @@ class DrawerWidget extends StatelessWidget {
                 pref.setBool("isLogin", false);
                 Navigator.of(context)
                     .pushReplacement(MaterialPageRoute(builder: (context) {
-                  return const LoginPageAlt();
+                  return const LoginPageApi();
                 }));
               }),
         ],
