@@ -343,53 +343,13 @@ class _LoginPageApiState extends State<LoginPageApi> {
                                 const SizedBox(height: 20),
                                 Container(
                                   alignment: Alignment.center,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      final bool? isValid =
-                                          _formKey.currentState?.validate();
-                                      if (isValid == true) {
-//                                         _trySubmitForm();
-// // pake Cubit
-                                        final _requestData = LoginRequest(
-                                          email: usernameC.text,
-                                          password: passwordC.text,
-                                        );
-                                        context
-                                            .read<AuthCubit>()
-                                            .signInUser(_requestData);
-// end
-
-                                        // Navigator.of(context).pushReplacement(
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) {
-                                        //   return const DashboardPage();
-                                        // }));
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 12),
-                                      primary: sett.cPrimary,
-                                      fixedSize: Size.fromWidth(
-                                          MediaQuery.of(context).size.width),
-                                    ),
-                                    child: Text(
-                                      'Sign In',
-                                      style: sett.body3,
-                                    ),
-                                  ),
+                                  child: (state is AuthLoading)
+                                      ? const _loginButtonLoading()
+                                      : SigninButton(
+                                          formKey: _formKey,
+                                          usernameC: usernameC,
+                                          passwordC: passwordC),
                                 ),
-                                // Center(
-                                //   child: (state is AuthLoading)
-                                //       ? const _loginButtonLoading()
-                                //       : Logins(
-                                //           usernameC: usernameC,
-                                //           passwordC: passwordC,
-                                //           emailValid: emailValid,
-                                //           passValid: passValid,
-                                //           trySubmit: _trySubmitForm,
-                                //         ),
-                                // ),
                               ],
                             ),
                           ),
@@ -407,61 +367,65 @@ class _LoginPageApiState extends State<LoginPageApi> {
   }
 }
 
-// class Logins extends StatelessWidget {
-//   const Logins({
-//     Key? key,
-//     required this.usernameC,
-//     required this.passwordC,
-//     required this.emailValid,
-//     required this.passValid,
-//     required this.trySubmit,
-//   }) : super(key: key);
+class SigninButton extends StatelessWidget {
+  const SigninButton({
+    Key? key,
+    required GlobalKey<FormState> formKey,
+    required this.usernameC,
+    required this.passwordC,
+  })  : _formKey = formKey,
+        super(key: key);
 
-//   final TextEditingController usernameC;
-//   final TextEditingController passwordC;
-//   final Function trySubmit;
-//   final bool emailValid;
-//   final bool passValid;
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       padding: const EdgeInsets.only(bottom: 5),
-//       child: ElevatedButton(
-//         style: ElevatedButton.styleFrom(
-//           padding: const EdgeInsets.symmetric(vertical: 12),
-//           primary: sett.cPrimary,
-//           fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
-//         ),
-//         onPressed: () {
-//           if (emailValid && passValid) {
-//             trySubmit;
-//             final _requestData = LoginRequest(
-//               email: usernameC.text,
-//               password: passwordC.text,
-//             );
-//             context.read<AuthCubit>().signInUser(_requestData);
-//           }
-//         },
-//         child: Text(
-//           'Sign In',
-//           style: sett.body3,
-//         ),
-//       ),
-//     );
-//   }
-// }
+  final GlobalKey<FormState> _formKey;
+  final TextEditingController usernameC;
+  final TextEditingController passwordC;
 
-// // ignore: camel_case_types
-// class _loginButtonLoading extends StatelessWidget {
-//   const _loginButtonLoading({
-//     Key? key,
-//   }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        final bool? isValid = _formKey.currentState?.validate();
+        if (isValid == true) {
+//                                         _trySubmitForm();
+// // pake Cubit
+          final _requestData = LoginRequest(
+            email: usernameC.text,
+            password: passwordC.text,
+          );
+          context.read<AuthCubit>().signInUser(_requestData);
+// end
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return const ElevatedButton(
-//       onPressed: null,
-//       child: CircularProgressIndicator(),
-//     );
-//   }
-// }
+        }
+      },
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        primary: sett.cPrimary,
+        fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
+      ),
+      child: Text(
+        'Sign In',
+        style: sett.body3,
+      ),
+    );
+  }
+}
+
+// ignore: camel_case_types
+class _loginButtonLoading extends StatelessWidget {
+  const _loginButtonLoading({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: null,
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        primary: sett.cPrimary,
+        fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
+      ),
+      child: CircularProgressIndicator(),
+    );
+  }
+}
