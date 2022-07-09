@@ -7,6 +7,7 @@ import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_
 import 'package:capstone_project_hospital_management/screen/vm/patient_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_api.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_done_api.dart';
+import 'package:capstone_project_hospital_management/widget/outpatient%20builder/patient_search_builder.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import
@@ -14,8 +15,9 @@ import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+  const DashboardPage({Key? key, this.token = ""}) : super(key: key);
 
+  final String token;
   @override
   State<DashboardPage> createState() => _DashboardPageState();
 }
@@ -30,6 +32,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("Token : ${widget.token}");
     return WillPopScope(
       onWillPop: _onWillPop,
       child: SafeArea(
@@ -137,8 +140,8 @@ class _DashboardPageState extends State<DashboardPage> {
                             Expanded(child: Container()),
                             TextButton(
                               onPressed: () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(builder: (context) {
+                                Navigator.of(context)
+                                    .push(MaterialPageRoute(builder: (context) {
                                   return const PatientPage();
                                 }));
                               },
@@ -155,11 +158,10 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                         Column(
                           children: [
-                            // PAKE API
                             PatientBuilderAPI(
                               future: patientApi.getPatients(),
                               limit: 4,
-                            )
+                            ),
                           ],
                         ),
                       ],
@@ -179,8 +181,8 @@ class _DashboardPageState extends State<DashboardPage> {
                             Expanded(child: Container()),
                             TextButton(
                               onPressed: () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(builder: (context) {
+                                Navigator.of(context)
+                                    .push(MaterialPageRoute(builder: (context) {
                                   return const PatientDonePage();
                                 }));
                               },
@@ -197,10 +199,6 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                         Column(
                           children: [
-                            // PatientBuilderDone(
-                            //   future: patientvm.getPatients(),
-                            //   limit: 3,
-                            // ),
                             // PAKE API
                             PatientBuilderDoneAPI(
                               future: patientApi.getPatients(),

@@ -34,10 +34,11 @@ class _PatientPageState extends State<PatientPage> {
             child: IconButton(
               icon: const Icon(Icons.navigate_before),
               onPressed: () {
-                Navigator.of(context)
-                    .pushReplacement(MaterialPageRoute(builder: (context) {
-                  return const DashboardPage();
-                }));
+                // Navigator.of(context)
+                //     .pushReplacement(MaterialPageRoute(builder: (context) {
+                //   return const DashboardPage();
+                // }));
+                Navigator.pop(context);
               },
             ),
           ),

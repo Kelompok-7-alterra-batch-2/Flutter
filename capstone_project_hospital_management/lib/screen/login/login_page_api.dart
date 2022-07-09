@@ -119,7 +119,7 @@ class _LoginPageApiState extends State<LoginPageApi> {
               debugPrint("Berhasil Login");
               Navigator.of(context)
                   .pushReplacement(MaterialPageRoute(builder: (context) {
-                return const DashboardPage();
+                return DashboardPage(token: state.dataLogin.token!);
               }));
             } else {
               showDialog(
