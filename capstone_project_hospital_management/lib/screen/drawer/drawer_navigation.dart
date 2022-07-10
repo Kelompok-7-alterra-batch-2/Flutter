@@ -1,5 +1,4 @@
 import 'package:capstone_project_hospital_management/screen/dashboard/dashboard_page.dart';
-import 'package:capstone_project_hospital_management/screen/login/login_page_alt.dart';
 import 'package:capstone_project_hospital_management/screen/login/login_page_api.dart';
 import 'package:capstone_project_hospital_management/screen/patient/patien_page.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
@@ -10,8 +9,11 @@ import 'package:iconify_flutter/icons/ic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DrawerWidget extends StatelessWidget {
-  DrawerWidget({Key? key}) : super(key: key);
+  DrawerWidget({
+    Key? key,
+  }) : super(key: key);
   late SharedPreferences pref;
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -64,10 +66,14 @@ class DrawerWidget extends StatelessWidget {
                 color: Colors.white,
               ),
               text: 'Dashboard',
-              onTap: () {
+              onTap: () async {
+                pref = await SharedPreferences.getInstance();
+                String tokenShared = pref.getString("token") ?? " ";
                 Navigator.of(context)
                     .pushReplacement(MaterialPageRoute(builder: (context) {
-                  return const DashboardPage();
+                  return DashboardPage(
+                    token: tokenShared,
+                  );
                 }));
               }),
           drawerItem(
@@ -76,24 +82,16 @@ class DrawerWidget extends StatelessWidget {
                 color: Colors.white,
               ),
               text: 'Patient',
-              onTap: () {
+              onTap: () async {
+                pref = await SharedPreferences.getInstance();
+                String tokenShared = pref.getString("token") ?? " ";
                 Navigator.of(context)
-                    .pushReplacement(MaterialPageRoute(builder: (context) {
-                  return const PatientPage();
+                    .push(MaterialPageRoute(builder: (context) {
+                  return PatientPage(
+                    token: tokenShared,
+                  );
                 }));
               }),
-          // drawerItem(
-          //     icon: const Iconify(
-          //       Ic.settings,
-          //       color: Colors.white,
-          //     ),
-          //     text: 'Setting',
-          //     onTap: () {
-          //       // Navigator.of(context)
-          //       //     .pushReplacement(MaterialPageRoute(builder: (context) {
-          //       //   return LoginPage();
-          //       // }));
-          //     }),
           drawerItem(
               icon: const Iconify(
                 Ic.twotone_log_out,

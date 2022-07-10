@@ -1,31 +1,33 @@
 import 'package:capstone_project_hospital_management/model/outpatient_model.dart';
+import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
 import 'package:capstone_project_hospital_management/services/API/outpatient/cubit/outpatient_cubit.dart';
+import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_api.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_single_list_api.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/ic.dart';
+import 'package:capstone_project_hospital_management/widget/settings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PatientBuilderCubit extends StatelessWidget {
   const PatientBuilderCubit({
     Key? key,
     this.limit = 0,
+    this.token = "",
   }) : super(key: key);
 
   final int limit;
-
+  final String token;
   @override
   Widget build(BuildContext context) {
+    late SharedPreferences pref;
+    final PatientAPIVM patientAPIVM = PatientAPIVM();
+    TextEditingController idC = TextEditingController();
     return BlocProvider(
       create: (context) => OutpatientCubit(),
       child: BlocConsumer<OutpatientCubit, OutpatientState>(
-        buildWhen: (context, state) {
-          if (state is OutpatientSuccess ||
-              state is OutpatientLoading ||
-              state is OutpatientError) {
-            return true;
-          }
-          return false;
-        },
         listener: (context, state) {
           if (state is OutpatientError) {
             debugPrint("error : ${state.errorMessage}");
@@ -102,23 +104,8 @@ class PatientBuilderCubit extends StatelessWidget {
               ),
             );
           }
-          return Center(
-            child: Container(
-                margin: const EdgeInsets.only(
-                  top: 20,
-                ),
-                child: GestureDetector(
-                  // child: const Text("Nothing Here, click to refresh."),
-                  child: Icon(
-                    Icons.refresh,
-                    size: 50,
-                    color: sett.cPrimary,
-                  ),
-                  onTap: () {
-                    context.read<OutpatientCubit>().fetchOutpatient();
-                  },
-                )),
-          );
+
+          return PatientBuilderAPI(future: patientAPIVM.getPatientsAuth(token));
         },
       ),
     );

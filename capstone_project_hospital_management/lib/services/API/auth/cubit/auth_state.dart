@@ -14,5 +14,6 @@ class AuthError extends AuthState {
 
 class AuthSuccess extends AuthState {
   final LoginRespond dataLogin;
+
   AuthSuccess(this.dataLogin);
 }

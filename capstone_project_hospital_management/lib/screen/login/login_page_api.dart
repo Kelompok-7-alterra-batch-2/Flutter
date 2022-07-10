@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/iconoir.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPageApi extends StatefulWidget {
@@ -29,34 +30,33 @@ class _LoginPageApiState extends State<LoginPageApi> {
 
   late SharedPreferences pref;
   late bool isLogin;
+  late String token;
   Future<bool> _onWillPop() async {
     return false; //<-- SEE HERE
   }
 
-  void _trySubmitForm() async {
+  void _trySubmitForm(String token) async {
     final bool? isValid = _formKey.currentState?.validate();
-    // if (isValid == true) {
-    //   debugPrint('Everything looks good!');
-    //   debugPrint(_userEmail);
-    //   debugPrint(_password);
 
     pref.setBool("isLogin", true);
-
-    // Navigator.of(context)
-    //     .pushReplacement(MaterialPageRoute(builder: (context) {
-    //   return const DashboardPage();
-    // }));
-    // }
+    pref.setString("token", token);
   }
 
   void checkLogin() async {
     pref = await SharedPreferences.getInstance();
     isLogin = pref.getBool('isLogin') ?? false;
-
-    if (isLogin) {
+    token = pref.getString('token') ?? " ";
+    bool isExp = true;
+    if (token != "" && token != " ") {
+      isExp = JwtDecoder.isExpired(token);
+    }
+    if (isLogin && (isExp == false)) {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => const DashboardPage()),
+        MaterialPageRoute(
+            builder: (context) => DashboardPage(
+                  token: token,
+                )),
         (route) => false,
       );
     }
@@ -81,8 +81,9 @@ class _LoginPageApiState extends State<LoginPageApi> {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                title: const Text("Error"),
-                content: Text(state.errorMessage.toString()),
+                title: const Text("Warning"),
+                // content: Text(state.errorMessage.toString()),
+                content: Text("User Not Found!"),
                 actions: [
                   TextButton(
                       onPressed: () {
@@ -93,29 +94,10 @@ class _LoginPageApiState extends State<LoginPageApi> {
               ),
             );
           } else if (state is AuthLoading) {
-            // showDialog(
-            //   context: context,
-            //   builder: (context) => AlertDialog(
-            //     title: const Text("Loading..."),
-            //     content: Container(
-            //       padding: EdgeInsets.all(60.0),
-            //       height: 200,
-            //       width: 200,
-            //       child: CircularProgressIndicator(),
-            //     ),
-            //     actions: [
-            //       TextButton(
-            //           onPressed: () {
-            //             Navigator.pop(context);
-            //           },
-            //           child: const Text("cancel"))
-            //     ],
-            //   ),
-            // );
             debugPrint("Loading...");
           } else if (state is AuthSuccess) {
             if (state.dataLogin.message == "Success") {
-              _trySubmitForm();
+              _trySubmitForm(state.dataLogin.token!);
               debugPrint("Berhasil Login");
               Navigator.of(context)
                   .pushReplacement(MaterialPageRoute(builder: (context) {

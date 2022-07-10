@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_unnecessary_containers
 
 import 'package:capstone_project_hospital_management/screen/drawer/drawer_navigation.dart';
+import 'package:capstone_project_hospital_management/screen/login/login_page_api.dart';
 import 'package:capstone_project_hospital_management/screen/patient/done/patient_done_page.dart';
 import 'package:capstone_project_hospital_management/screen/patient/patien_page.dart';
 import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
@@ -13,21 +14,46 @@ import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key, this.token = ""}) : super(key: key);
+  DashboardPage({
+    Key? key,
+    this.token = "",
+    this.email = "",
+  }) : super(key: key);
 
   final String token;
+  final String email;
   @override
   State<DashboardPage> createState() => _DashboardPageState();
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  // testing
-  final PatientVM patientvm = PatientVM();
   final PatientAPIVM patientApi = PatientAPIVM();
   Future<bool> _onWillPop() async {
     return false; //<-- SEE HERE
+  }
+
+  late SharedPreferences pref;
+  late String tokens;
+  late bool isLogin;
+  bool isExp = true;
+  void cekToken() async {
+    pref = await SharedPreferences.getInstance();
+    isLogin = pref.getBool('isLogin') ?? false;
+    tokens = pref.getString('token') ?? "";
+    if (tokens != "" && tokens != " ") {
+      isExp = JwtDecoder.isExpired(tokens);
+    }
+    if (isLogin && (isExp == false)) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPageApi()),
+        (route) => false,
+      );
+    }
   }
 
   @override
@@ -73,10 +99,10 @@ class _DashboardPageState extends State<DashboardPage> {
                       shape: const CircleBorder(),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) {
-                        return const DashboardPage();
-                      }));
+                      // Navigator.of(context).pushReplacement(
+                      //     MaterialPageRoute(builder: (context) {
+                      //   return DashboardPage();
+                      // }));
                     },
                     // child: const Text("A"),
                     child: Image(
@@ -142,7 +168,9 @@ class _DashboardPageState extends State<DashboardPage> {
                               onPressed: () {
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
-                                  return const PatientPage();
+                                  return PatientPage(
+                                    token: widget.token,
+                                  );
                                 }));
                               },
                               child: Row(
@@ -159,7 +187,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         Column(
                           children: [
                             PatientBuilderAPI(
-                              future: patientApi.getPatients(),
+                              future: patientApi.getPatientsAuth(widget.token),
                               limit: 4,
                             ),
                           ],
@@ -183,7 +211,9 @@ class _DashboardPageState extends State<DashboardPage> {
                               onPressed: () {
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
-                                  return const PatientDonePage();
+                                  return PatientDonePage(
+                                    token: widget.token,
+                                  );
                                 }));
                               },
                               child: Row(
@@ -200,8 +230,9 @@ class _DashboardPageState extends State<DashboardPage> {
                         Column(
                           children: [
                             // PAKE API
+
                             PatientBuilderDoneAPI(
-                              future: patientApi.getPatients(),
+                              future: patientApi.getPatientsAuth(widget.token),
                               limit: 4,
                             )
                           ],

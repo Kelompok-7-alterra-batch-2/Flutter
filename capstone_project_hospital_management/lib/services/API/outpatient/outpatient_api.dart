@@ -6,11 +6,16 @@ import 'package:flutter/foundation.dart';
 class OutpatientApiRepository {
   final Dio _dio = Dio();
 
-  Future<Either<String, List<OutpatientModel>>> fetchDataOutpatient() async {
+  Future<Either<String, List<OutpatientModel>>> fetchDataOutpatient(
+      int id, String token) async {
     Response _response;
     try {
-      _response = await Dio()
-          .get('https://capstone-project-hospital.herokuapp.com/outpatients');
+      _response = await Dio().get(
+        'https://capstone-postgres-hospital.herokuapp.com/outpatients/$id',
+        options: Options(
+          headers: {"authorization": "Bearer ${token}"},
+        ),
+      );
 
       debugPrint("${_response.statusCode}");
       final List<OutpatientModel> _listOutpatient = (_response.data as List)

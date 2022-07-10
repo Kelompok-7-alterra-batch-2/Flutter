@@ -1,12 +1,14 @@
 import 'package:capstone_project_hospital_management/model/outpatient_model.dart';
 // ignore: unused_import
 import 'package:capstone_project_hospital_management/model/patient.dart';
+import 'package:capstone_project_hospital_management/screen/dashboard/dashboard_page.dart';
 import 'package:capstone_project_hospital_management/screen/patient/patien_page.dart';
 import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/emojione_monotone.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PatientDetailPageAPI extends StatefulWidget {
   const PatientDetailPageAPI({
@@ -245,7 +247,7 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
       String diagnose, String prescription) {
     // set up the buttons
     final PatientAPIVM _patientApi = PatientAPIVM();
-
+    late SharedPreferences pref;
     Widget cancelButton = ElevatedButton(
       child: Text(
         "No",
@@ -273,19 +275,28 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
       style: ElevatedButton.styleFrom(
         primary: sett.cPrimary,
       ),
-      onPressed: () {
-        _patientApi.updateOutpatientDiagnose(
-          patient.id,
-          diagnose: diagnose,
-          prescription: prescription,
-        );
-        _patientApi.updateOutpatientToDone(patient.id).then((value) {
-          Navigator.of(context)
-              .pushReplacement(MaterialPageRoute(builder: (context) {
-            return const PatientPage();
-          }));
-          // Navigator.pop(context);
-        });
+      onPressed: () async {
+        pref = await SharedPreferences.getInstance();
+        String tokens = pref.getString('token') ?? "";
+        if (tokens != "" && tokens != " ") {
+          _patientApi.updateOutpatientDiagnoseAuth(
+            patient.id,
+            token: tokens,
+            diagnose: diagnose,
+            prescription: prescription,
+          );
+          _patientApi
+              .updateOutpatientToDoneAuth(patient.id, tokens)
+              .then((value) {
+            Navigator.of(context)
+                .pushReplacement(MaterialPageRoute(builder: (context) {
+              return DashboardPage(
+                token: tokens,
+              );
+            }));
+            // Navigator.pop(context);
+          });
+        }
         // dbPatient.updatePatient(patient);
         // debugPrint(patient.toString());
       },

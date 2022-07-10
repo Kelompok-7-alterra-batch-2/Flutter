@@ -10,11 +10,12 @@ class OutpatientCubit extends Cubit<OutpatientState> {
 
   final OutpatientApiRepository _outpatientApiRepository =
       OutpatientApiRepository();
-  void fetchOutpatient() async {
+  void fetchOutpatient(int id, String token) async {
     emit(OutpatientLoading());
 
     try {
-      final _data = await _outpatientApiRepository.fetchDataOutpatient();
+      final _data =
+          await _outpatientApiRepository.fetchDataOutpatient(id, token);
       _data.fold(
         (l) => emit(OutpatientError(l)),
         (r) => emit(OutpatientSuccess(r)),

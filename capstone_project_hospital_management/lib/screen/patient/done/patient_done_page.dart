@@ -8,8 +8,9 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 
 class PatientDonePage extends StatefulWidget {
-  const PatientDonePage({Key? key}) : super(key: key);
+  const PatientDonePage({Key? key, this.token = ""}) : super(key: key);
 
+  final String token;
   @override
   State<PatientDonePage> createState() => _PatientDonePageState();
 }
@@ -52,39 +53,10 @@ class _PatientDonePageState extends State<PatientDonePage> {
                 : const EdgeInsets.all(10),
             width: MediaQuery.of(context).size.width,
             child: Column(children: [
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                child: Semantics(
-                  label: "searchID",
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        icon: Iconify(
-                          Ic.outline_search,
-                          size: 25,
-                          color: sett.cGrey2,
-                        ),
-                        onPressed: () {},
-                      ),
-                      fillColor: Colors.white,
-                      filled: true,
-                      hintText: 'Search Here',
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: sett.cGrey15),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: sett.cGrey2),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
               Column(
                 children: [
                   PatientBuilderDoneAPI(
-                    future: patientApi.getPatients(),
+                    future: patientApi.getPatientsAuth(widget.token),
                   ),
                 ],
               )

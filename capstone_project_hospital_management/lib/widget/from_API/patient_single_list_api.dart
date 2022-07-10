@@ -3,12 +3,15 @@ import 'package:capstone_project_hospital_management/screen/patient/detail/patie
 import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PatientSingleListAPI extends StatelessWidget {
   PatientSingleListAPI({
     Key? key,
     required this.patient,
   }) : super(key: key);
+
+  late SharedPreferences pref;
 
   final OutpatientModel patient;
   final PatientAPIVM patientApi = PatientAPIVM();
@@ -84,14 +87,19 @@ class PatientSingleListAPI extends StatelessWidget {
             child: Semantics(
               label: "goDetailId",
               child: IconButton(
-                  onPressed: () {
-                    patientApi.updateOutpatientToProcess(patient.id);
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return PatientDetailPageAPI(
-                        patient: patient,
-                      );
-                    }));
+                  onPressed: () async {
+                    pref = await SharedPreferences.getInstance();
+                    String token = pref.getString("token") ?? "";
+                    if (token != " " && token != "") {
+                      patientApi.updateOutpatientToProcessAuth(
+                          patient.id, token);
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return PatientDetailPageAPI(
+                          patient: patient,
+                        );
+                      }));
+                    }
                   },
                   icon: const Icon(Icons.navigate_next)),
             ),
