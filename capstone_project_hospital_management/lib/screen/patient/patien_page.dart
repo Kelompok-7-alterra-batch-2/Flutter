@@ -1,4 +1,3 @@
-import 'package:capstone_project_hospital_management/screen/dashboard/dashboard_page.dart';
 import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
 import 'package:capstone_project_hospital_management/screen/vm/patient_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_api.dart';
@@ -8,8 +7,9 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 
 class PatientPage extends StatefulWidget {
-  const PatientPage({Key? key}) : super(key: key);
+  const PatientPage({Key? key, this.token = ""}) : super(key: key);
 
+  final String token;
   @override
   State<PatientPage> createState() => _PatientPageState();
 }
@@ -17,6 +17,7 @@ class PatientPage extends StatefulWidget {
 class _PatientPageState extends State<PatientPage> {
   final PatientVM patientvm = PatientVM();
   final PatientAPIVM patientApi = PatientAPIVM();
+  TextEditingController idC = TextEditingController();
   Future<bool> _onWillPop() async {
     return false; //<-- SEE HERE
   }
@@ -34,10 +35,11 @@ class _PatientPageState extends State<PatientPage> {
             child: IconButton(
               icon: const Icon(Icons.navigate_before),
               onPressed: () {
-                Navigator.of(context)
-                    .pushReplacement(MaterialPageRoute(builder: (context) {
-                  return const DashboardPage();
-                }));
+                // Navigator.of(context)
+                //     .pushReplacement(MaterialPageRoute(builder: (context) {
+                //   return const DashboardPage();
+                // }));
+                Navigator.pop(context);
               },
             ),
           ),
@@ -54,11 +56,14 @@ class _PatientPageState extends State<PatientPage> {
                 : const EdgeInsets.all(10),
             width: MediaQuery.of(context).size.width,
             child: Column(children: [
+              //BUILDER HERE
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
                 child: Semantics(
                   label: "searchID",
                   child: TextFormField(
+                    controller: idC,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         icon: Iconify(
@@ -66,7 +71,15 @@ class _PatientPageState extends State<PatientPage> {
                           size: 25,
                           color: sett.cGrey2,
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          // pref = await SharedPreferences.getInstance();
+                          // String tokenS = pref.getString('token') ?? "";
+                          // if (tokenS != "" && tokenS != " ") {
+                          //   context
+                          //       .read<OutpatientCubit>()
+                          //       .fetchOutpatient(int.parse(idC.text), tokenS);
+                          // }
+                        },
                       ),
                       fillColor: Colors.white,
                       filled: true,
@@ -86,8 +99,11 @@ class _PatientPageState extends State<PatientPage> {
               Column(
                 children: [
                   PatientBuilderAPI(
-                    future: patientApi.getPatients(),
+                    future: patientApi.getPatientsAuth(widget.token),
                   ),
+                  // PatientBuilderCubit(
+                  //   token: widget.token,
+                  // ),
                 ],
               )
             ]),

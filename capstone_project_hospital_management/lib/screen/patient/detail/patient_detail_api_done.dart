@@ -1,12 +1,8 @@
 import 'package:capstone_project_hospital_management/model/outpatient_model.dart';
 // ignore: unused_import
 import 'package:capstone_project_hospital_management/model/patient.dart';
-import 'package:capstone_project_hospital_management/screen/patient/patien_page.dart';
-import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:iconify_flutter/icons/emojione_monotone.dart';
 
 class PatientDetailPageDoneAPI extends StatefulWidget {
   const PatientDetailPageDoneAPI({

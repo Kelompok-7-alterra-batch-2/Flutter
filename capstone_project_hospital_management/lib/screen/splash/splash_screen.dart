@@ -1,8 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:capstone_project_hospital_management/model/mock_patient.dart';
-import 'package:capstone_project_hospital_management/screen/dashboard/dashboard_page.dart';
-import 'package:capstone_project_hospital_management/screen/login/login_page_alt.dart';
-import 'package:capstone_project_hospital_management/services/database/mock_sqlite.dart';
+import 'package:capstone_project_hospital_management/screen/login/login_page_api.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -48,7 +45,6 @@ class _MyAppState extends State<MyApp> {
   //   ),
   // ];
 
-  final DatabasePatient _databasePatient = DatabasePatient();
   late SharedPreferences pref;
   late bool newDB;
 
@@ -85,7 +81,7 @@ class _MyAppState extends State<MyApp> {
       home: AnimatedSplashScreen(
         splash: 'assets/logo/logo_text_white.png',
         splashIconSize: 200,
-        nextScreen: const LoginPageAlt(),
+        nextScreen: const LoginPageApi(),
         // nextScreen: const DashboardPage(),
         // nextScreen: const PatientDetailPage(),
         splashTransition: SplashTransition.fadeTransition,
