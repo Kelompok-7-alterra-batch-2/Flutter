@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:capstone_project_hospital_management/screen/dashboard/dashboard_page.dart';
 import 'package:capstone_project_hospital_management/screen/splash/splash_screen.dart';
 import 'package:capstone_project_hospital_management/services/API/auth/cubit/auth_cubit.dart';
@@ -36,8 +38,6 @@ class _LoginPageApiState extends State<LoginPageApi> {
   }
 
   void _trySubmitForm(String token) async {
-    final bool? isValid = _formKey.currentState?.validate();
-
     pref.setBool("isLogin", true);
     pref.setString("token", token);
   }
@@ -65,14 +65,13 @@ class _LoginPageApiState extends State<LoginPageApi> {
   @override
   void initState() {
     checkLogin();
+    // ignore: todo
     // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    bool emailValid = false;
-    bool passValid = false;
     return BlocProvider(
       create: (context) => AuthCubit(),
       child: BlocConsumer<AuthCubit, AuthState>(
@@ -83,7 +82,7 @@ class _LoginPageApiState extends State<LoginPageApi> {
               builder: (context) => AlertDialog(
                 title: const Text("Warning"),
                 // content: Text(state.errorMessage.toString()),
-                content: Text("User Not Found!"),
+                content: const Text("User Not Found!"),
                 actions: [
                   TextButton(
                       onPressed: () {
@@ -108,7 +107,7 @@ class _LoginPageApiState extends State<LoginPageApi> {
                 context: context,
                 builder: (context) => AlertDialog(
                   title: const Text("Warning"),
-                  content: Text("User not found!"),
+                  content: const Text("User not found!"),
                   actions: [
                     TextButton(
                         onPressed: () {
@@ -194,7 +193,6 @@ class _LoginPageApiState extends State<LoginPageApi> {
                                           .hasMatch(value)) {
                                         return 'Please enter a valid email address';
                                       }
-                                      emailValid = true;
                                       // Return null if the entered email is valid
                                       return null;
                                     },
@@ -256,7 +254,6 @@ class _LoginPageApiState extends State<LoginPageApi> {
                                         }
                                       }
                                       // Return null if the entered password is valid
-                                      passValid = true;
                                       return null;
                                     },
                                     decoration: InputDecoration(
@@ -407,7 +404,7 @@ class _loginButtonLoading extends StatelessWidget {
         primary: sett.cPrimary,
         fixedSize: Size.fromWidth(MediaQuery.of(context).size.width),
       ),
-      child: CircularProgressIndicator(),
+      child: const CircularProgressIndicator(),
     );
   }
 }

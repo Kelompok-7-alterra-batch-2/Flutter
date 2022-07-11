@@ -5,6 +5,7 @@ import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// ignore: must_be_immutable
 class PatientSingleListAPI extends StatelessWidget {
   PatientSingleListAPI({
     Key? key,

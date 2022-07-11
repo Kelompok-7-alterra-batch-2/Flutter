@@ -1,11 +1,8 @@
-import 'package:capstone_project_hospital_management/screen/dashboard/dashboard_page.dart';
 import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
 import 'package:capstone_project_hospital_management/screen/vm/patient_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_done_api.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:iconify_flutter/icons/ic.dart';
 
 class PatientDonePage extends StatefulWidget {
   const PatientDonePage({Key? key, this.token = ""}) : super(key: key);

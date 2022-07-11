@@ -43,19 +43,19 @@ class DoctorDashboardAndroid extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Welcome,",
                         style: TextStyle(
                             // fontWeight: FontWeight.w600,
                             color: Colors.white,
                             fontSize: 18),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Text(
                         "Dr. ${akun.name}",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.white,
                             fontSize: 23),
@@ -98,7 +98,7 @@ class DoctorDashboardAndroid extends StatelessWidget {
                 Expanded(child: Container()),
                 Text(
                   "${akun.outpatient} Appointments",
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontWeight: FontWeight.w700,
                       color: Colors.white,
                       fontSize: 18),
@@ -137,7 +137,6 @@ class DoctorDashboardTablet extends StatelessWidget {
         }
 
         late Doctor akun;
-        var tanggal = DateTime.now();
         for (var a in snapshot.data!) {
           if (a.email == email) {
             akun = a;
@@ -149,75 +148,73 @@ class DoctorDashboardTablet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Welcome,",
-                              style: TextStyle(
-                                // fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                                fontSize: 16, fontWeight: FontWeight.w600,
-                              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Welcome,",
+                            style: TextStyle(
+                              // fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                              fontSize: 16, fontWeight: FontWeight.w600,
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Dr. ${akun.name}",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                  fontSize: 18),
-                            ),
-                          ],
-                        ),
-                        Expanded(child: Container()),
-                        Text(
-                          "${DateFormat("MMMM").format(tanggalT)}, ${tanggalT.day} ${tanggalT.year}",
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                            fontSize: 16,
                           ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "Dr. ${akun.name}",
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                                fontSize: 18),
+                          ),
+                        ],
+                      ),
+                      Expanded(child: Container()),
+                      Text(
+                        "${DateFormat("MMMM").format(tanggalT)}, ${tanggalT.day} ${tanggalT.year}",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontSize: 16,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    decoration: const BoxDecoration(
-                        border: Border(
-                      bottom: BorderSide(color: Colors.white, width: 2),
-                    )),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "${akun.outpatient} Appointments",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontSize: 16),
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  decoration: const BoxDecoration(
+                      border: Border(
+                    bottom: BorderSide(color: Colors.white, width: 2),
+                  )),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "${akun.outpatient} Appointments",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 16),
+                ),
+              ],
             ),
             Expanded(child: Container()),
             Image(

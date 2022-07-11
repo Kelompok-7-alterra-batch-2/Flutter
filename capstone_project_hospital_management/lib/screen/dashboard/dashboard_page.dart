@@ -5,10 +5,8 @@ import 'package:capstone_project_hospital_management/screen/login/login_page_api
 import 'package:capstone_project_hospital_management/screen/patient/done/patient_done_page.dart';
 import 'package:capstone_project_hospital_management/screen/patient/patien_page.dart';
 import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
-import 'package:capstone_project_hospital_management/screen/vm/patient_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_api.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_done_api.dart';
-import 'package:capstone_project_hospital_management/widget/outpatient%20builder/patient_search_builder.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import
@@ -18,7 +16,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardPage extends StatefulWidget {
-  DashboardPage({
+  const DashboardPage({
     Key? key,
     this.token = "",
     this.email = "",
@@ -50,7 +48,7 @@ class _DashboardPageState extends State<DashboardPage> {
     if (isLogin && (isExp == false)) {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => LoginPageApi()),
+        MaterialPageRoute(builder: (context) => const LoginPageApi()),
         (route) => false,
       );
     }

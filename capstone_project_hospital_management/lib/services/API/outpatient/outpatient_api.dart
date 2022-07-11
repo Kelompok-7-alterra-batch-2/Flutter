@@ -4,8 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class OutpatientApiRepository {
-  final Dio _dio = Dio();
-
   Future<Either<String, List<OutpatientModel>>> fetchDataOutpatient(
       int id, String token) async {
     Response _response;
@@ -13,7 +11,7 @@ class OutpatientApiRepository {
       _response = await Dio().get(
         'https://capstone-postgres-hospital.herokuapp.com/outpatients/$id',
         options: Options(
-          headers: {"authorization": "Bearer ${token}"},
+          headers: {"authorization": "Bearer $token"},
         ),
       );
 
@@ -23,7 +21,7 @@ class OutpatientApiRepository {
           .toList();
       return right(_listOutpatient);
     } on DioError catch (e) {
-      print(e.response!.statusCode);
+      debugPrint("${e.response!.statusCode}");
       String errorMessage = e.response!.data.toString();
       switch (e.type) {
         case DioErrorType.connectTimeout:

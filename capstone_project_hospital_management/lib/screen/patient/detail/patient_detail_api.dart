@@ -2,7 +2,6 @@ import 'package:capstone_project_hospital_management/model/outpatient_model.dart
 // ignore: unused_import
 import 'package:capstone_project_hospital_management/model/patient.dart';
 import 'package:capstone_project_hospital_management/screen/dashboard/dashboard_page.dart';
-import 'package:capstone_project_hospital_management/screen/patient/patien_page.dart';
 import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
@@ -208,7 +207,7 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
                                   "Warning",
                                   style: TextStyle(color: Colors.red),
                                 ),
-                                content: Text(
+                                content: const Text(
                                     "You must fill the diagnose and prescription column before update!"),
                                 actions: [
                                   TextButton(

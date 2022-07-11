@@ -1,15 +1,10 @@
-import 'package:capstone_project_hospital_management/screen/dashboard/dashboard_page.dart';
 import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
 import 'package:capstone_project_hospital_management/screen/vm/patient_view_model.dart';
-import 'package:capstone_project_hospital_management/services/API/outpatient/cubit/outpatient_cubit.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_api.dart';
-import 'package:capstone_project_hospital_management/widget/outpatient%20builder/patient_search_builder.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class PatientPage extends StatefulWidget {
   const PatientPage({Key? key, this.token = ""}) : super(key: key);
@@ -29,7 +24,6 @@ class _PatientPageState extends State<PatientPage> {
 
   @override
   Widget build(BuildContext context) {
-    late SharedPreferences pref;
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(

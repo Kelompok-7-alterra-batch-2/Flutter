@@ -32,7 +32,7 @@ class PatientVM {
       Response response = await Dio().get(
         'https://capstone-postgres-hospital.herokuapp.com/outpatients',
         options: Options(
-          headers: {"authorization": "Bearer ${token}"},
+          headers: {"authorization": "Bearer $token"},
         ),
       );
 
@@ -59,7 +59,7 @@ class PatientVM {
       Response response = await Dio().get(
         'https://capstone-postgres-hospital.herokuapp.com/doctors',
         options: Options(
-          headers: {"authorization": "Bearer ${token}"},
+          headers: {"authorization": "Bearer $token"},
         ),
       );
 
@@ -95,7 +95,7 @@ class PatientVM {
       Response response = await Dio().put(
         "https://capstone-postgres-hospital.herokuapp.com/outpatients/process/$id",
         options: Options(
-          headers: {"authorization": "Bearer ${token}"},
+          headers: {"authorization": "Bearer $token"},
         ),
       );
       print("status outpatient has changed to process");
@@ -119,7 +119,7 @@ class PatientVM {
       Response response = await Dio().put(
         "https://capstone-postgres-hospital.herokuapp.com/outpatients/done/$id",
         options: Options(
-          headers: {"authorization": "Bearer ${token}"},
+          headers: {"authorization": "Bearer $token"},
         ),
       );
       print("status outpatient has changed to done");
@@ -160,7 +160,7 @@ class PatientVM {
           "prescription": prescription,
         },
         options: Options(
-          headers: {"authorization": "Bearer ${token}"},
+          headers: {"authorization": "Bearer $token"},
         ),
       );
     } on DioError catch (e) {

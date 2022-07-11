@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_void_to_null, unnecessary_question_mark
+
 class Doctor {
   int? id;
   String? name;
@@ -34,9 +36,9 @@ class Doctor {
     availableFrom = json['availableFrom'];
     availableTo = json['availableTo'];
     department = json['department'] != null
-        ? new Department.fromJson(json['department'])
+        ? Department.fromJson(json['department'])
         : null;
-    role = json['role'] != null ? new Department.fromJson(json['role']) : null;
+    role = json['role'] != null ? Department.fromJson(json['role']) : null;
     nid = json['nid'];
     phoneNumber = json['phoneNumber'];
     outpatient = json['outpatient'];
@@ -44,23 +46,23 @@ class Doctor {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['dob'] = this.dob;
-    data['email'] = this.email;
-    data['availableFrom'] = this.availableFrom;
-    data['availableTo'] = this.availableTo;
-    if (this.department != null) {
-      data['department'] = this.department!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['dob'] = dob;
+    data['email'] = email;
+    data['availableFrom'] = availableFrom;
+    data['availableTo'] = availableTo;
+    if (department != null) {
+      data['department'] = department!.toJson();
     }
-    if (this.role != null) {
-      data['role'] = this.role!.toJson();
+    if (role != null) {
+      data['role'] = role!.toJson();
     }
-    data['nid'] = this.nid;
-    data['phoneNumber'] = this.phoneNumber;
-    data['outpatient'] = this.outpatient;
-    data['createdAt'] = this.createdAt;
+    data['nid'] = nid;
+    data['phoneNumber'] = phoneNumber;
+    data['outpatient'] = outpatient;
+    data['createdAt'] = createdAt;
     return data;
   }
 }
@@ -79,10 +81,10 @@ class Department {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['createdAt'] = this.createdAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['createdAt'] = createdAt;
     return data;
   }
 }

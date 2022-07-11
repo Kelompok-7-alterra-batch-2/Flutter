@@ -6,10 +6,6 @@ import 'package:capstone_project_hospital_management/widget/from_API/patient_sin
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:iconify_flutter/icons/ic.dart';
-import 'package:capstone_project_hospital_management/widget/settings.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class PatientBuilderCubit extends StatelessWidget {
   const PatientBuilderCubit({
@@ -22,9 +18,7 @@ class PatientBuilderCubit extends StatelessWidget {
   final String token;
   @override
   Widget build(BuildContext context) {
-    late SharedPreferences pref;
     final PatientAPIVM patientAPIVM = PatientAPIVM();
-    TextEditingController idC = TextEditingController();
     return BlocProvider(
       create: (context) => OutpatientCubit(),
       child: BlocConsumer<OutpatientCubit, OutpatientState>(
@@ -55,7 +49,7 @@ class PatientBuilderCubit extends StatelessWidget {
                   margin: const EdgeInsets.only(
                     top: 20,
                   ),
-                  child: Text("${state.errorMessage}")),
+                  child: Text(state.errorMessage)),
             );
           } else if (state is OutpatientSuccess) {
             if (state.outpatientList.isNotEmpty) {

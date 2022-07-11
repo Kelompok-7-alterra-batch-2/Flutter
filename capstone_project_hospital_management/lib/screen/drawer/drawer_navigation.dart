@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:capstone_project_hospital_management/screen/dashboard/dashboard_page.dart';
 import 'package:capstone_project_hospital_management/screen/login/login_page_api.dart';
 import 'package:capstone_project_hospital_management/screen/patient/patien_page.dart';

@@ -1,4 +1,5 @@
 import 'package:capstone_project_hospital_management/model/outpatient_model.dart';
+// ignore: unused_import
 import 'package:capstone_project_hospital_management/screen/patient/detail/patient_detail_api.dart';
 import 'package:capstone_project_hospital_management/screen/patient/detail/patient_detail_api_done.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
