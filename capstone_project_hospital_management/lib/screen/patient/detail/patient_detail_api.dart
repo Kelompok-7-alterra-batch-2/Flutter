@@ -277,6 +277,7 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
       onPressed: () async {
         pref = await SharedPreferences.getInstance();
         String tokens = pref.getString('token') ?? "";
+        String emails = pref.getString('email') ?? "";
         if (tokens != "" && tokens != " ") {
           _patientApi.updateOutpatientDiagnoseAuth(
             patient.id,
@@ -291,6 +292,7 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
                 .pushReplacement(MaterialPageRoute(builder: (context) {
               return DashboardPage(
                 token: tokens,
+                email: emails,
               );
             }));
             // Navigator.pop(context);

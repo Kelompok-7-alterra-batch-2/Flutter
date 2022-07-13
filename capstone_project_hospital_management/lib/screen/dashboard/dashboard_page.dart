@@ -5,6 +5,7 @@ import 'package:capstone_project_hospital_management/screen/login/login_page_api
 import 'package:capstone_project_hospital_management/screen/patient/done/patient_done_page.dart';
 import 'package:capstone_project_hospital_management/screen/patient/patien_page.dart';
 import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
+import 'package:capstone_project_hospital_management/widget/from_API/doctor_dashboard.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_api.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_done_api.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
@@ -146,9 +147,17 @@ class _DashboardPageState extends State<DashboardPage> {
                     child: Center(
                       // child: DashboardHeadTablet(),
                       child: MediaQuery.of(context).size.width > 770
-                          ? const DashboardHeadTablet()
-                          : const DashboardHeadAndroid(),
+                          ? DoctorDashboardTablet(
+                              future: patientApi.getDoctorByEmailAuth(
+                                  widget.token, widget.email))
+                          : DoctorDashboardAndroid(
+                              future: patientApi.getDoctorByEmailAuth(
+                                  widget.token, widget.email),
+                            ),
                     ),
+                    // child: MediaQuery.of(context).size.width > 770
+                    //     ? DashboardHeadTablet()
+                    //     : DashboardHeadAndroid()),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 30),

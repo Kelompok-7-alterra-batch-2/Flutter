@@ -71,10 +71,12 @@ class DrawerWidget extends StatelessWidget {
               onTap: () async {
                 pref = await SharedPreferences.getInstance();
                 String tokenShared = pref.getString("token") ?? " ";
+                String email = pref.getString('email') ?? " ";
                 Navigator.of(context)
                     .pushReplacement(MaterialPageRoute(builder: (context) {
                   return DashboardPage(
                     token: tokenShared,
+                    email: email,
                   );
                 }));
               }),

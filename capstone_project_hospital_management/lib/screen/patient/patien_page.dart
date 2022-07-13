@@ -3,6 +3,7 @@ import 'package:capstone_project_hospital_management/screen/vm/patient_view_mode
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_api.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 
@@ -22,8 +23,11 @@ class _PatientPageState extends State<PatientPage> {
     return false; //<-- SEE HERE
   }
 
+  int id = 0;
   @override
   Widget build(BuildContext context) {
+    var symbolNumb = ["(", ")", "+", "-", "*", "/", "#", "=", ".", ","];
+    // debugPrint("benar? ${symbolNumb.contains("(")}");
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -35,10 +39,6 @@ class _PatientPageState extends State<PatientPage> {
             child: IconButton(
               icon: const Icon(Icons.navigate_before),
               onPressed: () {
-                // Navigator.of(context)
-                //     .pushReplacement(MaterialPageRoute(builder: (context) {
-                //   return const DashboardPage();
-                // }));
                 Navigator.pop(context);
               },
             ),
@@ -64,6 +64,7 @@ class _PatientPageState extends State<PatientPage> {
                   child: TextFormField(
                     controller: idC,
                     keyboardType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         icon: Iconify(
@@ -71,7 +72,14 @@ class _PatientPageState extends State<PatientPage> {
                           size: 25,
                           color: sett.cGrey2,
                         ),
-                        onPressed: () async {
+                        onPressed: () {
+                          setState(() {
+                            id = (idC.text != "") &&
+                                    !(symbolNumb.contains(idC.text))
+                                ? int.parse(idC.text)
+                                : 0;
+                          });
+
                           // pref = await SharedPreferences.getInstance();
                           // String tokenS = pref.getString('token') ?? "";
                           // if (tokenS != "" && tokenS != " ") {
@@ -99,7 +107,7 @@ class _PatientPageState extends State<PatientPage> {
               Column(
                 children: [
                   PatientBuilderAPI(
-                    future: patientApi.getPatientsAuth(widget.token),
+                    future: patientApi.getPatientsAuthComplex(widget.token, id),
                   ),
                   // PatientBuilderCubit(
                   //   token: widget.token,

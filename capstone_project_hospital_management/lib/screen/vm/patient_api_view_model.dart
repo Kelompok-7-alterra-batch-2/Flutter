@@ -1,3 +1,4 @@
+import 'package:capstone_project_hospital_management/model/doctor_model.dart';
 import 'package:capstone_project_hospital_management/model/outpatient_model.dart';
 // ignore: unused_import
 import 'package:capstone_project_hospital_management/model/patient.dart';
@@ -12,8 +13,20 @@ class PatientAPIVM {
     return await PatientVM().fetchDataOutpatientAuth(token);
   }
 
+  Future<List<OutpatientModel>> getPatientsAuthComplex(
+      String token, int id) async {
+    if (id == 0) {
+      return await PatientVM().fetchDataOutpatientAuth(token);
+    }
+    return await PatientVM().fetchDataOutpatientIdAuth(token, id);
+  }
+
   Future<List<Doctor>> getDoctorAuth(String token) async {
     return await PatientVM().fetchDataDoctorAuth(token);
+  }
+
+  Future<DoctorModel> getDoctorByEmailAuth(String token, String email) async {
+    return await PatientVM().fetchDataDoctorEmailAuth(token, email);
   }
 
   Future<void> updateOutpatientToProcess(int? id) async {
