@@ -6,10 +6,11 @@ class DoctorDashboardAndroid extends StatelessWidget {
   const DoctorDashboardAndroid({
     Key? key,
     required this.future,
+    required this.futureCount,
   }) : super(key: key);
 
   final Future<DoctorModel> future;
-
+  final Future<int> futureCount;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<DoctorModel>(
@@ -88,14 +89,34 @@ class DoctorDashboardAndroid extends StatelessWidget {
                   ),
                 ),
                 Expanded(child: Container()),
-                const Text(
-                  // "${snapshot.data!.outpatient ?? } Appointments",
-                  "0 Appointments",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                      fontSize: 18),
-                ),
+                // const Text(
+                //   // "${snapshot.data!.outpatient ?? } Appointments",
+                //   "0 Appointments",
+                //   style: TextStyle(
+                //       fontWeight: FontWeight.w700,
+                //       color: Colors.white,
+                //       fontSize: 18),
+                // ),
+                FutureBuilder<int>(
+                    future: futureCount,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: Container(
+                              margin: const EdgeInsets.only(
+                                top: 20,
+                              ),
+                              child: const CircularProgressIndicator()),
+                        );
+                      }
+                      return Text(
+                        "${snapshot.data} Appointments",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontSize: 16),
+                      );
+                    })
               ],
             ),
           ],
@@ -109,11 +130,12 @@ class DoctorDashboardTablet extends StatelessWidget {
   const DoctorDashboardTablet({
     Key? key,
     required this.future,
-    this.email = "",
+    required this.futureCount,
   }) : super(key: key);
 
   final Future<DoctorModel> future;
-  final String email;
+  final Future<int> futureCount;
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<DoctorModel>(
@@ -193,14 +215,34 @@ class DoctorDashboardTablet extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const Text(
-                  // "${snapshot.data!.outpatient} Appointments",
-                  "0 Appointments",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                      fontSize: 16),
-                ),
+                // const Text(
+                //   // "${snapshot.data!.outpatient} Appointments",
+                //   "0 Appointments",
+                //   style: TextStyle(
+                //       fontWeight: FontWeight.w600,
+                //       color: Colors.white,
+                //       fontSize: 16),
+                // ),
+                FutureBuilder<int>(
+                    future: futureCount,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: Container(
+                              margin: const EdgeInsets.only(
+                                top: 20,
+                              ),
+                              child: const CircularProgressIndicator()),
+                        );
+                      }
+                      return Text(
+                        "${snapshot.data} Appointments",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontSize: 16),
+                      );
+                    })
               ],
             ),
             Expanded(child: Container()),

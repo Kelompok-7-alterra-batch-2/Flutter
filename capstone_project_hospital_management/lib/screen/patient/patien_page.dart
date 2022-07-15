@@ -24,6 +24,8 @@ class _PatientPageState extends State<PatientPage> {
   }
 
   int id = 0;
+  String nama = "";
+  bool isByName = false;
   @override
   Widget build(BuildContext context) {
     var symbolNumb = ["(", ")", "+", "-", "*", "/", "#", "=", ".", ","];
@@ -63,8 +65,13 @@ class _PatientPageState extends State<PatientPage> {
                   label: "searchID",
                   child: TextFormField(
                     controller: idC,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    keyboardType:
+                        isByName ? TextInputType.text : TextInputType.number,
+                    inputFormatters: [
+                      isByName
+                          ? FilteringTextInputFormatter.singleLineFormatter
+                          : FilteringTextInputFormatter.digitsOnly
+                    ],
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         icon: Iconify(
@@ -74,24 +81,20 @@ class _PatientPageState extends State<PatientPage> {
                         ),
                         onPressed: () {
                           setState(() {
-                            id = (idC.text != "") &&
-                                    !(symbolNumb.contains(idC.text))
-                                ? int.parse(idC.text)
-                                : 0;
+                            if (!isByName) {
+                              id = (idC.text != "") &&
+                                      !(symbolNumb.contains(idC.text))
+                                  ? int.parse(idC.text)
+                                  : 0;
+                            }
+                            nama = idC.text;
                           });
-
-                          // pref = await SharedPreferences.getInstance();
-                          // String tokenS = pref.getString('token') ?? "";
-                          // if (tokenS != "" && tokenS != " ") {
-                          //   context
-                          //       .read<OutpatientCubit>()
-                          //       .fetchOutpatient(int.parse(idC.text), tokenS);
-                          // }
                         },
                       ),
                       fillColor: Colors.white,
                       filled: true,
-                      hintText: 'Search Here',
+                      hintText:
+                          'Search Here ${isByName ? "(by Name)" : "(by ID)"}',
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: sett.cGrey15),
                         borderRadius: BorderRadius.circular(10),
@@ -104,14 +107,24 @@ class _PatientPageState extends State<PatientPage> {
                   ),
                 ),
               ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isByName = !isByName;
+                  });
+                },
+                child: Text(isByName
+                    ? "Click gere to search by id"
+                    : "Click here to search by name"),
+              ),
               Column(
                 children: [
                   PatientBuilderAPI(
-                    future: patientApi.getPatientsAuthComplex(widget.token, id),
+                    future: isByName
+                        ? patientApi.getPatientsByNameAuthComplex(
+                            widget.token, nama)
+                        : patientApi.getPatientsAuthComplex(widget.token, id),
                   ),
-                  // PatientBuilderCubit(
-                  //   token: widget.token,
-                  // ),
                 ],
               )
             ]),

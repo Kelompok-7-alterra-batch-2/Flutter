@@ -47,7 +47,7 @@ class _LoginPageApiState extends State<LoginPageApi> {
     pref = await SharedPreferences.getInstance();
     isLogin = pref.getBool('isLogin') ?? false;
     token = pref.getString('token') ?? " ";
-    email = pref.getString('email') ?? " ";
+    email = pref.getString('email') ?? "oscarok@gmail.com";
     bool isExp = true;
     if (token != "" && token != " ") {
       isExp = JwtDecoder.isExpired(token);

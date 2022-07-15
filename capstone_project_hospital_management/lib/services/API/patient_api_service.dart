@@ -28,6 +28,31 @@ class PatientVM {
     }
   }
 
+  Future<int> fetchCountOutpatientAuth(String token) async {
+    try {
+      Response response = await Dio().get(
+        'https://capstone-postgres-hospital.herokuapp.com/outpatients/count/today',
+        options: Options(
+          headers: {"authorization": "Bearer $token"},
+        ),
+      );
+
+      print("Success access : ${response.statusCode}");
+
+      return response.data as int;
+    } on DioError catch (e) {
+      if (e.response!.statusCode == 400) {
+        print("error : ${e.response!.statusCode}");
+        return 0;
+      } else if (e.response!.statusCode == 403) {
+        print("error : ${e.response!.statusCode}, token is invalid now");
+      }
+      print("something wrong");
+      print(e);
+      return 0;
+    }
+  }
+
   Future<List<OutpatientModel>> fetchDataOutpatientAuth(String token) async {
     try {
       Response response = await Dio().get(
@@ -55,11 +80,39 @@ class PatientVM {
     }
   }
 
+  Future<List<OutpatientModel>> fetchDataOutpatientTodayAuth(
+      String token) async {
+    try {
+      Response response = await Dio().get(
+        'https://capstone-postgres-hospital.herokuapp.com/outpatients/today',
+        options: Options(
+          headers: {"authorization": "Bearer $token"},
+        ),
+      );
+
+      print("Success access : ${response.statusCode}");
+      final List<OutpatientModel> _listOutpatient = (response.data as List)
+          .map((e) => OutpatientModel.fromJson(e))
+          .toList();
+      return _listOutpatient;
+    } on DioError catch (e) {
+      if (e.response!.statusCode == 400) {
+        print("error : ${e.response!.statusCode}");
+        return [];
+      } else if (e.response!.statusCode == 403) {
+        print("error : ${e.response!.statusCode}, token is invalid now");
+      }
+      print("something wrong");
+      print(e);
+      return [];
+    }
+  }
+
   Future<List<OutpatientModel>> fetchDataOutpatientIdAuth(
       String token, int id) async {
     try {
       Response response = await Dio().get(
-        'https://capstone-postgres-hospital.herokuapp.com/outpatients/$id',
+        'https://capstone-postgres-hospital.herokuapp.com/outpatients/patients/$id',
         options: Options(
           headers: {"authorization": "Bearer $token"},
         ),
@@ -67,8 +120,48 @@ class PatientVM {
 
       print("Success access : ${response.statusCode}");
 
-      final List<OutpatientModel> _listOutpatient = [];
-      _listOutpatient.add(OutpatientModel.fromJson(response.data));
+      // final List<OutpatientModel> _listOutpatient = [];
+      // _listOutpatient.add(OutpatientModel.fromJson(response.data));
+      final List<OutpatientModel> _listOutpatient = (response.data as List)
+          .map((e) => OutpatientModel.fromJson(e))
+          .toList();
+      return _listOutpatient;
+    } on DioError catch (e) {
+      if (e.response!.statusCode == 400) {
+        print("error : ${e.response!.statusCode}");
+        return [];
+      } else if (e.response!.statusCode == 403) {
+        print("error : ${e.response!.statusCode}, token is invalid now");
+        return [];
+      } else if (e.response!.statusCode == 404) {
+        print("not found");
+        return [];
+      }
+      print("something wrong");
+      print(e);
+      return [];
+    }
+  }
+
+  Future<List<OutpatientModel>> fetchDataOutpatientNameAuth(
+      String token, String name) async {
+    try {
+      Response response = await Dio().get(
+        'https://capstone-postgres-hospital.herokuapp.com/outpatients/patients/today?name=$name',
+        options: Options(
+          headers: {"authorization": "Bearer $token"},
+        ),
+      );
+
+      print("Success access : ${response.statusCode}");
+
+      // final List<OutpatientModel> _listOutpatient = [];
+      // _listOutpatient.add(OutpatientModel.fromJson(response.data));
+
+      final List<OutpatientModel> _listOutpatient = (response.data as List)
+          .map((e) => OutpatientModel.fromJson(e))
+          .toList();
+
       return _listOutpatient;
     } on DioError catch (e) {
       if (e.response!.statusCode == 400) {
@@ -127,11 +220,11 @@ class PatientVM {
 
       print("Success access : ${response.statusCode}");
 
-      // final List<Doctor> _listOutpatient =
-      // (response.data as List).map((e) => Doctor.fromJson(e)).toList();
-      // final DoctorModel _doctor = response.data;
-
-      // final DoctorModel _doctor = DoctorModel.fromJson(response.extra);
+      if (response.data.runtimeType is String) {
+        final DoctorModel _doctor =
+            DoctorModel.fromJson(Map<String, dynamic>.from(response.extra));
+        return _doctor;
+      }
       final DoctorModel _doctor =
           DoctorModel.fromJson(Map<String, dynamic>.from(response.data));
       return _doctor;

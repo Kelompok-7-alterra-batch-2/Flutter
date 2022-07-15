@@ -149,10 +149,15 @@ class _DashboardPageState extends State<DashboardPage> {
                       child: MediaQuery.of(context).size.width > 770
                           ? DoctorDashboardTablet(
                               future: patientApi.getDoctorByEmailAuth(
-                                  widget.token, widget.email))
+                                  widget.token, widget.email),
+                              futureCount: patientApi
+                                  .getCountOutpatientsTodayAuth(widget.token),
+                            )
                           : DoctorDashboardAndroid(
                               future: patientApi.getDoctorByEmailAuth(
                                   widget.token, widget.email),
+                              futureCount: patientApi
+                                  .getCountOutpatientsTodayAuth(widget.token),
                             ),
                     ),
                     // child: MediaQuery.of(context).size.width > 770
@@ -194,7 +199,8 @@ class _DashboardPageState extends State<DashboardPage> {
                         Column(
                           children: [
                             PatientBuilderAPI(
-                              future: patientApi.getPatientsAuth(widget.token),
+                              future:
+                                  patientApi.getPatientsTodayAuth(widget.token),
                               limit: 4,
                             ),
                           ],

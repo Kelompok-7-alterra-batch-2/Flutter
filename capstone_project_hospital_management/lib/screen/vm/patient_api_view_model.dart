@@ -5,20 +5,34 @@ import 'package:capstone_project_hospital_management/model/patient.dart';
 import 'package:capstone_project_hospital_management/services/API/patient_api_service.dart';
 
 class PatientAPIVM {
-  Future<List<OutpatientModel>> getPatients() async {
-    return await PatientVM().fetchDataOutpatient();
-  }
-
   Future<List<OutpatientModel>> getPatientsAuth(String token) async {
     return await PatientVM().fetchDataOutpatientAuth(token);
+  }
+
+  Future<List<OutpatientModel>> getPatientsTodayAuth(String token) async {
+    return await PatientVM().fetchDataOutpatientTodayAuth(token);
+  }
+
+  Future<int> getCountOutpatientsTodayAuth(String token) async {
+    return await PatientVM().fetchCountOutpatientAuth(token);
   }
 
   Future<List<OutpatientModel>> getPatientsAuthComplex(
       String token, int id) async {
     if (id == 0) {
-      return await PatientVM().fetchDataOutpatientAuth(token);
+      // return await PatientVM().fetchDataOutpatientAuth(token);
+      return await PatientVM().fetchDataOutpatientTodayAuth(token);
     }
     return await PatientVM().fetchDataOutpatientIdAuth(token, id);
+  }
+
+  Future<List<OutpatientModel>> getPatientsByNameAuthComplex(
+      String token, String name) async {
+    if (name.trim() == "") {
+      // return await PatientVM().fetchDataOutpatientAuth(token);
+      return await PatientVM().fetchDataOutpatientTodayAuth(token);
+    }
+    return await PatientVM().fetchDataOutpatientNameAuth(token, name.trim());
   }
 
   Future<List<Doctor>> getDoctorAuth(String token) async {
