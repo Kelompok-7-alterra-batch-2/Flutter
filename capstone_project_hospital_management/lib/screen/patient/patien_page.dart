@@ -1,5 +1,4 @@
 import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
-import 'package:capstone_project_hospital_management/screen/vm/patient_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_api.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,6 @@ class PatientPage extends StatefulWidget {
 }
 
 class _PatientPageState extends State<PatientPage> {
-  final PatientVM patientvm = PatientVM();
   final PatientAPIVM patientApi = PatientAPIVM();
   TextEditingController idC = TextEditingController();
   Future<bool> _onWillPop() async {
@@ -25,11 +23,9 @@ class _PatientPageState extends State<PatientPage> {
 
   int id = 0;
   String nama = "";
-  bool isByName = false;
+
   @override
   Widget build(BuildContext context) {
-    var symbolNumb = ["(", ")", "+", "-", "*", "/", "#", "=", ".", ","];
-    // debugPrint("benar? ${symbolNumb.contains("(")}");
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -65,12 +61,9 @@ class _PatientPageState extends State<PatientPage> {
                   label: "searchID",
                   child: TextFormField(
                     controller: idC,
-                    keyboardType:
-                        isByName ? TextInputType.text : TextInputType.number,
+                    keyboardType: TextInputType.text,
                     inputFormatters: [
-                      isByName
-                          ? FilteringTextInputFormatter.singleLineFormatter
-                          : FilteringTextInputFormatter.digitsOnly
+                      FilteringTextInputFormatter.singleLineFormatter
                     ],
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
@@ -81,20 +74,13 @@ class _PatientPageState extends State<PatientPage> {
                         ),
                         onPressed: () {
                           setState(() {
-                            if (!isByName) {
-                              id = (idC.text != "") &&
-                                      !(symbolNumb.contains(idC.text))
-                                  ? int.parse(idC.text)
-                                  : 0;
-                            }
                             nama = idC.text;
                           });
                         },
                       ),
                       fillColor: Colors.white,
                       filled: true,
-                      hintText:
-                          'Search Here ${isByName ? "(by Name)" : "(by ID)"}',
+                      hintText: 'Search Here',
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: sett.cGrey15),
                         borderRadius: BorderRadius.circular(10),
@@ -107,23 +93,12 @@ class _PatientPageState extends State<PatientPage> {
                   ),
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isByName = !isByName;
-                  });
-                },
-                child: Text(isByName
-                    ? "Click gere to search by id"
-                    : "Click here to search by name"),
-              ),
+
               Column(
                 children: [
                   PatientBuilderAPI(
-                    future: isByName
-                        ? patientApi.getPatientsByNameAuthComplex(
-                            widget.token, nama)
-                        : patientApi.getPatientsAuthComplex(widget.token, id),
+                    future: patientApi.getPatientsByNameAuthComplex(
+                        widget.token, nama),
                   ),
                 ],
               )

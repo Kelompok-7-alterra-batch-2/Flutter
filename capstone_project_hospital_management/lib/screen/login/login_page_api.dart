@@ -100,19 +100,40 @@ class _LoginPageApiState extends State<LoginPageApi> {
           } else if (state is AuthSuccess) {
             if (state.dataLogin.message == "Success") {
               _trySubmitForm(state.dataLogin.token!);
-              // Map<String, dynamic>? map =
-              //     JwtDecoder.tryDecode(state.dataLogin.token!);
+              Map<String, dynamic>? map =
+                  JwtDecoder.tryDecode(state.dataLogin.token!);
 
               // String emailT = map!['username'].toString();
               // debugPrint("Berhasil Login");
-              Navigator.of(context)
-                  .pushReplacement(MaterialPageRoute(builder: (context) {
-                return DashboardPage(
-                  token: state.dataLogin.token!,
-                  email: state.dataLogin.email!,
-                  /* email: emailT */
+              String role = map!['role'].toString();
+              if (role.toLowerCase() == "doctor") {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return DashboardPage(
+                        token: state.dataLogin.token!,
+                        email: state.dataLogin.email!,
+                        /* email: emailT */
+                      );
+                    },
+                  ),
                 );
-              }));
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text("Warning"),
+                    content: const Text("Only Doctor can use tablet version!"),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("OK"))
+                    ],
+                  ),
+                );
+              }
             } else {
               showDialog(
                 context: context,

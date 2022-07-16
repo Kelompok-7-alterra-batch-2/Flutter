@@ -53,7 +53,7 @@ class PatientBuilderDoneAPI extends StatelessWidget {
           );
         }
         int limited = limit == 0 ? snapshot.data!.length : limit;
-
+        int antre = 0;
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: ListView.builder(
@@ -67,7 +67,7 @@ class PatientBuilderDoneAPI extends StatelessWidget {
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               final patients = snapshot.data![index];
-
+              // ++antre;
               if (patients.outpatientCondition!.conditions != "done" ||
                   buildLimit == limited) {
                 return const SizedBox.shrink();
@@ -75,9 +75,10 @@ class PatientBuilderDoneAPI extends StatelessWidget {
 
               if (patients.outpatientCondition!.conditions == "done") {
                 buildLimit++;
+                antre++;
               }
 
-              return _buildPatientCard(patients, context);
+              return _buildPatientCard(patients, context, antre);
             },
           ),
         );
@@ -86,11 +87,13 @@ class PatientBuilderDoneAPI extends StatelessWidget {
   }
 }
 
-Widget _buildPatientCard(OutpatientModel patient, BuildContext context) {
+Widget _buildPatientCard(
+    OutpatientModel patient, BuildContext context, int antrian) {
   return GestureDetector(
     onTap: () {},
     child: PatientSingleListAPIDone(
       patient: patient,
+      antrian: antrian,
     ),
   );
 }

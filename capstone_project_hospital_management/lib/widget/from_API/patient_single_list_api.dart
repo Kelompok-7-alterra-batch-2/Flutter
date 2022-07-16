@@ -10,12 +10,14 @@ class PatientSingleListAPI extends StatelessWidget {
   PatientSingleListAPI({
     Key? key,
     required this.patient,
+    this.antrian = 0,
   }) : super(key: key);
 
   late SharedPreferences pref;
 
   final OutpatientModel patient;
   final PatientAPIVM patientApi = PatientAPIVM();
+  final int antrian;
   @override
   Widget build(BuildContext context) {
     debugPrint(patient.toString());
@@ -55,7 +57,8 @@ class PatientSingleListAPI extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                "${patient.queue}",
+                // "${patient.queue}",
+                "${antrian}",
                 style: sett.body3p,
               ),
             ),
@@ -74,7 +77,10 @@ class PatientSingleListAPI extends StatelessWidget {
                 Expanded(child: Container()),
                 Text(
                   // "${patient.doB.day}-${patient.doB.month}-${patient.doB.year}",
-                  "${patient.appointmentReason}",
+                  // "${patient.appointmentReason.length}",
+                  patient.appointmentReason!.length > 15
+                      ? "${patient.appointmentReason!.substring(0, 10)}..."
+                      : "${patient.appointmentReason}",
                   style: sett.body6,
                 ),
                 Expanded(child: Container()),

@@ -46,7 +46,7 @@ class _DashboardPageState extends State<DashboardPage> {
     if (tokens != "" && tokens != " ") {
       isExp = JwtDecoder.isExpired(tokens);
     }
-    if (isLogin && (isExp == false)) {
+    if (isLogin == false && (isExp == false)) {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const LoginPageApi()),

@@ -16,7 +16,7 @@ class PatientBuilderAPI extends StatelessWidget {
   Widget build(BuildContext context) {
     int adaOutpatient = 0;
     int buildLimit = 0;
-
+    int outpatientCount = 0;
     return FutureBuilder<List<OutpatientModel>>(
       future: future,
       builder: (context, snapshot) {
@@ -75,7 +75,7 @@ class PatientBuilderAPI extends StatelessWidget {
               if (patients.outpatientCondition!.conditions != "done") {
                 buildLimit++;
               }
-              return _buildPatientCard(patients, context);
+              return _buildPatientCard(patients, context, index + 1);
             },
           ),
         );
@@ -84,11 +84,13 @@ class PatientBuilderAPI extends StatelessWidget {
   }
 }
 
-Widget _buildPatientCard(OutpatientModel patient, BuildContext context) {
+Widget _buildPatientCard(
+    OutpatientModel patient, BuildContext context, int antrian) {
   return GestureDetector(
     onTap: () {},
     child: PatientSingleListAPI(
       patient: patient,
+      antrian: antrian,
     ),
   );
 }

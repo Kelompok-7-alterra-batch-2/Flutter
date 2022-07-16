@@ -9,9 +9,11 @@ class PatientSingleListAPIDone extends StatelessWidget {
   const PatientSingleListAPIDone({
     Key? key,
     required this.patient,
+    this.antrian = 0,
   }) : super(key: key);
 
   final OutpatientModel patient;
+  final int antrian;
   @override
   Widget build(BuildContext context) {
     debugPrint(patient.toString());
@@ -51,7 +53,8 @@ class PatientSingleListAPIDone extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                "${patient.queue}",
+                // "${patient.queue}",
+                "${antrian}",
                 style: sett.body3d,
               ),
             ),
@@ -69,7 +72,10 @@ class PatientSingleListAPIDone extends StatelessWidget {
                 ),
                 Expanded(child: Container()),
                 Text(
-                  "${patient.appointmentReason}",
+                  // "${patient.appointmentReason}",
+                  patient.appointmentReason!.length > 15
+                      ? "${patient.appointmentReason!.substring(0, 10)}..."
+                      : "${patient.appointmentReason}",
                   style: sett.body6d,
                 ),
                 Expanded(child: Container()),

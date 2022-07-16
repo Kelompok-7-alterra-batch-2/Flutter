@@ -219,8 +219,9 @@ class PatientVM {
       );
 
       print("Success access : ${response.statusCode}");
+      print("Success access : ${response.data.toString()}");
 
-      if (response.data.runtimeType is String) {
+      if (response.data.runtimeType is String || response.data == "") {
         final DoctorModel _doctor =
             DoctorModel.fromJson(Map<String, dynamic>.from(response.extra));
         return _doctor;

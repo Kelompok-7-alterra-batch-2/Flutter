@@ -99,6 +99,11 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
                   idSemantics: "GenderField",
                   hintText: "${widget.patient.patient!.gender!.type}",
                 ),
+                ColumnData(
+                  labelName: "Appointment Reason",
+                  idSemantics: "AppointmentField",
+                  hintText: "${widget.patient.appointmentReason}",
+                ),
                 Container(
                   margin: const EdgeInsets.only(bottom: 15),
                   child: Column(
