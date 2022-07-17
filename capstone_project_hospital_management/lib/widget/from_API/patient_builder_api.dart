@@ -16,7 +16,6 @@ class PatientBuilderAPI extends StatelessWidget {
   Widget build(BuildContext context) {
     int adaOutpatient = 0;
     int buildLimit = 0;
-    int outpatientCount = 0;
     return FutureBuilder<List<OutpatientModel>>(
       future: future,
       builder: (context, snapshot) {
@@ -58,11 +57,6 @@ class PatientBuilderAPI extends StatelessWidget {
           child: ListView.builder(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
-            // itemCount: limit == 0
-            //     ? snapshot.data!.length
-            //     : snapshot.data!.length <= limit
-            //         ? snapshot.data!.length
-            //         : limit,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               final patients = snapshot.data![index];

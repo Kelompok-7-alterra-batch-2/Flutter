@@ -57,7 +57,6 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("Token : ${widget.token}");
     return WillPopScope(
       onWillPop: _onWillPop,
       child: SafeArea(
@@ -97,13 +96,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       primary: Colors.purple[300],
                       shape: const CircleBorder(),
                     ),
-                    onPressed: () {
-                      // Navigator.of(context).pushReplacement(
-                      //     MaterialPageRoute(builder: (context) {
-                      //   return DashboardPage();
-                      // }));
-                    },
-                    // child: const Text("A"),
+                    onPressed: () {},
                     child: Image(
                       height: MediaQuery.of(context).size.height * 0.2,
                       image: const AssetImage("assets/pic/image1.png"),
@@ -160,9 +153,6 @@ class _DashboardPageState extends State<DashboardPage> {
                                   .getCountOutpatientsTodayAuth(widget.token),
                             ),
                     ),
-                    // child: MediaQuery.of(context).size.width > 770
-                    //     ? DashboardHeadTablet()
-                    //     : DashboardHeadAndroid()),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -259,184 +249,6 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class DashboardHeadAndroid extends StatelessWidget {
-  const DashboardHeadAndroid({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    var tanggal = DateTime.now();
-
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              // width: MediaQuery.of(context).size.width * 0.58,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    "Welcome,",
-                    style: TextStyle(
-                        // fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontSize: 18),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Dr. Lorem Ipsum",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontSize: 23),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(),
-            ),
-            Image(
-              height: MediaQuery.of(context).size.height * 0.12,
-              image: const AssetImage("assets/logo/Vector.png"),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Container(
-          decoration: const BoxDecoration(
-              border: Border(
-            bottom: BorderSide(color: Colors.white, width: 1),
-          )),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              "${DateFormat("MMMM").format(tanggal)}, ${tanggal.day} ${tanggal.year}",
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-                fontSize: 16,
-              ),
-            ),
-            Expanded(child: Container()),
-            const Text(
-              "15 Appointments",
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                  fontSize: 18),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class DashboardHeadTablet extends StatelessWidget {
-  const DashboardHeadTablet({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    var tanggal = DateTime.now();
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.6,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          "Welcome,",
-                          style: TextStyle(
-                            // fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                            fontSize: 16, fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          "Dr. Lorem Ipsum",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                              fontSize: 18),
-                        ),
-                      ],
-                    ),
-                    Expanded(child: Container()),
-                    Text(
-                      "${DateFormat("MMMM").format(tanggal)}, ${tanggal.day} ${tanggal.year}",
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.6,
-                decoration: const BoxDecoration(
-                    border: Border(
-                  bottom: BorderSide(color: Colors.white, width: 2),
-                )),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "15 Appointments",
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                    fontSize: 16),
-              ),
-            ],
-          ),
-        ),
-        Expanded(child: Container()),
-        Image(
-          height: MediaQuery.of(context).size.height * 0.2,
-          image: const AssetImage("assets/logo/logobiru.png"),
-        ),
-      ],
     );
   }
 }

@@ -89,14 +89,6 @@ class DoctorDashboardAndroid extends StatelessWidget {
                   ),
                 ),
                 Expanded(child: Container()),
-                // const Text(
-                //   // "${snapshot.data!.outpatient ?? } Appointments",
-                //   "0 Appointments",
-                //   style: TextStyle(
-                //       fontWeight: FontWeight.w700,
-                //       color: Colors.white,
-                //       fontSize: 18),
-                // ),
                 FutureBuilder<int>(
                     future: futureCount,
                     builder: (context, snapshot) {
@@ -215,14 +207,6 @@ class DoctorDashboardTablet extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                // const Text(
-                //   // "${snapshot.data!.outpatient} Appointments",
-                //   "0 Appointments",
-                //   style: TextStyle(
-                //       fontWeight: FontWeight.w600,
-                //       color: Colors.white,
-                //       fontSize: 16),
-                // ),
                 FutureBuilder<int>(
                     future: futureCount,
                     builder: (context, snapshot) {

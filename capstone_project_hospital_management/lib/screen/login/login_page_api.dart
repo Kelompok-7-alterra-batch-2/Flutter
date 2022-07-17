@@ -205,9 +205,6 @@ class _LoginPageApiState extends State<LoginPageApi> {
                                   padding: const EdgeInsets.only(bottom: 8.0),
                                   child: Text(
                                     "Email",
-                                    // style: TextStyle(
-                                    //   fontWeight: FontWeight.bold,
-                                    // ),
                                     style: sett.body3,
                                   ),
                                 ),
@@ -401,15 +398,11 @@ class SigninButton extends StatelessWidget {
         _pref = await SharedPreferences.getInstance();
         _pref.setString('email', usernameC.text);
         if (isValid == true) {
-//                                         _trySubmitForm();
-// // pake Cubit
           final _requestData = LoginRequest(
             email: usernameC.text,
             password: passwordC.text,
           );
           context.read<AuthCubit>().signInUser(_requestData);
-// end
-
         }
       },
       style: ElevatedButton.styleFrom(

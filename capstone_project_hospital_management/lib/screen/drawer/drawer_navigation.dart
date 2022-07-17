@@ -21,7 +21,7 @@ class DrawerWidget extends StatelessWidget {
     return Drawer(
       backgroundColor: sett.cPrimary,
       child: ListView(
-        padding: const EdgeInsets.symmetric(/*horizontal: 20,*/ vertical: 20),
+        padding: const EdgeInsets.symmetric(vertical: 20),
         children: <Widget>[
           Container(
             height: MediaQuery.of(context).size.height * 0.1,

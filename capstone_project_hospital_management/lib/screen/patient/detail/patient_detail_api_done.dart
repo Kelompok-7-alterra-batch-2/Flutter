@@ -38,10 +38,6 @@ class _PatientDetailPageDoneAPIState extends State<PatientDetailPageDoneAPI> {
             child: IconButton(
               icon: const Icon(Icons.navigate_before),
               onPressed: () {
-                // Navigator.of(context)
-                //     .pushReplacement(MaterialPageRoute(builder: (context) {
-                //   return const PatientPage();
-                // }));
                 Navigator.pop(context);
               },
             ),

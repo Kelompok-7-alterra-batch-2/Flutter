@@ -59,11 +59,6 @@ class PatientBuilderDoneAPI extends StatelessWidget {
           child: ListView.builder(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
-            // itemCount: limit == 0
-            //     ? snapshot.data!.length
-            //     : snapshot.data!.length < limit
-            //         ? snapshot.data!.length
-            //         : limit,
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               final patients = snapshot.data![index];

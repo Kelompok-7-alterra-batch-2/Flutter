@@ -16,7 +16,6 @@ class PatientSingleListAPIDone extends StatelessWidget {
   final int antrian;
   @override
   Widget build(BuildContext context) {
-    debugPrint(patient.toString());
     return Container(
       height: MediaQuery.of(context).size.width > 770
           ? MediaQuery.of(context).size.height * 0.08
@@ -53,15 +52,13 @@ class PatientSingleListAPIDone extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                // "${patient.queue}",
-                "${antrian}",
+                "$antrian",
                 style: sett.body3d,
               ),
             ),
           ),
           Container(
             margin: const EdgeInsets.only(left: 20),
-            // padding: EdgeInsets.symmetric(vertical: 2),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -72,7 +69,6 @@ class PatientSingleListAPIDone extends StatelessWidget {
                 ),
                 Expanded(child: Container()),
                 Text(
-                  // "${patient.appointmentReason}",
                   patient.appointmentReason!.length > 15
                       ? "${patient.appointmentReason!.substring(0, 10)}..."
                       : "${patient.appointmentReason}",

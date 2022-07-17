@@ -7,27 +7,6 @@ import 'package:dio/dio.dart';
 class PatientVM {
   var dio = Dio();
 
-  Future<List<OutpatientModel>> fetchDataOutpatient() async {
-    try {
-      Response response = await Dio()
-          .get('https://capstone-project-hospital.herokuapp.com/outpatients');
-
-      print(response.statusCode);
-      final List<OutpatientModel> _listOutpatient = (response.data as List)
-          .map((e) => OutpatientModel.fromJson(e))
-          .toList();
-      return _listOutpatient;
-    } on DioError catch (e) {
-      if (e.response!.statusCode == 400) {
-        print("error : ${e.response!.statusCode}");
-        return [];
-      }
-      print("something wrong");
-      print(e);
-      return [];
-    }
-  }
-
   Future<int> fetchCountOutpatientAuth(String token) async {
     try {
       Response response = await Dio().get(
@@ -36,8 +15,6 @@ class PatientVM {
           headers: {"authorization": "Bearer $token"},
         ),
       );
-
-      print("Success access : ${response.statusCode}");
 
       return response.data as int;
     } on DioError catch (e) {
@@ -62,7 +39,6 @@ class PatientVM {
         ),
       );
 
-      print("Success access : ${response.statusCode}");
       final List<OutpatientModel> _listOutpatient = (response.data as List)
           .map((e) => OutpatientModel.fromJson(e))
           .toList();
@@ -89,8 +65,6 @@ class PatientVM {
           headers: {"authorization": "Bearer $token"},
         ),
       );
-
-      print("Success access : ${response.statusCode}");
       final List<OutpatientModel> _listOutpatient = (response.data as List)
           .map((e) => OutpatientModel.fromJson(e))
           .toList();
@@ -118,10 +92,6 @@ class PatientVM {
         ),
       );
 
-      print("Success access : ${response.statusCode}");
-
-      // final List<OutpatientModel> _listOutpatient = [];
-      // _listOutpatient.add(OutpatientModel.fromJson(response.data));
       final List<OutpatientModel> _listOutpatient = (response.data as List)
           .map((e) => OutpatientModel.fromJson(e))
           .toList();
@@ -153,11 +123,6 @@ class PatientVM {
         ),
       );
 
-      print("Success access : ${response.statusCode}");
-
-      // final List<OutpatientModel> _listOutpatient = [];
-      // _listOutpatient.add(OutpatientModel.fromJson(response.data));
-
       final List<OutpatientModel> _listOutpatient = (response.data as List)
           .map((e) => OutpatientModel.fromJson(e))
           .toList();
@@ -180,32 +145,6 @@ class PatientVM {
     }
   }
 
-  Future<List<Doctor>> fetchDataDoctorAuth(String token) async {
-    try {
-      Response response = await Dio().get(
-        'https://capstone-postgres-hospital.herokuapp.com/doctors',
-        options: Options(
-          headers: {"authorization": "Bearer $token"},
-        ),
-      );
-
-      print("Success access : ${response.statusCode}");
-      final List<Doctor> _listOutpatient =
-          (response.data as List).map((e) => Doctor.fromJson(e)).toList();
-      return _listOutpatient;
-    } on DioError catch (e) {
-      if (e.response!.statusCode == 400) {
-        print("error : ${e.response!.statusCode}");
-        return [];
-      } else if (e.response!.statusCode == 403) {
-        print("error : ${e.response!.statusCode}, token is invalid now");
-      }
-      print("something wrong");
-      print(e);
-      return [];
-    }
-  }
-
   Future<DoctorModel> fetchDataDoctorEmailAuth(
     String token,
     String email,
@@ -217,10 +156,6 @@ class PatientVM {
           headers: {"authorization": "Bearer $token"},
         ),
       );
-
-      print("Success access : ${response.statusCode}");
-      print("Success access : ${response.data.toString()}");
-
       if (response.data.runtimeType is String || response.data == "") {
         final DoctorModel _doctor =
             DoctorModel.fromJson(Map<String, dynamic>.from(response.extra));
@@ -242,16 +177,6 @@ class PatientVM {
     }
   }
 
-  Future<void> updateDiagnoseToProcess(int? id) async {
-    try {
-      Response response = await Dio().put(
-          "https://capstone-project-hospital.herokuapp.com/outpatients/process/$id");
-      print("status outpatient has changed to process");
-    } on DioError catch (e) {
-      print("Something wrong on put : $e");
-    }
-  }
-
   Future<void> updateDiagnoseToProcessAuth(int? id, String token) async {
     try {
       Response response = await Dio().put(
@@ -261,16 +186,6 @@ class PatientVM {
         ),
       );
       print("status outpatient has changed to process");
-    } on DioError catch (e) {
-      print("Something wrong on put : $e");
-    }
-  }
-
-  Future<void> updateDiagnoseToDone(int? id) async {
-    try {
-      Response response = await Dio().put(
-          "https://capstone-project-hospital.herokuapp.com/outpatients/done/$id");
-      print("status outpatient has changed to done");
     } on DioError catch (e) {
       print("Something wrong on put : $e");
     }
@@ -287,24 +202,6 @@ class PatientVM {
       print("status outpatient has changed to done");
     } on DioError catch (e) {
       print("Something wrong on put : $e");
-    }
-  }
-
-  Future<void> updateDiagnosePrescription(
-    int? id,
-    String diagnose,
-    String prescription,
-  ) async {
-    try {
-      Response response = await Dio().put(
-        "https://capstone-project-hospital.herokuapp.com/outpatients/diagnosis/$id",
-        data: {
-          "diagnosis": diagnose,
-          "prescription": prescription,
-        },
-      );
-    } on DioError catch (e) {
-      print("Something wrong on update diagnose: $e ");
     }
   }
 

@@ -35,37 +35,16 @@ class PatientAPIVM {
     return await PatientVM().fetchDataOutpatientNameAuth(token, name.trim());
   }
 
-  Future<List<Doctor>> getDoctorAuth(String token) async {
-    return await PatientVM().fetchDataDoctorAuth(token);
-  }
-
   Future<DoctorModel> getDoctorByEmailAuth(String token, String email) async {
     return await PatientVM().fetchDataDoctorEmailAuth(token, email);
-  }
-
-  Future<void> updateOutpatientToProcess(int? id) async {
-    return await PatientVM().updateDiagnoseToProcess(id);
   }
 
   Future<void> updateOutpatientToProcessAuth(int? id, String token) async {
     return await PatientVM().updateDiagnoseToProcessAuth(id, token);
   }
 
-  Future<void> updateOutpatientToDone(int? id) async {
-    return await PatientVM().updateDiagnoseToDone(id);
-  }
-
   Future<void> updateOutpatientToDoneAuth(int? id, String token) async {
     return await PatientVM().updateDiagnoseToDoneAuth(id, token);
-  }
-
-  Future<void> updateOutpatientDiagnose(
-    int? id, {
-    String diagnose = "",
-    String prescription = "",
-  }) async {
-    return await PatientVM()
-        .updateDiagnosePrescription(id, diagnose, prescription);
   }
 
   Future<void> updateOutpatientDiagnoseAuth(

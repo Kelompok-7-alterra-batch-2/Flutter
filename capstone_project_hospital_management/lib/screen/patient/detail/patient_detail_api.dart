@@ -42,10 +42,6 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
             child: IconButton(
               icon: const Icon(Icons.navigate_before),
               onPressed: () {
-                // Navigator.of(context)
-                //     .pushReplacement(MaterialPageRoute(builder: (context) {
-                //   return const PatientPage();
-                // }));
                 Navigator.pop(context);
               },
             ),
@@ -303,8 +299,6 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
             // Navigator.pop(context);
           });
         }
-        // dbPatient.updatePatient(patient);
-        // debugPrint(patient.toString());
       },
     ); // set up the AlertDialog
     AlertDialog alert = AlertDialog(
