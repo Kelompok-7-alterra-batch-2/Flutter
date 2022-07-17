@@ -42,10 +42,6 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
             child: IconButton(
               icon: const Icon(Icons.navigate_before),
               onPressed: () {
-                // Navigator.of(context)
-                //     .pushReplacement(MaterialPageRoute(builder: (context) {
-                //   return const PatientPage();
-                // }));
                 Navigator.pop(context);
               },
             ),
@@ -98,6 +94,11 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
                   labelName: "Gender",
                   idSemantics: "GenderField",
                   hintText: "${widget.patient.patient!.gender!.type}",
+                ),
+                ColumnData(
+                  labelName: "Appointment Reason",
+                  idSemantics: "AppointmentField",
+                  hintText: "${widget.patient.appointmentReason}",
                 ),
                 Container(
                   margin: const EdgeInsets.only(bottom: 15),
@@ -277,6 +278,7 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
       onPressed: () async {
         pref = await SharedPreferences.getInstance();
         String tokens = pref.getString('token') ?? "";
+        String emails = pref.getString('email') ?? "";
         if (tokens != "" && tokens != " ") {
           _patientApi.updateOutpatientDiagnoseAuth(
             patient.id,
@@ -291,13 +293,12 @@ class _PatientDetailPageAPIState extends State<PatientDetailPageAPI> {
                 .pushReplacement(MaterialPageRoute(builder: (context) {
               return DashboardPage(
                 token: tokens,
+                email: emails,
               );
             }));
             // Navigator.pop(context);
           });
         }
-        // dbPatient.updatePatient(patient);
-        // debugPrint(patient.toString());
       },
     ); // set up the AlertDialog
     AlertDialog alert = AlertDialog(

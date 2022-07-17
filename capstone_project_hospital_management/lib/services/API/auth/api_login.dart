@@ -14,6 +14,7 @@ class AuthRepository {
           "https://capstone-postgres-hospital.herokuapp.com/users/login",
           data: loginRequest.toJson());
       LoginRespond _loginResp = LoginRespond.fromJson(_response.data);
+      _loginResp.email = loginRequest.email;
       return right(_loginResp);
     } on DioError catch (e) {
       // ignore: avoid_print

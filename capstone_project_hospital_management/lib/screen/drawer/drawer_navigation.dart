@@ -21,7 +21,7 @@ class DrawerWidget extends StatelessWidget {
     return Drawer(
       backgroundColor: sett.cPrimary,
       child: ListView(
-        padding: const EdgeInsets.symmetric(/*horizontal: 20,*/ vertical: 20),
+        padding: const EdgeInsets.symmetric(vertical: 20),
         children: <Widget>[
           Container(
             height: MediaQuery.of(context).size.height * 0.1,
@@ -71,10 +71,12 @@ class DrawerWidget extends StatelessWidget {
               onTap: () async {
                 pref = await SharedPreferences.getInstance();
                 String tokenShared = pref.getString("token") ?? " ";
+                String email = pref.getString('email') ?? " ";
                 Navigator.of(context)
                     .pushReplacement(MaterialPageRoute(builder: (context) {
                   return DashboardPage(
                     token: tokenShared,
+                    email: email,
                   );
                 }));
               }),

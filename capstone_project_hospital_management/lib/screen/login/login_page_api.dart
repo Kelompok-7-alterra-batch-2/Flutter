@@ -33,6 +33,7 @@ class _LoginPageApiState extends State<LoginPageApi> {
   late SharedPreferences pref;
   late bool isLogin;
   late String token;
+  late String email;
   Future<bool> _onWillPop() async {
     return false; //<-- SEE HERE
   }
@@ -46,6 +47,7 @@ class _LoginPageApiState extends State<LoginPageApi> {
     pref = await SharedPreferences.getInstance();
     isLogin = pref.getBool('isLogin') ?? false;
     token = pref.getString('token') ?? " ";
+    email = pref.getString('email') ?? "oscarok@gmail.com";
     bool isExp = true;
     if (token != "" && token != " ") {
       isExp = JwtDecoder.isExpired(token);
@@ -56,6 +58,7 @@ class _LoginPageApiState extends State<LoginPageApi> {
         MaterialPageRoute(
             builder: (context) => DashboardPage(
                   token: token,
+                  email: email,
                 )),
         (route) => false,
       );
@@ -97,11 +100,40 @@ class _LoginPageApiState extends State<LoginPageApi> {
           } else if (state is AuthSuccess) {
             if (state.dataLogin.message == "Success") {
               _trySubmitForm(state.dataLogin.token!);
-              debugPrint("Berhasil Login");
-              Navigator.of(context)
-                  .pushReplacement(MaterialPageRoute(builder: (context) {
-                return DashboardPage(token: state.dataLogin.token!);
-              }));
+              Map<String, dynamic>? map =
+                  JwtDecoder.tryDecode(state.dataLogin.token!);
+
+              // String emailT = map!['username'].toString();
+              // debugPrint("Berhasil Login");
+              String role = map!['role'].toString();
+              if (role.toLowerCase() == "doctor") {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return DashboardPage(
+                        token: state.dataLogin.token!,
+                        email: state.dataLogin.email!,
+                        /* email: emailT */
+                      );
+                    },
+                  ),
+                );
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text("Warning"),
+                    content: const Text("Only Doctor can use tablet version!"),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("OK"))
+                    ],
+                  ),
+                );
+              }
             } else {
               showDialog(
                 context: context,
@@ -173,9 +205,6 @@ class _LoginPageApiState extends State<LoginPageApi> {
                                   padding: const EdgeInsets.only(bottom: 8.0),
                                   child: Text(
                                     "Email",
-                                    // style: TextStyle(
-                                    //   fontWeight: FontWeight.bold,
-                                    // ),
                                     style: sett.body3,
                                   ),
                                 ),
@@ -346,8 +375,9 @@ class _LoginPageApiState extends State<LoginPageApi> {
   }
 }
 
+// ignore: must_be_immutable
 class SigninButton extends StatelessWidget {
-  const SigninButton({
+  SigninButton({
     Key? key,
     required GlobalKey<FormState> formKey,
     required this.usernameC,
@@ -358,22 +388,21 @@ class SigninButton extends StatelessWidget {
   final GlobalKey<FormState> _formKey;
   final TextEditingController usernameC;
   final TextEditingController passwordC;
+  late SharedPreferences _pref;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
+      onPressed: () async {
         final bool? isValid = _formKey.currentState?.validate();
+        _pref = await SharedPreferences.getInstance();
+        _pref.setString('email', usernameC.text);
         if (isValid == true) {
-//                                         _trySubmitForm();
-// // pake Cubit
           final _requestData = LoginRequest(
             email: usernameC.text,
             password: passwordC.text,
           );
           context.read<AuthCubit>().signInUser(_requestData);
-// end
-
         }
       },
       style: ElevatedButton.styleFrom(

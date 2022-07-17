@@ -1,8 +1,8 @@
 import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
-import 'package:capstone_project_hospital_management/screen/vm/patient_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_api.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
 
@@ -15,12 +15,14 @@ class PatientPage extends StatefulWidget {
 }
 
 class _PatientPageState extends State<PatientPage> {
-  final PatientVM patientvm = PatientVM();
   final PatientAPIVM patientApi = PatientAPIVM();
   TextEditingController idC = TextEditingController();
   Future<bool> _onWillPop() async {
     return false; //<-- SEE HERE
   }
+
+  int id = 0;
+  String nama = "";
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +37,6 @@ class _PatientPageState extends State<PatientPage> {
             child: IconButton(
               icon: const Icon(Icons.navigate_before),
               onPressed: () {
-                // Navigator.of(context)
-                //     .pushReplacement(MaterialPageRoute(builder: (context) {
-                //   return const DashboardPage();
-                // }));
                 Navigator.pop(context);
               },
             ),
@@ -63,7 +61,10 @@ class _PatientPageState extends State<PatientPage> {
                   label: "searchID",
                   child: TextFormField(
                     controller: idC,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.text,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.singleLineFormatter
+                    ],
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         icon: Iconify(
@@ -71,14 +72,10 @@ class _PatientPageState extends State<PatientPage> {
                           size: 25,
                           color: sett.cGrey2,
                         ),
-                        onPressed: () async {
-                          // pref = await SharedPreferences.getInstance();
-                          // String tokenS = pref.getString('token') ?? "";
-                          // if (tokenS != "" && tokenS != " ") {
-                          //   context
-                          //       .read<OutpatientCubit>()
-                          //       .fetchOutpatient(int.parse(idC.text), tokenS);
-                          // }
+                        onPressed: () {
+                          setState(() {
+                            nama = idC.text;
+                          });
                         },
                       ),
                       fillColor: Colors.white,
@@ -96,14 +93,13 @@ class _PatientPageState extends State<PatientPage> {
                   ),
                 ),
               ),
+
               Column(
                 children: [
                   PatientBuilderAPI(
-                    future: patientApi.getPatientsAuth(widget.token),
+                    future: patientApi.getPatientsByNameAuthComplex(
+                        widget.token, nama),
                   ),
-                  // PatientBuilderCubit(
-                  //   token: widget.token,
-                  // ),
                 ],
               )
             ]),

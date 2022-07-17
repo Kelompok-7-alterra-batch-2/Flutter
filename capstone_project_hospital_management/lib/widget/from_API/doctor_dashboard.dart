@@ -6,14 +6,14 @@ class DoctorDashboardAndroid extends StatelessWidget {
   const DoctorDashboardAndroid({
     Key? key,
     required this.future,
-    this.email = "",
+    required this.futureCount,
   }) : super(key: key);
 
-  final Future<List<Doctor>> future;
-  final String email;
+  final Future<DoctorModel> future;
+  final Future<int> futureCount;
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Doctor>>(
+    return FutureBuilder<DoctorModel>(
       future: future,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -25,14 +25,7 @@ class DoctorDashboardAndroid extends StatelessWidget {
                 child: const CircularProgressIndicator()),
           );
         }
-
-        late Doctor akun;
-        var tanggal = DateTime.now();
-        for (var a in snapshot.data!) {
-          if (a.email == email) {
-            akun = a;
-          }
-        }
+        DateTime tanggal = DateTime.now();
         return Column(
           children: [
             Row(
@@ -54,7 +47,7 @@ class DoctorDashboardAndroid extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        "Dr. ${akun.name}",
+                        "Dr. ${snapshot.data!.name ?? "Unknown"}",
                         style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.white,
@@ -96,13 +89,26 @@ class DoctorDashboardAndroid extends StatelessWidget {
                   ),
                 ),
                 Expanded(child: Container()),
-                Text(
-                  "${akun.outpatient} Appointments",
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                      fontSize: 18),
-                ),
+                FutureBuilder<int>(
+                    future: futureCount,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: Container(
+                              margin: const EdgeInsets.only(
+                                top: 20,
+                              ),
+                              child: const CircularProgressIndicator()),
+                        );
+                      }
+                      return Text(
+                        "${snapshot.data} Appointments",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontSize: 16),
+                      );
+                    })
               ],
             ),
           ],
@@ -116,14 +122,15 @@ class DoctorDashboardTablet extends StatelessWidget {
   const DoctorDashboardTablet({
     Key? key,
     required this.future,
-    this.email = "",
+    required this.futureCount,
   }) : super(key: key);
 
-  final Future<List<Doctor>> future;
-  final String email;
+  final Future<DoctorModel> future;
+  final Future<int> futureCount;
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Doctor>>(
+    return FutureBuilder<DoctorModel>(
       future: future,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -134,13 +141,6 @@ class DoctorDashboardTablet extends StatelessWidget {
                 ),
                 child: const CircularProgressIndicator()),
           );
-        }
-
-        late Doctor akun;
-        for (var a in snapshot.data!) {
-          if (a.email == email) {
-            akun = a;
-          }
         }
 
         var tanggalT = DateTime.now();
@@ -174,7 +174,7 @@ class DoctorDashboardTablet extends StatelessWidget {
                             height: 20,
                           ),
                           Text(
-                            "Dr. ${akun.name}",
+                            "Dr. ${snapshot.data!.name ?? "Unknown"}",
                             style: const TextStyle(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
@@ -207,13 +207,26 @@ class DoctorDashboardTablet extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(
-                  "${akun.outpatient} Appointments",
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                      fontSize: 16),
-                ),
+                FutureBuilder<int>(
+                    future: futureCount,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: Container(
+                              margin: const EdgeInsets.only(
+                                top: 20,
+                              ),
+                              child: const CircularProgressIndicator()),
+                        );
+                      }
+                      return Text(
+                        "${snapshot.data} Appointments",
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontSize: 16),
+                      );
+                    })
               ],
             ),
             Expanded(child: Container()),

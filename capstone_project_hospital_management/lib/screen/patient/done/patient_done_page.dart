@@ -1,5 +1,4 @@
 import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
-import 'package:capstone_project_hospital_management/screen/vm/patient_view_model.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_done_api.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ class PatientDonePage extends StatefulWidget {
 }
 
 class _PatientDonePageState extends State<PatientDonePage> {
-  final PatientVM patientvm = PatientVM();
   final PatientAPIVM patientApi = PatientAPIVM();
 
   Future<bool> _onWillPop() async {

@@ -5,6 +5,7 @@ import 'package:capstone_project_hospital_management/screen/login/login_page_api
 import 'package:capstone_project_hospital_management/screen/patient/done/patient_done_page.dart';
 import 'package:capstone_project_hospital_management/screen/patient/patien_page.dart';
 import 'package:capstone_project_hospital_management/screen/vm/patient_api_view_model.dart';
+import 'package:capstone_project_hospital_management/widget/from_API/doctor_dashboard.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_api.dart';
 import 'package:capstone_project_hospital_management/widget/from_API/patient_builder_done_api.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
@@ -45,7 +46,7 @@ class _DashboardPageState extends State<DashboardPage> {
     if (tokens != "" && tokens != " ") {
       isExp = JwtDecoder.isExpired(tokens);
     }
-    if (isLogin && (isExp == false)) {
+    if (isLogin == false && (isExp == false)) {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const LoginPageApi()),
@@ -56,7 +57,6 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("Token : ${widget.token}");
     return WillPopScope(
       onWillPop: _onWillPop,
       child: SafeArea(
@@ -96,13 +96,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       primary: Colors.purple[300],
                       shape: const CircleBorder(),
                     ),
-                    onPressed: () {
-                      // Navigator.of(context).pushReplacement(
-                      //     MaterialPageRoute(builder: (context) {
-                      //   return DashboardPage();
-                      // }));
-                    },
-                    // child: const Text("A"),
+                    onPressed: () {},
                     child: Image(
                       height: MediaQuery.of(context).size.height * 0.2,
                       image: const AssetImage("assets/pic/image1.png"),
@@ -146,8 +140,18 @@ class _DashboardPageState extends State<DashboardPage> {
                     child: Center(
                       // child: DashboardHeadTablet(),
                       child: MediaQuery.of(context).size.width > 770
-                          ? const DashboardHeadTablet()
-                          : const DashboardHeadAndroid(),
+                          ? DoctorDashboardTablet(
+                              future: patientApi.getDoctorByEmailAuth(
+                                  widget.token, widget.email),
+                              futureCount: patientApi
+                                  .getCountOutpatientsTodayAuth(widget.token),
+                            )
+                          : DoctorDashboardAndroid(
+                              future: patientApi.getDoctorByEmailAuth(
+                                  widget.token, widget.email),
+                              futureCount: patientApi
+                                  .getCountOutpatientsTodayAuth(widget.token),
+                            ),
                     ),
                   ),
                   Container(
@@ -185,7 +189,8 @@ class _DashboardPageState extends State<DashboardPage> {
                         Column(
                           children: [
                             PatientBuilderAPI(
-                              future: patientApi.getPatientsAuth(widget.token),
+                              future:
+                                  patientApi.getPatientsTodayAuth(widget.token),
                               limit: 4,
                             ),
                           ],
@@ -244,184 +249,6 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class DashboardHeadAndroid extends StatelessWidget {
-  const DashboardHeadAndroid({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    var tanggal = DateTime.now();
-
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              // width: MediaQuery.of(context).size.width * 0.58,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    "Welcome,",
-                    style: TextStyle(
-                        // fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontSize: 18),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Dr. Lorem Ipsum",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontSize: 23),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(),
-            ),
-            Image(
-              height: MediaQuery.of(context).size.height * 0.12,
-              image: const AssetImage("assets/logo/Vector.png"),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Container(
-          decoration: const BoxDecoration(
-              border: Border(
-            bottom: BorderSide(color: Colors.white, width: 1),
-          )),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              "${DateFormat("MMMM").format(tanggal)}, ${tanggal.day} ${tanggal.year}",
-              style: const TextStyle(
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-                fontSize: 16,
-              ),
-            ),
-            Expanded(child: Container()),
-            const Text(
-              "15 Appointments",
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white,
-                  fontSize: 18),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class DashboardHeadTablet extends StatelessWidget {
-  const DashboardHeadTablet({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    var tanggal = DateTime.now();
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width * 0.6,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          "Welcome,",
-                          style: TextStyle(
-                            // fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                            fontSize: 16, fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          "Dr. Lorem Ipsum",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                              fontSize: 18),
-                        ),
-                      ],
-                    ),
-                    Expanded(child: Container()),
-                    Text(
-                      "${DateFormat("MMMM").format(tanggal)}, ${tanggal.day} ${tanggal.year}",
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.6,
-                decoration: const BoxDecoration(
-                    border: Border(
-                  bottom: BorderSide(color: Colors.white, width: 2),
-                )),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "15 Appointments",
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                    fontSize: 16),
-              ),
-            ],
-          ),
-        ),
-        Expanded(child: Container()),
-        Image(
-          height: MediaQuery.of(context).size.height * 0.2,
-          image: const AssetImage("assets/logo/logobiru.png"),
-        ),
-      ],
     );
   }
 }
