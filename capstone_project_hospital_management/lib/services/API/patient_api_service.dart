@@ -7,10 +7,12 @@ import 'package:dio/dio.dart';
 class PatientVM {
   var dio = Dio();
 
+  final String baseurl = "https://capstone-postgres-hospital.herokuapp.com";
+
   Future<int> fetchCountOutpatientAuth(String token) async {
     try {
       Response response = await Dio().get(
-        'https://capstone-postgres-hospital.herokuapp.com/outpatients/count/today',
+        '${baseurl}/outpatients/count/today',
         options: Options(
           headers: {"authorization": "Bearer $token"},
         ),
@@ -33,7 +35,7 @@ class PatientVM {
   Future<List<OutpatientModel>> fetchDataOutpatientAuth(String token) async {
     try {
       Response response = await Dio().get(
-        'https://capstone-postgres-hospital.herokuapp.com/outpatients',
+        '${baseurl}/outpatients',
         options: Options(
           headers: {"authorization": "Bearer $token"},
         ),
@@ -60,7 +62,7 @@ class PatientVM {
       String token) async {
     try {
       Response response = await Dio().get(
-        'https://capstone-postgres-hospital.herokuapp.com/outpatients/today',
+        '${baseurl}/outpatients/today',
         options: Options(
           headers: {"authorization": "Bearer $token"},
         ),
@@ -86,7 +88,7 @@ class PatientVM {
       String token, int id) async {
     try {
       Response response = await Dio().get(
-        'https://capstone-postgres-hospital.herokuapp.com/outpatients/patients/$id',
+        '${baseurl}/outpatients/patients/$id',
         options: Options(
           headers: {"authorization": "Bearer $token"},
         ),
@@ -117,7 +119,7 @@ class PatientVM {
       String token, String name) async {
     try {
       Response response = await Dio().get(
-        'https://capstone-postgres-hospital.herokuapp.com/outpatients/patients/today?name=$name',
+        '${baseurl}/outpatients/patients/today?name=$name',
         options: Options(
           headers: {"authorization": "Bearer $token"},
         ),
@@ -151,7 +153,7 @@ class PatientVM {
   ) async {
     try {
       Response response = await Dio().get(
-        'https://capstone-postgres-hospital.herokuapp.com/doctors/emails?email=$email',
+        '${baseurl}/doctors/emails?email=$email',
         options: Options(
           headers: {"authorization": "Bearer $token"},
         ),
@@ -180,7 +182,7 @@ class PatientVM {
   Future<void> updateDiagnoseToProcessAuth(int? id, String token) async {
     try {
       Response response = await Dio().put(
-        "https://capstone-postgres-hospital.herokuapp.com/outpatients/process/$id",
+        "${baseurl}/outpatients/process/$id",
         options: Options(
           headers: {"authorization": "Bearer $token"},
         ),
@@ -194,7 +196,7 @@ class PatientVM {
   Future<void> updateDiagnoseToDoneAuth(int? id, String token) async {
     try {
       Response response = await Dio().put(
-        "https://capstone-postgres-hospital.herokuapp.com/outpatients/done/$id",
+        "${baseurl}/outpatients/done/$id",
         options: Options(
           headers: {"authorization": "Bearer $token"},
         ),
@@ -213,7 +215,7 @@ class PatientVM {
   ) async {
     try {
       Response response = await Dio().put(
-        "https://capstone-postgres-hospital.herokuapp.com/outpatients/diagnosis/$id",
+        "${baseurl}/outpatients/diagnosis/$id",
         data: {
           "diagnosis": diagnose,
           "prescription": prescription,
