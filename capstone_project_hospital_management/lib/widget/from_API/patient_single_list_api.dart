@@ -69,7 +69,9 @@ class PatientSingleListAPI extends StatelessWidget {
               children: [
                 Expanded(child: Container()),
                 Text(
-                  "${patient.patient!.name}",
+                  patient.patient!.name!.length > 20
+                      ? "${patient.patient!.name!.substring(0, 14)}..."
+                      : "${patient.patient!.name}",
                   style: sett.body5,
                 ),
                 Expanded(child: Container()),

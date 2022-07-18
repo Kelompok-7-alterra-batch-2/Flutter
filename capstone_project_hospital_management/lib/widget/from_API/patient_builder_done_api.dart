@@ -57,6 +57,7 @@ class PatientBuilderDoneAPI extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             itemCount: snapshot.data!.length,

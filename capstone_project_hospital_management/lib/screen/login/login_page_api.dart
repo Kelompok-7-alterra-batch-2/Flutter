@@ -327,28 +327,8 @@ class _LoginPageApiState extends State<LoginPageApi> {
                                     onChanged: (value) => _password = value,
                                   ),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    GestureDetector(
-                                      child: const Text(
-                                        "Forgot Password",
-                                        textAlign: TextAlign.end,
-                                        style: TextStyle(
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        Navigator.of(context).pushReplacement(
-                                            MaterialPageRoute(
-                                                builder: (context) {
-                                          return const MyApp();
-                                        }));
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 20),
+
+                                const SizedBox(height: 40),
                                 Container(
                                   alignment: Alignment.center,
                                   child: (state is AuthLoading)

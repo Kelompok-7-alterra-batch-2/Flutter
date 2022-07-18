@@ -47,7 +47,9 @@ class DoctorDashboardAndroid extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        "Dr. ${snapshot.data!.name ?? "Unknown"}",
+                        snapshot.data!.name!.length > 15
+                            ? "Dr. ${snapshot.data!.name!.substring(0, 14)}..."
+                            : "Dr. ${snapshot.data!.name}",
                         style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.white,
@@ -174,7 +176,9 @@ class DoctorDashboardTablet extends StatelessWidget {
                             height: 20,
                           ),
                           Text(
-                            "Dr. ${snapshot.data!.name ?? "Unknown"}",
+                            snapshot.data!.name!.length > 15
+                                ? "Dr. ${snapshot.data!.name!.substring(0, 14)}..."
+                                : "Dr. ${snapshot.data!.name}",
                             style: const TextStyle(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
