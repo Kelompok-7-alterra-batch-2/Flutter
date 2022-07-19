@@ -1,6 +1,5 @@
 # Hospital Management (Kelompok 7)
 * flutter developer : Oscar Oktorian
 
-
-note : 
+Note :
 Please check each branch regularly
