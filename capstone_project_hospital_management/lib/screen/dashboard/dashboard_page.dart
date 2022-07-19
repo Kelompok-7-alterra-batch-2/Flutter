@@ -12,7 +12,6 @@ import 'package:capstone_project_hospital_management/widget/settings.dart';
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/rendering.dart';
-import 'package:intl/intl.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

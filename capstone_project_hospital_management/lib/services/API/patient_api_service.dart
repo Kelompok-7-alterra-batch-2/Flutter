@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, unused_local_variable
+// ignore_for_file: avoid_print, unused_local_variable, unnecessary_brace_in_string_interps
 
 import 'package:capstone_project_hospital_management/model/doctor_model.dart';
 import 'package:capstone_project_hospital_management/model/outpatient_model.dart';

@@ -2,7 +2,7 @@
     package="com.example.capstone_project_hospital_management">
      <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="capstone_project_hospital_management"
+        android:label="Hospital Management : Care Hospital"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
