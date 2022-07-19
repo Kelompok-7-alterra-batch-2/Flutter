@@ -1,7 +1,6 @@
 // ignore_for_file: unused_field
 
 import 'package:capstone_project_hospital_management/screen/dashboard/dashboard_page.dart';
-import 'package:capstone_project_hospital_management/screen/splash/splash_screen.dart';
 import 'package:capstone_project_hospital_management/services/API/auth/cubit/auth_cubit.dart';
 import 'package:capstone_project_hospital_management/services/API/auth/model/login_request.dart';
 import 'package:capstone_project_hospital_management/widget/settings.dart';
